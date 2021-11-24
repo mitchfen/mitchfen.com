@@ -1,0 +1,29 @@
+name: Check pull request
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+concurrency:
+  group: ${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check_pull_request:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+
+      - name: Setup node
+        uses: actions/setup-node@v2.4.1
+        with:
+		  node-version: '16'
+		  cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+

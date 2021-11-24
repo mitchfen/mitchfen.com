@@ -11,7 +11,7 @@ jobs:
   publishContainer:
     runs-on: ubuntu-latest
     environment:
-      name: mitchfen.xyz
+      name: container-deployment
       url: https://mitchfen.xyz
     steps:
       - name: Checkout
