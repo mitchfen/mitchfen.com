@@ -1,9 +1,15 @@
+import Socials from "./components/Socials";
+
 function App() {
   return (
     <>
-    <div className="App">
-      <h1>Heyo</h1>
-    </div>
+      <div className="flex-parent">
+        <div className="left-column">
+          <h2>Mitchell Fenner</h2>
+          <hr />
+          <Socials />
+        </div>
+      </div>
     </>
   );
 }
