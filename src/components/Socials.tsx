@@ -1,35 +1,40 @@
-import { SiOrcid, SiGithub, SiLinkedin } from "react-icons/si";
-import { MdEmail } from "react-icons/md";
+import { SiOrcid, SiGithub, SiLinkedin } from 'react-icons/si'
+import { MdEmail } from 'react-icons/md'
+
+const github = "https://github.com/mitchfen"
+const linkedin = "https://linkedin.com/in/mitchfen"
+const email = "mailto:mitchfen@mitchfen.xyz"
+const orchid = "https://orcid.org/0000-0002-9684-0447"
 
 const Socials = () => {
   return (
     <>
       <a
-        href="https://github.com/mitchfen"
+        href={github}
         rel="noopener noreferrer"
         target="_blank"
       >
         <SiGithub className="social" size={40} />
-      </a>{" "}
+      </a>{' '}
       <a
-        href="https://www.linkedin.com/in/mitchfen/"
+        href={linkedin}
         rel="noopener noreferrer"
         target="_blank"
       >
         <SiLinkedin className="social" size={40} />
-      </a>{" "}
-      <a href="mailto:mitchfen@mitchfen.xyz">
+      </a>{' '}
+      <a href={email}>
         <MdEmail className="social" size={40} />
-      </a>{" "}
+      </a>{' '}
       <a
-        href="https://orcid.org/0000-0002-9684-0447"
+        href={orchid}
         rel="noopener noreferrer"
         target="_blank"
       >
         <SiOrcid className="social" size={40} />
-      </a>{" "}
+      </a>{' '}
     </>
-  );
-};
+  )
+}
 
-export default Socials;
+export default Socials
