@@ -1,4 +1,5 @@
 import Socials from './components/Socials'
+import Files from './components/Files'
 
 
 function App() {
@@ -7,8 +8,10 @@ function App() {
       <div className="flex-parent">
         <div className="left-column">
           <br />
-          <h2>Mitchell Fenner</h2>
+          <p>Hi I'm Mitchell Fenner, welcome to my site 🙂</p>
+		  <hr />
           <Socials />
+          <Files/>
           <br />
        </div>
       </div>
