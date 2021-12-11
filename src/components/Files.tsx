@@ -1,19 +1,18 @@
 const Files = () => {
   return (
     <>
-      <hr />
       <p>
+	    Send me a private email:
         <a
           href="https://raw.githubusercontent.com/mitchfen/mitchfen_xyz/main/src/assets/mitchfen.asc"
           target="_blank"
           rel="noreferrer noopener"
         >
-          mitchfen@mitchfen.xyz.asc
+		 &nbsp;mitchfen@mitchfen.xyz
         </a>
       </p>
     </>
-  );
-};
+  )
+}
 
-export default Files;
-
+export default Files

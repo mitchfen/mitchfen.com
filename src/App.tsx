@@ -1,19 +1,19 @@
 import Socials from './components/Socials'
 import Files from './components/Files'
 
-
 function App() {
   return (
     <>
       <div className="flex-parent">
         <div className="left-column">
           <br />
-          <p>Hi I'm Mitchell Fenner, welcome to my site 🙂</p>
-		  <hr />
+          <p>Mitchell Fenner</p>
+		  <br />
+          <Files />
+		  <br />
           <Socials />
-          <Files/>
           <br />
-       </div>
+        </div>
       </div>
     </>
   )
