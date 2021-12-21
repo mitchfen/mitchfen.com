@@ -7,12 +7,12 @@ function App() {
       <div className="flex-parent">
         <div className="left-column">
           <br />
-          <p>Mitchell Fenner</p>
-		  <br />
-          <Files />
+          <p>Mitchell Fenner - DevOps Engineer</p>
 		  <br />
           <Socials />
-          <br />
+		  <br />
+		  <br />
+          <Files />
         </div>
       </div>
     </>
