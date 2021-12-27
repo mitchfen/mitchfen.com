@@ -8,10 +8,10 @@ function App() {
         <div className="left-column">
           <br />
           <p>Mitchell Fenner - DevOps Engineer</p>
-		  <br />
+          <br />
           <Socials />
-		  <br />
-		  <br />
+          <br />
+          <br />
           <Files />
         </div>
       </div>

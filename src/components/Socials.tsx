@@ -10,7 +10,7 @@ const dockerhub = 'https://hub.docker.com/u/mitchfen'
 const Socials = () => {
   return (
     <>
-	  <p>Find me online:</p>
+      <p>Find me online:</p>
       <a href={github} rel="noopener noreferrer" target="_blank">
         <SiGithub className="social" size={40} />
       </a>{' '}
