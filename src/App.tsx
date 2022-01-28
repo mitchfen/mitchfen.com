@@ -11,8 +11,6 @@ function App() {
           <br />
           <Socials />
           <br />
-          <br />
-          <Files />
         </div>
       </div>
     </>
