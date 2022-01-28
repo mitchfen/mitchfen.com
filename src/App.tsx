@@ -1,5 +1,4 @@
 import Socials from './components/Socials'
-import Files from './components/Files'
 
 function App() {
   return (
