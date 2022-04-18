@@ -2,7 +2,7 @@
 
 ## About
 
-A tiny site with links to my accounts and my pgp key.
+A tiny site with links to my accounts.
 
 ## CI and deployment
 
