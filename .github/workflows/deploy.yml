@@ -94,4 +94,4 @@ jobs:
         uses: docker/build-push-action@master
         with:
           push: true
-          tags: docker.io/mitchfen/mitchfen_xyz:latest
+          tags: docker.io/mitchfen/mitchfen.xyz:latest
