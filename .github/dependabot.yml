@@ -3,11 +3,14 @@ updates:
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
-      interval: "daily"
-      time: "10:00"
+      interval: 'weekly'
+      timezone: 'America/Detroit'
+      day: 'Friday'
+      time: '06:00'
   - package-ecosystem: npm
     directory: "/"
     schedule:
-      interval: daily
-      time: "10:00"
-    open-pull-requests-limit: 10
+      interval: 'weekly'
+      timezone: 'America/Detroit'
+      day: 'Friday'
+      time: '06:00'
