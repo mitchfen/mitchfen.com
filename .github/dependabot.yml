@@ -5,12 +5,12 @@ updates:
     schedule:
       interval: 'weekly'
       timezone: 'America/Detroit'
-      day: 'Friday'
+      day: 'friday'
       time: '06:00'
   - package-ecosystem: npm
     directory: "/"
     schedule:
       interval: 'weekly'
       timezone: 'America/Detroit'
-      day: 'Friday'
+      day: 'friday'
       time: '06:00'
