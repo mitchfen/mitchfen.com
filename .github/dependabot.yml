@@ -7,10 +7,3 @@ updates:
       timezone: 'America/Detroit'
       day: 'friday'
       time: '06:00'
-  - package-ecosystem: npm
-    directory: "/"
-    schedule:
-      interval: 'weekly'
-      timezone: 'America/Detroit'
-      day: 'friday'
-      time: '06:00'
