@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using System;
 using mitchfenxyz;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
