@@ -20,7 +20,9 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Build
-        run: ./build.sh Publish
+        run: |
+          dotnet workload install wasm-tools
+          ./build.sh Publish
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
