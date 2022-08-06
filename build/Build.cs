@@ -23,12 +23,26 @@ class Build : NukeBuild
     AbsolutePath SourceDirectory => RootDirectory / "src";
     AbsolutePath OutputDirectory => RootDirectory / "output";
 
-    Target Clean => _ => _
-        .Before(Restore)
+    Target StartupInformation => _ => _
+        .Before(Clean)
         .Executes(() =>
         {
-            SourceDirectory.GlobDirectories("**/bin", "**/obj").ForEach(DeleteDirectory);
-            EnsureCleanDirectory(OutputDirectory);
+            Serilog.Log.Information($"Configuration: {Configuration}");
+            Serilog.Log.Information($"Output directory: {OutputDirectory}");
+        });
+
+    Target Clean => _ => _
+        .DependsOn(StartupInformation)
+        .Executes(() =>
+        {
+            if (IsLocalBuild) {
+                Serilog.Log.Information("Detected that build is running locally. Cleaning...");
+                SourceDirectory.GlobDirectories("**/bin", "**/obj").ForEach(DeleteDirectory);
+                EnsureCleanDirectory(OutputDirectory);
+            }
+            else {
+                Serilog.Log.Information("Clean step is skipped on CI");
+            }
         });
 
     Target Restore => _ => _

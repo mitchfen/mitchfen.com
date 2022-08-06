@@ -74,7 +74,8 @@
               "Clean",
               "Compile",
               "Publish",
-              "Restore"
+              "Restore",
+              "StartupInformation"
             ]
           }
         },
@@ -91,7 +92,8 @@
               "Clean",
               "Compile",
               "Publish",
-              "Restore"
+              "Restore",
+              "StartupInformation"
             ]
           }
         },
