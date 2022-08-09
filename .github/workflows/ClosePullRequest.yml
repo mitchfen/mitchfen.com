@@ -1,0 +1,20 @@
+name: Delete staging environment
+
+on:
+  pull_request_target:
+    types: [closed]
+
+jobs:
+  deploy-static-site:
+    name: Delete staging environment
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete staging environment
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_SITE }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          action: "close"
+          app_location: "output/wwwroot"
+          output_location: "" # Leave empty, app is already built
+          skip_app_build: true
