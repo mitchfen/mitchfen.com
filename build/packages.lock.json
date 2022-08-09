@@ -4,13 +4,13 @@
     "net6.0": {
       "Nuke.Common": {
         "type": "Direct",
-        "requested": "[6.0.3, )",
-        "resolved": "6.0.3",
-        "contentHash": "75Q+1rUnjXDBc0JSvzU7tfhOI3RZiyAwSZ4yOU4nZ8zBJpSvagVw5Sj3vE+wXNQ0eTU4XOtIakq4+Tui7ACd5w==",
+        "requested": "[6.1.2, )",
+        "resolved": "6.1.2",
+        "contentHash": "h9mvvuA6JVcvXTS7eoS1JvwUu2mWPGDewwF8odkUpJb9aI+edqK1p1X5aoJRRwaF31q0BaFqxa/9Vp6Bh/+vXw==",
         "dependencies": {
           "Glob": "1.1.8",
-          "JetBrains.Annotations": "2021.2.0",
-          "Microsoft.ApplicationInsights": "2.18.0",
+          "JetBrains.Annotations": "2022.1.0",
+          "Microsoft.ApplicationInsights": "2.20.0",
           "Microsoft.Azure.KeyVault": "3.0.4",
           "Microsoft.Build": "16.9.0",
           "Microsoft.Build.Framework": "16.9.0",
@@ -20,7 +20,7 @@
           "Microsoft.IdentityModel.Clients.ActiveDirectory": "5.2.4",
           "Newtonsoft.Json": "12.0.3",
           "NuGet.Packaging": "5.11.0",
-          "Octokit": "0.50.0",
+          "Octokit": "0.51.0",
           "Serilog.Sinks.Console": "4.0.1",
           "Serilog.Sinks.File": "5.0.0",
           "SharpZipLib": "1.3.3",
@@ -34,13 +34,13 @@
       },
       "JetBrains.Annotations": {
         "type": "Transitive",
-        "resolved": "2021.2.0",
-        "contentHash": "kKSyoVfndMriKHLfYGmr0uzQuI4jcc3TKGyww7buJFCYeHb/X0kodYBPL7n9454q7v6ASiRmDgpPGaDGerg/Hg=="
+        "resolved": "2022.1.0",
+        "contentHash": "ASfpoFJxiRsC9Xc4TWuPM41Zb/gl64xwfMOhnOZ3RnVWGYIZchjpWQV5zshJgoc/ZxVtgjaF7b577lURj7E6ig=="
       },
       "Microsoft.ApplicationInsights": {
         "type": "Transitive",
-        "resolved": "2.18.0",
-        "contentHash": "milJB3VOCoC4EWmpE/Co9cOJ7SV6Ji6VqV4Rf5UlqL9QCg+rAX1y+3Y+j1Gu/j4IExYiPq7SEKqkP2BFnEu6Vw==",
+        "resolved": "2.20.0",
+        "contentHash": "mb+EC5j06Msn5HhKrhrsMAst6JxvYUnphQMGY2cixCabgGAO3q79Y8o/p1Zce1Azgd1IVkRKAMzAV4vDCbXOqA==",
         "dependencies": {
           "System.Diagnostics.DiagnosticSource": "5.0.0"
         }
@@ -336,8 +336,8 @@
       },
       "Octokit": {
         "type": "Transitive",
-        "resolved": "0.50.0",
-        "contentHash": "J5vqespSvjxIAAtjG1Tc6ghBqyfRgDJtKnk/ifi4N0hD/f3JbPwyEDRT+Eelu/bS4C4M6mu5gt1WJqar+fByzg=="
+        "resolved": "0.51.0",
+        "contentHash": "p+8/X9y340TaqJCHGdizDqJ7EbAkGZU0cLeIgVByokdZs6I8VKXQ+f2g6992mMm5m+LHevTKcW5879AfrQ8nQg=="
       },
       "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl": {
         "type": "Transitive",
