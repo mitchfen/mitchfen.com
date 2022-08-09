@@ -20,7 +20,7 @@ jobs:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
   build:
-    name: Build and enable auto merge
+    name: Build pull request
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

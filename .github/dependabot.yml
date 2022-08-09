@@ -1,17 +1,17 @@
 version: 2
 updates:
-  - package-ecosystem: "NuGet"
+  - package-ecosystem: "nuget"
     directory: "/"
     schedule:
       interval: 'weekly'
       timezone: 'America/Detroit'
-      day: 'friday'
-      time: '06:00'
+      day: 'monday'
+      time: '10:00'
 
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: 'weekly'
       timezone: 'America/Detroit'
-      day: 'friday'
-      time: '06:00'
+      day: 'monday'
+      time: '10:00'
