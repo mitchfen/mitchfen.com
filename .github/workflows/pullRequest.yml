@@ -10,7 +10,7 @@ concurrency:
 
 jobs:
   build:
-    name: Build
+    name: Build and enable auto merge
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -20,6 +20,9 @@ jobs:
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: '6.0.x'
+
+      - name: Enable auto merge
+        run: gh pr merge --auto --squash "$PR_URL"
 
       - name: Install dotnet wasm workload
         run: dotnet workload install wasm-tools
