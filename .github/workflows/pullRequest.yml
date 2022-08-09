@@ -23,6 +23,8 @@ jobs:
 
       - name: Enable auto merge
         run: gh pr merge --auto --squash "$PR_URL"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Install dotnet wasm workload
         run: dotnet workload install wasm-tools
