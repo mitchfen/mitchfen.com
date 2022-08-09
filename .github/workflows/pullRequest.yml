@@ -9,6 +9,16 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  automerge:
+    name: Enable auto merge
+    runs-on: ubuntu-latest
+    steps:
+      - name: Enable auto-merge
+        run: gh pr merge --auto --squash "$PR_URL"
+        env:
+          PR_URL: ${{github.event.pull_request.html_url}}
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
   build:
     name: Build and enable auto merge
     runs-on: ubuntu-latest
@@ -20,11 +30,6 @@ jobs:
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: '6.0.x'
-
-      - name: Enable auto merge
-        run: gh pr merge --auto --squash "$PR_URL"
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Install dotnet wasm workload
         run: dotnet workload install wasm-tools
@@ -42,7 +47,7 @@ jobs:
   deploy-static-site:
     name: Deploy staging
     runs-on: ubuntu-latest
-    needs: build
+    needs: [automerge, build]
     environment:
       name: "mitchfen.xyz-staging"
       url: "https://calm-flower-0acda890f.1.azurestaticapps.net"
