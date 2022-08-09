@@ -21,10 +21,11 @@ jobs:
         with:
           dotnet-version: '6.0.x'
 
+      - name: Install dotnet wasm workload
+        run: dotnet workload install wasm-tools
+
       - name: Build
-        run: |
-          dotnet workload install wasm-tools
-          ./build.sh Publish
+        run: dotnet run --project ./build/nukebuild.csproj --target Publish
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
