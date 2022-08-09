@@ -5,7 +5,7 @@ on:
     types: [closed]
 
 jobs:
-  deploy-static-site:
+  delete-staging:
     name: Delete staging environment
     runs-on: ubuntu-latest
     steps:
