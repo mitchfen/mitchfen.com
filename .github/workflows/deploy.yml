@@ -1,0 +1,21 @@
+name: Production deploy
+
+on:
+  push:
+    branches: [main]
+
+# Set permissions of GITHUB_TOKEN for dependabot
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: ${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    name: Deploy to production
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo hi
