@@ -37,7 +37,7 @@ jobs:
           dotnet-version: '6.0.x'
 
       - name: Install dotnet wasm workload
-        run: dotnet workload restore ./mitchfenxyz.csproj
+        run: dotnet workload restore ./src/mitchfenxyz.csproj
 
       - name: Build
         run: dotnet run --project ./build/nukebuild.csproj --target Publish
