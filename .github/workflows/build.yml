@@ -1,11 +1,11 @@
-name: Check pull request
+name: Build
 
 on:
   pull_request:
     types: [opened, synchronize, reopened]
   push:
     branches:
-      - "feat/improvements"
+      - main
 
 # Set permissions of GITHUB_TOKEN for dependabot
 permissions:
@@ -53,6 +53,7 @@ jobs:
           retention-days: 1
 
   publish-container:
+    if: ${{ github.event_name == 'push' }}
     needs: build
     runs-on: ubuntu-latest
     env:
