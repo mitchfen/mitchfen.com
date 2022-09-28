@@ -3,6 +3,9 @@ name: Check pull request
 on:
   pull_request:
     types: [opened, synchronize, reopened]
+  push:
+    branches:
+      - "feat/improvements"
 
 # Set permissions of GITHUB_TOKEN for dependabot
 permissions:
@@ -14,18 +17,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  automerge:
-    name: Enable auto merge
-    runs-on: ubuntu-latest
-    steps:
-      - name: Enable auto-merge
-        run: gh pr merge --auto --squash "$PR_URL"
-        env:
-          PR_URL: ${{github.event.pull_request.html_url}}
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-
   build:
-    name: Build pull request
+    name: Build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -36,11 +29,14 @@ jobs:
         with:
           dotnet-version: '6.0.x'
 
-      - name: Install dotnet wasm workload
-        run: dotnet workload restore ./src/mitchfenxyz.csproj
+      - name: Install dotnet workloads
+        run: |
+          dotnet workload restore ./src/mitchfenxyz.csproj
+          dotnet workload update
 
       - name: Build
-        run: dotnet run --project ./build/nukebuild.csproj --target Publish
+        shell: pwsh
+        run: ./build.ps1 -Target Publish
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
@@ -49,27 +45,27 @@ jobs:
           path: ./output
           retention-days: 1
 
-  deploy-static-site:
-    name: Deploy staging
-    runs-on: ubuntu-latest
-    needs: [automerge, build]
-    environment:
-      name: "mitchfen.xyz"
-      url: "${{ steps.deploy.outputs.static_web_app_url }}"
-    steps:
-      - name: Download artifact from build job
-        uses: actions/download-artifact@v3
-        with:
-          name: output
-          path: output
+  # deploy-static-site:
+  #   name: Deploy staging
+  #   runs-on: ubuntu-latest
+  #   needs: [automerge, build]
+  #   environment:
+  #     name: "mitchfen.xyz"
+  #     url: "${{ steps.deploy.outputs.static_web_app_url }}"
+  #   steps:
+  #     - name: Download artifact from build job
+  #       uses: actions/download-artifact@v3
+  #       with:
+  #         name: output
+  #         path: output
 
-      - name: Deploy to Azure
-        id: deploy
-        uses: Azure/static-web-apps-deploy@v1
-        with:
-          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_SITE }}
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          action: "upload"
-          app_location: "output/wwwroot"
-          output_location: "" # Leave empty, app is already built
-          skip_app_build: true
+  #     - name: Deploy to Azure
+  #       id: deploy
+  #       uses: Azure/static-web-apps-deploy@v1
+  #       with:
+  #         azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_SITE }}
+  #         repo_token: ${{ secrets.GITHUB_TOKEN }}
+  #         action: "upload"
+  #         app_location: "output/wwwroot"
+  #         output_location: "" # Leave empty, app is already built
+  #         skip_app_build: true
