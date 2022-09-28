@@ -1,0 +1,78 @@
+name: Build
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+  push:
+    branches:
+      - main
+
+# Set permissions of GITHUB_TOKEN for dependabot
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: ${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - uses: actions/cache@v3
+        with:
+          path: ~/.nuget/packages
+          key: nuget-packages-${{ hashFiles('**/*.csproj') }}
+          restore-keys: |
+            nuget-packages-
+
+      - name: Setup .NET Core SDK
+        uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: '6.0.x'
+
+      - name: Install dotnet workloads
+        run: |
+          dotnet workload restore ./src/mitchfenxyz.csproj
+          dotnet workload update
+
+      - name: Build
+        shell: pwsh
+        run: ./build.ps1 -Target Publish
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: output
+          path: ./output
+          retention-days: 1
+
+  publish-container:
+    if: ${{ github.event_name == 'push' }}
+    needs: build
+    runs-on: ubuntu-latest
+    env:
+      tagname: 'ghcr.io/mitchfen/mitchfen.xyz:blazor'
+    steps:
+      - name: Checkout to get Dockerfile
+        uses: actions/checkout@v3
+
+      - name: Download artifact from build job
+        uses: actions/download-artifact@v3
+        with:
+          name: output
+          path: output
+
+      - name: Login to ghcr.io
+        run: echo ${{ secrets.GHCR_TOKEN }} | docker login ghcr.io -u USERNAME --password-stdin
+
+      - name: Build image
+        run: docker build -t ${{ env.tagname }} .
+      
+      - name: Push image
+        run: docker image push ${{ env.tagname }}
