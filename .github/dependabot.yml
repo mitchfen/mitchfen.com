@@ -5,13 +5,17 @@ updates:
     schedule:
       interval: 'weekly'
       timezone: 'America/Detroit'
-      day: 'monday'
+      day: 'friday'
       time: '10:00'
+    reviewers:
+      - "mitchfen"
 
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: 'weekly'
       timezone: 'America/Detroit'
-      day: 'monday'
+      day: 'friday'
       time: '10:00'
+    reviewers:
+      - "mitchfen"
