@@ -4,6 +4,7 @@ using Nuke.Common.IO;
 using Nuke.Common.ProjectModel;
 using Nuke.Common.Tools.DotNet;
 using Nuke.Common.Utilities.Collections;
+using static Serilog.Log;
 using static Nuke.Common.IO.FileSystemTasks;
 using static Nuke.Common.Tools.DotNet.DotNetTasks;
 
@@ -25,8 +26,8 @@ class Build : NukeBuild
         .Before(Clean)
         .Executes(() =>
         {
-            Serilog.Log.Information($"Configuration: {Configuration}");
-            Serilog.Log.Information($"Output directory: {OutputDirectory}");
+            Information($"Configuration: {Configuration}");
+            Information($"Output directory: {OutputDirectory}");
         });
 
     Target Clean => _ => _
@@ -34,12 +35,12 @@ class Build : NukeBuild
         .Executes(() =>
         {
             if (IsLocalBuild) {
-                Serilog.Log.Information("Detected that build is running locally. Cleaning...");
+                Information("Detected that build is running locally. Cleaning...");
                 SourceDirectory.GlobDirectories("**/bin", "**/obj").ForEach(DeleteDirectory);
                 EnsureCleanDirectory(OutputDirectory);
             }
             else {
-                Serilog.Log.Information("Clean step is skipped on CI");
+                Information("Clean step is skipped on CI");
             }
         });
 
