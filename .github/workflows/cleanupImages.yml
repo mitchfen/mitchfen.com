@@ -17,7 +17,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - run: ./cleanupTaglessImages.py
-        shell: python
+      - run: python ./cleanupTaglessImages.py
         env:
           GITHUB_TOKEN: ${{ secrets.GHCR_TOKEN }}
