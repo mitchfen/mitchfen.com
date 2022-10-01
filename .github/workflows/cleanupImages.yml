@@ -1,0 +1,21 @@
+name: Cleanup tagless images
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron:  '0 0 * * 0' # 00:00 on Sundays
+
+concurrency:
+  group: ${{ github.workflow }}
+
+jobs:
+  cleanup:
+    name: Cleanup tagless images
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - run: python ./cleanupTaglessImages.py
+        env:
+          GITHUB_TOKEN: ${{ secrets.GHCR_TOKEN }}
