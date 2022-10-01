@@ -1,7 +1,8 @@
-@Name
+﻿@page "/project"
+
+<p>Project name: @projectName</p>
 
 @code {
-    // Demonstrates how a parent component can supply parameters
     [Parameter]
-    public string? Name { get; set; }
+    public string? projectName { get; set; }
 }

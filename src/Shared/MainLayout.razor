@@ -1,17 +1,16 @@
 ﻿@inherits LayoutComponentBase
 
 <div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
-
-    <main>
-        <div class="top-row px-4">
-            <a href="https://github.com/mitchfen/mitchfen.xyz" target="_blank">View the source</a>
+    <div class="flex-row">
+        <div class="flex-columnleft">
+            <NavMenu />
         </div>
-
-        <article class="content px-4">
-            @Body
-        </article>
-    </main>
+        <div class="flex-columnright">
+            <main>
+                <article class="content px-4">
+                    @Body
+                </article>
+            </main>
+        </div>
+    </div>
 </div>

@@ -21,6 +21,7 @@ class Build : NukeBuild
 
     AbsolutePath SourceDirectory => RootDirectory / "src";
     AbsolutePath OutputDirectory => RootDirectory / "output";
+    AbsolutePath DockerfileDirectory => RootDirectory / "Docker";
 
     Target StartupInformation => _ => _
         .Before(Clean)
@@ -66,11 +67,14 @@ class Build : NukeBuild
         .DependsOn(Compile)
         .Executes(() =>
         {
+            CopyFileToDirectory(DockerfileDirectory / "Dockerfile", OutputDirectory);
+            CopyFileToDirectory(DockerfileDirectory / "nginx.conf", OutputDirectory);
             DotNetPublish(s => s
                 .SetProject(SourceDirectory / "mitchfenxyz.csproj")
                 .SetConfiguration(Configuration)
                 .EnableNoBuild()
                 .SetOutput(OutputDirectory));
+            
         });
 
 }

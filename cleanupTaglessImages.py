@@ -23,7 +23,7 @@ else:
         id = str(taglessImages[i])
         cmd += id
         print("Deleting " + id)
-        system(cmd)
+        os.system(cmd)
     print("Done.")
 
 os.system("rm ./temp.json")

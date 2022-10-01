@@ -1,0 +1,35 @@
+﻿@page "/textgame"
+<PageTitle>Mitchell Fenner - Text Game</PageTitle>
+
+<h1>Text adventure game</h1>
+<hr />
+
+<p>You are in a clearing. There is a small mailbox here.</p>
+@foreach (var Command in Commands)
+{
+    <p>@Command</p>
+}
+
+<form @onsubmit=Save>
+    <input id="todo" placeholder="Type a command" @bind="@NewCommand" />
+</form>
+
+@code {
+    private List<string> Commands = new();
+    private string NewCommand = string.Empty;
+    private void Save()
+    {
+        if (string.IsNullOrEmpty(NewCommand)) return;
+        Commands.Add("> " + NewCommand);
+        if (NewCommand == "Open the mailbox")
+        {
+            Commands.Add("You open the mailbox. There is a small leaflet inside.");
+        }
+        else
+        {
+            Commands.Add("Invalid command!");
+        }
+        NewCommand = string.Empty;
+    }
+
+}
