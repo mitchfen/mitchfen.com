@@ -2,7 +2,6 @@ name: Build
 
 on:
   pull_request:
-    types: [opened, synchronize, reopened]
   push:
     branches:
       - main
@@ -60,10 +59,7 @@ jobs:
     env:
       tagname: 'ghcr.io/mitchfen/mitchfen.xyz:blazor'
     steps:
-      - name: Checkout to get Dockerfile
-        uses: actions/checkout@v3
-
-      - name: Download artifact from build job
+      - name: Download output from build job
         uses: actions/download-artifact@v3
         with:
           name: output
@@ -75,6 +71,44 @@ jobs:
       - name: Build image
         working-directory: output
         run: docker build -t ${{ env.tagname }} .
-      
+
       - name: Push image
         run: docker image push ${{ env.tagname }}
+
+  deploy_job:
+    if: ${{ github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed') }}
+    needs: build
+    runs-on: ubuntu-latest
+    name: Deploy to Azure
+    environment:
+      name: 'mitchfen.xyz'
+      url: ${{ steps.deploy.outputs.static_web_app_url }}
+    steps:
+      - name: Download output from build job
+        uses: actions/download-artifact@v3
+        with:
+          name: output
+          path: output
+
+      - name: Build And Deploy
+        id: deploy
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_DEPLOYMENT_TOKEN }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }} # Used for Github integrations
+          action: "upload"
+          app_location: "output" 
+          skip_app_build: true # The app is built by Nuke
+          app_artifact_location: "wwwroot"
+
+  close_pull_request_job:
+    if: ${{ github.event_name == 'pull_request' && github.event.action == 'closed' }}
+    runs-on: ubuntu-latest
+    name: Close staging environment
+    steps:
+      - name: Delete staging environment
+        id: closepullrequest
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_DEPLOYMENT_TOKEN }}
+          action: "close"
