@@ -2,6 +2,7 @@ name: Build and Deploy
 
 on:
   pull_request:
+    types: [opened, synchronize, reopened]
   push:
     branches:
       - main
@@ -98,15 +99,3 @@ jobs:
           action: "upload"
           skip_app_build: true # The app has already been built by Nuke
           app_location: "output/wwwroot"
-
-  close_pull_request_job:
-    if: ${{ github.event_name == 'pull_request' && github.event.action == 'closed' }}
-    runs-on: ubuntu-latest
-    name: Close staging environment
-    steps:
-      - name: Delete staging environment
-        id: closepullrequest
-        uses: Azure/static-web-apps-deploy@v1
-        with:
-          azure_static_web_apps_api_token: ${{ secrets.AZURE_DEPLOYMENT_TOKEN }}
-          action: "close"
