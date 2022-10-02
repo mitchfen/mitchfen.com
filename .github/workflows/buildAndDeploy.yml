@@ -96,9 +96,8 @@ jobs:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_DEPLOYMENT_TOKEN }}
           repo_token: ${{ secrets.GITHUB_TOKEN }} # Used for Github integrations
           action: "upload"
-          app_location: "output" # Bogus value, since we don't have the source here
-          skip_app_build: true # The app is built by Nuke
-          output_location: "output/wwwroot"
+          skip_app_build: true # The app has already been built by Nuke
+          app_location: "output/wwwroot"
 
   close_pull_request_job:
     if: ${{ github.event_name == 'pull_request' && github.event.action == 'closed' }}
