@@ -43,7 +43,7 @@ jobs:
 
       - name: Build
         shell: pwsh
-        run: ./build.ps1 -Target PublishForDocker
+        run: ./build.ps1 -Target Publish
 
       - name: Upload artifact
         uses: actions/upload-artifact@v3
