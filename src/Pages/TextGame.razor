@@ -4,10 +4,10 @@ Text adventure game
 <br/>
 <hr />
 
-<p>You are in a clearing. There is a small mailbox here.</p>
-@foreach (var Command in Commands)
+<p>You are in a @GameStateObject.PlayerLocation. There is a small mailbox here.</p>
+@foreach (var Command in GameStateObject.InputCommands) 
 {
-    <p>@Command</p>
+    <p>@Command.ToString()</p>
 }
 
 <form @onsubmit=Save>
@@ -15,19 +15,19 @@ Text adventure game
 </form>
 
 @code {
-    private List<string> Commands = new();
+    GameState GameStateObject = new GameState();
     private string NewCommand = string.Empty;
     private void Save()
     {
         if (string.IsNullOrEmpty(NewCommand)) return;
-        Commands.Add("> " + NewCommand);
-        if (NewCommand == "Open the mailbox")
+        GameStateObject.InputCommands.Add("> " + NewCommand);
+        if (NewCommand == "Open the mailbox") 
         {
-            Commands.Add("You open the mailbox. There is a small leaflet inside.");
+            GameStateObject.InputCommands.Add("You open the mailbox. There is a small leaflet inside.");
         }
         else
         {
-            Commands.Add("Invalid command!");
+            GameStateObject.InputCommands.Add("Invalid command!");
         }
         NewCommand = string.Empty;
     }
