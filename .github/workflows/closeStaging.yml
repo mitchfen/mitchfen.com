@@ -1,0 +1,16 @@
+on:
+  pull_request:
+    types:
+      - "closed"
+
+jobs:
+  close_staging:
+    if: ${{ github.event_name == 'pull_request' && github.event.action == 'closed' }}
+    runs-on: ubuntu-latest
+    name: Close staging environment
+    steps:
+      - name: Close staging environment
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_DEPLOYMENT_TOKEN }}
+          action: "close"

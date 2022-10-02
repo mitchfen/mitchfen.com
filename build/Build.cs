@@ -67,7 +67,7 @@ class Build : NukeBuild
             );
         });
     
-    Target PublishForDocker => _ => _
+    Target Publish => _ => _
         .DependsOn(Compile)
         .Executes(() =>
         {
