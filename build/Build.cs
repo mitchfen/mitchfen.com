@@ -50,7 +50,9 @@ class Build : NukeBuild
         .Executes(() =>
         {
             DotNetRestore(s => s
-                .SetProjectFile(Solution));
+                .SetProjectFile(Solution)
+                .EnableUseLockFile()
+            );
         });
 
     Target Compile => _ => _
@@ -60,10 +62,12 @@ class Build : NukeBuild
             DotNetBuild(s => s
                 .SetProjectFile(Solution)
                 .SetConfiguration(Configuration)
-                .EnableNoRestore());
+                .EnableNoRestore()
+                .EnableNoLogo()
+            );
         });
     
-    Target Publish => _ => _
+    Target PublishForDocker => _ => _
         .DependsOn(Compile)
         .Executes(() =>
         {
@@ -73,8 +77,9 @@ class Build : NukeBuild
                 .SetProject(SourceDirectory / "mitchfenxyz.csproj")
                 .SetConfiguration(Configuration)
                 .EnableNoBuild()
-                .SetOutput(OutputDirectory));
-            
+                .EnableNoLogo()
+                .SetOutput(OutputDirectory)
+            );
         });
 
 }

@@ -74,7 +74,7 @@
             "enum": [
               "Clean",
               "Compile",
-              "Publish",
+              "PublishForDocker",
               "Restore",
               "StartupInformation"
             ]
@@ -92,7 +92,7 @@
             "enum": [
               "Clean",
               "Compile",
-              "Publish",
+              "PublishForDocker",
               "Restore",
               "StartupInformation"
             ]
