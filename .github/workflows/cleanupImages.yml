@@ -13,8 +13,8 @@ jobs:
     name: Cleanup untagged images
     runs-on: ubuntu-latest
     steps:
-      - uses: mitchfen/cleanup-untagged-container-images@v1
+      - uses: mitchfen/cleanup-untagged-container-images@main
         with:
           username: 'mitchfen'
-          container-name: 'highsec-ore-price-checker'
+          container-name: 'mitchfen.xyz'
           token: ${{ secrets.GHCR_TOKEN }}
