@@ -1,4 +1,4 @@
-name: Cleanup tagless images
+name: Cleanup untagged images
 
 on:
   workflow_dispatch:
@@ -10,12 +10,11 @@ concurrency:
 
 jobs:
   cleanup:
-    name: Cleanup tagless images
+    name: Cleanup untagged images
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - run: python ./cleanupTaglessImages.py
-        env:
-          GITHUB_TOKEN: ${{ secrets.GHCR_TOKEN }}
+      - uses: mitchfen/cleanup-untagged-container-images@v1
+        with:
+          username: 'mitchfen'
+          container-name: 'highsec-ore-price-checker'
+          token: ${{ secrets.GHCR_TOKEN }}
