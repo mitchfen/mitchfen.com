@@ -38,7 +38,7 @@ jobs:
           dotnet-version: '6.0.x'
 
       - name: Install dotnet workloads
-        run: dotnet workload restore ./src/mitchfenxyz.csproj
+        run: dotnet workload restore ./src/MitchfenSite.csproj
 
       - name: Build
         shell: pwsh

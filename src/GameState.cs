@@ -1,4 +1,4 @@
-namespace mitchfenxyz;
+namespace MitchfenSite;
 
 public enum Location { clearing, house, forest }
 

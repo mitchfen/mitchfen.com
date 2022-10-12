@@ -8,9 +8,10 @@ using static Serilog.Log;
 using static Nuke.Common.IO.FileSystemTasks;
 using static Nuke.Common.Tools.DotNet.DotNetTasks;
 
+namespace NukeBuild;
+
 [ShutdownDotNetAfterServerBuild]
-class Build : NukeBuild
-{
+class Build : Nuke.Common.NukeBuild {
 
     public static int Main () => Execute<Build>(x => x.Compile);
 
@@ -19,9 +20,9 @@ class Build : NukeBuild
 
     [Solution] readonly Solution Solution;
 
-    AbsolutePath SourceDirectory => RootDirectory / "src";
-    AbsolutePath OutputDirectory => RootDirectory / "output";
-    AbsolutePath DockerfileDirectory => RootDirectory / "Docker";
+    static AbsolutePath SourceDirectory => RootDirectory / "src";
+    static AbsolutePath OutputDirectory => RootDirectory / "output";
+    static AbsolutePath DockerfileDirectory => RootDirectory / "Docker";
 
     Target StartupInformation => _ => _
         .Before(Clean)
@@ -74,7 +75,7 @@ class Build : NukeBuild
             CopyFileToDirectory(DockerfileDirectory / "Dockerfile", OutputDirectory);
             CopyFileToDirectory(DockerfileDirectory / "nginx.conf", OutputDirectory);
             DotNetPublish(s => s
-                .SetProject(SourceDirectory / "mitchfenxyz.csproj")
+                .SetProject(SourceDirectory / "MitchfenSite.csproj")
                 .SetConfiguration(Configuration)
                 .EnableNoBuild()
                 .EnableNoLogo()
