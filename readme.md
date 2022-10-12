@@ -14,4 +14,4 @@ As a DevOps engineer, I enjoy automating and overengineering the CI/CD more than
 
 * Once a week, the [Cleanup Tagless Images](https://github.com/mitchfen/mitchfen.xyz/actions/workflows/cleanupImages.yml) workflow fires off to remove untagged images and save space on the container registry.
 
-* Dependabot is configured to update NuGet and Actions dependencies.
+* Dependabot is configured to update NuGet and GitHub Actions dependencies.
