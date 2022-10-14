@@ -36,7 +36,8 @@ class Build : Nuke.Common.NukeBuild {
         .DependsOn(StartupInformation)
         .Executes(() =>
         {
-            if (IsLocalBuild) {
+            if (IsLocalBuild) 
+            {
                 Information("Detected that build is running locally. Cleaning...");
                 SourceDirectory.GlobDirectories("**/bin", "**/obj").ForEach(DeleteDirectory);
                 EnsureCleanDirectory(OutputDirectory);

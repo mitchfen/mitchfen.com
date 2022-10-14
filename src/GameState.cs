@@ -1,6 +1,6 @@
 namespace MitchfenSite;
 
-public enum Location { clearing, house, forest }
+public enum Location { Clearing, House, Forest }
 
 public class GameState
 {
@@ -10,7 +10,7 @@ public class GameState
 
     public GameState()
     {
-        this.PlayerLocation = Location.clearing;
+        this.PlayerLocation = Location.Clearing;
         InputCommands = new List<string>();
     }
 }

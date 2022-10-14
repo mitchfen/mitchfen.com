@@ -10,18 +10,18 @@ Text adventure game
     <p>@command.ToString()</p>
 }
 
-<form @onsubmit=Save>
-    <input id="todo" placeholder="Type a command" @bind="@NewCommand" />
+<form @onsubmit="Save">
+    <input id="todo" placeholder="Type a command" @bind="@_newCommand" />
 </form>
 
 @code {
     private readonly GameState _gameStateObject = new GameState();
-    private string NewCommand = string.Empty;
+    private string _newCommand = string.Empty;
     private void Save()
     {
-        if (string.IsNullOrEmpty(NewCommand)) return;
-        _gameStateObject.InputCommands.Add("> " + NewCommand);
-        if (NewCommand == "Open the mailbox") 
+        if (string.IsNullOrEmpty(_newCommand)) return;
+        _gameStateObject.InputCommands.Add("> " + _newCommand);
+        if (_newCommand == "Open the mailbox") 
         {
             _gameStateObject.InputCommands.Add("You open the mailbox. There is a small leaflet inside.");
         }
@@ -29,7 +29,7 @@ Text adventure game
         {
             _gameStateObject.InputCommands.Add("Invalid command!");
         }
-        NewCommand = string.Empty;
+        _newCommand = string.Empty;
     }
 
 }
