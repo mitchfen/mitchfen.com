@@ -4,32 +4,22 @@ Text adventure game
 <br/>
 <hr />
 
-<p>You are in a @_gameStateObject.PlayerLocation. There is a small mailbox here.</p>
+<p>You are in a small clearing. There is a small mailbox here.</p>
 @foreach (var command in _gameStateObject.InputCommands) 
 {
     <p>@command.ToString()</p>
 }
 
-<form @onsubmit="Save">
-    <input id="todo" placeholder="Type a command" @bind="@_newCommand" />
+<form @onsubmit=EnterCommand>
+    <input id="todo" placeholder="" @bind="@_newCommand" />
 </form>
 
 @code {
-    private readonly GameState _gameStateObject = new GameState();
-    private string _newCommand = string.Empty;
-    private void Save()
+    GameState _gameStateObject = new GameState();
+    string _newCommand = string.Empty;
+    void EnterCommand() // Can this be a lambda?
     {
-        if (string.IsNullOrEmpty(_newCommand)) return;
-        _gameStateObject.InputCommands.Add("> " + _newCommand);
-        if (_newCommand == "Open the mailbox") 
-        {
-            _gameStateObject.InputCommands.Add("You open the mailbox. There is a small leaflet inside.");
-        }
-        else
-        {
-            _gameStateObject.InputCommands.Add("Invalid command!");
-        }
+        _gameStateObject.EnterCommand(_newCommand);
         _newCommand = string.Empty;
     }
-
 }
