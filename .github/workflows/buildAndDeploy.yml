@@ -21,30 +21,33 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: pwsh
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-
-      - uses: actions/cache@v3
-        with:
-          path: ~/.nuget/packages
-          key: nuget-packages-${{ hashFiles('**/*.csproj') }}
-          restore-keys: |
-            nuget-packages-
 
       - name: Setup .NET Core SDK
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: '6.0.x'
 
-      - name: Install dotnet workloads
+      - name: Cache Nuget packages
+        uses: actions/cache@v3
+        with:
+          path: ~/.nuget/packages
+          key: nuget-packages-${{ hashFiles('**/*.csproj') }}
+          restore-keys: |
+            nuget-packages-
+
+      - name: Restore dotnet workloads
         run: dotnet workload restore ./src/MitchfenSite.csproj
 
       - name: Build
-        shell: pwsh
         run: ./build.ps1 -Target Publish
 
-      - name: Upload artifact
+      - name: Upload output directory
         uses: actions/upload-artifact@v3
         with:
           name: output
@@ -74,6 +77,17 @@ jobs:
 
       - name: Push image
         run: docker image push ${{ env.tagname }}
+
+  cleanup:
+    needs: publish-container
+    name: Cleanup untagged container images
+    runs-on: ubuntu-latest
+    steps:
+      - uses: mitchfen/cleanup-untagged-container-images@main
+        with:
+          username: 'mitchfen'
+          container-name: 'mitchfen.xyz'
+          token: ${{ secrets.GHCR_TOKEN }}
 
   deploy_job:
     if: ${{ github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed') }}
