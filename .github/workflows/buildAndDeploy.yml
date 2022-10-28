@@ -36,8 +36,8 @@ jobs:
       - name: Cache Nuget packages
         uses: actions/cache@v3
         with:
-          path: ~/.nuget/packages
-          key: nuget-packages-${{ hashFiles('**/*.csproj') }}
+          path: ./packages
+          key: nuget-packages-${{ hashFiles('Directory.Packages.props') }}
           restore-keys: |
             nuget-packages-
 
