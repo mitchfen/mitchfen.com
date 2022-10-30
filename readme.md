@@ -11,3 +11,6 @@ As a DevOps engineer, I enjoy automating and overengineering the CI/CD more than
 * On pull request close, the staging environment associated with that pull request is closed by the [close staging environment](https://github.com/mitchfen/mitchfen.xyz/actions/workflows/closeStaging.yml) workflow.
 * Dependabot is configured to update NuGet and GitHub Actions dependencies.
 
+## Building the site
+The site is built using [Nuke](https://nuke.build/). This allows me to write both the build scripts and site in C#.
+To build the site, run `dotnet run --project ./build/nukebuild.csproj --target Publish`. There is also a convenience PowerShell script which allows you to run simply `./build.ps1 -Target Publish`

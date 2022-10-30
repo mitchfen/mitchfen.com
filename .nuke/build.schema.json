@@ -72,6 +72,7 @@
           "items": {
             "type": "string",
             "enum": [
+              "BuildContainerImage",
               "Clean",
               "Compile",
               "Publish",
@@ -84,12 +85,17 @@
           "type": "string",
           "description": "Path to a solution file that is automatically loaded"
         },
+        "Tag": {
+          "type": "string",
+          "description": "Docker image tag - Default is 'latest'"
+        },
         "Target": {
           "type": "array",
           "description": "List of targets to be invoked. Default is '{default_target}'",
           "items": {
             "type": "string",
             "enum": [
+              "BuildContainerImage",
               "Clean",
               "Compile",
               "Publish",
