@@ -93,13 +93,13 @@ class Build : Nuke.Common.NukeBuild {
         .Executes(() =>
         {
             Information("Building docker image...");
-            string imageName = "ghcr.io/mitchfen/mitchfen.xyz:{Tag}";
+            string imageName = $"ghcr.io/mitchfen/mitchfen.xyz:{Tag}";
             string cmd = $"docker build -t {imageName} .";
-            StartShell(cmd, OutputDirectory);
+            StartShell(cmd, OutputDirectory).WaitForExit();
 
             Information("Pushing docker image...");
             cmd = $"docker image push {imageName}";
-            StartShell(cmd, OutputDirectory);
+            StartShell(cmd, OutputDirectory).WaitForExit();
         });
 
 }
