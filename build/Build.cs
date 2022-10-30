@@ -21,7 +21,7 @@ class Build : Nuke.Common.NukeBuild {
     [Parameter("Configuration to build - Default is 'Debug' (local) or 'Release' (server)")]
     readonly Configuration Configuration = IsLocalBuild ? Configuration.Debug : Configuration.Release;
 
-    [Parameter("Docker image tag - Default is 'latest'")]
+    [Parameter("Docker image tag - Default is 'blazor'")]
     readonly string Tag = "blazor";
 
     static AbsolutePath SourceDirectory => RootDirectory / "src";
