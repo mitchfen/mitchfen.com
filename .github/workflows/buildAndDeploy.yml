@@ -17,13 +17,14 @@ concurrency:
   group: ${{ github.head_ref || github.ref }}
   cancel-in-progress: true
 
+defaults:
+  run:
+    shell: pwsh
+
 jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        shell: pwsh
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -62,6 +63,9 @@ jobs:
     env:
       tagname: 'ghcr.io/mitchfen/mitchfen.xyz:blazor'
     steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
       - name: Download output from build job
         uses: actions/download-artifact@v3
         with:
@@ -71,12 +75,8 @@ jobs:
       - name: Login to ghcr.io
         run: echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
-      - name: Build image
-        working-directory: output
-        run: docker build -t ${{ env.tagname }} .
-
-      - name: Push image
-        run: docker image push ${{ env.tagname }}
+      - name: Build and push image
+        run: ./build.ps1 -Target BuildContainerImage -skip Publish
 
   cleanup:
     needs: publish-container
