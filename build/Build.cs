@@ -1,12 +1,13 @@
+using Serilog;
 using Nuke.Common;
 using Nuke.Common.CI;
 using Nuke.Common.IO;
 using Nuke.Common.ProjectModel;
+using Nuke.Common.Tooling;
 using Nuke.Common.Tools.DotNet;
 using Nuke.Common.Utilities.Collections;
-using static Serilog.Log;
+using Nuke.Common.Tools.Docker;
 using static Nuke.Common.IO.FileSystemTasks;
-using static Nuke.Common.Tooling.ProcessTasks;
 using static Nuke.Common.Tools.DotNet.DotNetTasks;
 
 namespace NukeBuild;
@@ -26,13 +27,14 @@ class Build : Nuke.Common.NukeBuild {
     static AbsolutePath SourceDirectory => RootDirectory / "src";
     static AbsolutePath OutputDirectory => RootDirectory / "output";
     static AbsolutePath DockerfileDirectory => RootDirectory / "Docker";
+    const string BaseImageName = "ghcr.io/mitchfen/mitchfen.xyz";
 
     Target StartupInformation => _ => _
         .Before(Clean)
         .Executes(() =>
         {
-            Information($"Configuration: {Configuration}");
-            Information($"Output directory: {OutputDirectory}");
+            Log.Information($"Configuration: {Configuration}");
+            Log.Information($"Output directory: {OutputDirectory}");
         });
 
     Target Clean => _ => _
@@ -41,12 +43,12 @@ class Build : Nuke.Common.NukeBuild {
         {
             if (IsLocalBuild) 
             {
-                Information("Detected that build is running locally. Cleaning...");
+                Log.Information("Detected that build is running locally. Cleaning...");
                 SourceDirectory.GlobDirectories("**/bin", "**/obj").ForEach(DeleteDirectory);
-                EnsureCleanDirectory(OutputDirectory);
+                EnsureCleanDirectory( OutputDirectory );
             }
             else {
-                Information("Clean step is skipped on CI");
+                Log.Information("Clean step is skipped on CI environments.");
             }
         });
 
@@ -54,7 +56,7 @@ class Build : Nuke.Common.NukeBuild {
         .DependsOn(Clean)
         .Executes(() =>
         {
-            DotNetRestore(s => s
+            DotNetRestore(settings => settings
                 .SetProjectFile(Solution)
                 .EnableUseLockFile()
             );
@@ -64,7 +66,7 @@ class Build : Nuke.Common.NukeBuild {
         .DependsOn(Restore)
         .Executes(() =>
         {
-            DotNetBuild(s => s
+            DotNetBuild(settings => settings
                 .SetProjectFile(Solution)
                 .SetConfiguration(Configuration)
                 .EnableNoRestore()
@@ -78,7 +80,7 @@ class Build : Nuke.Common.NukeBuild {
         {
             CopyFileToDirectory(DockerfileDirectory / "Dockerfile", OutputDirectory);
             CopyFileToDirectory(DockerfileDirectory / "nginx.conf", OutputDirectory);
-            DotNetPublish(s => s
+            DotNetPublish(settings => settings
                 .SetProject(SourceDirectory / "MitchfenSite.csproj")
                 .SetConfiguration(Configuration)
                 .EnableNoBuild()
@@ -91,14 +93,19 @@ class Build : Nuke.Common.NukeBuild {
         .DependsOn(Publish)
         .Executes(() =>
         {
-            Information("Building docker image...");
-            string imageName = $"ghcr.io/mitchfen/mitchfen.xyz:{Tag}";
-            string cmd = $"docker build -t {imageName} .";
-            StartShell(cmd, OutputDirectory).WaitForExit();
+            Log.Information("Building docker image...");
+            var fullImageName = $"{BaseImageName}:{Tag}";
+            DockerTasks.DockerImageBuild(settings => settings
+                .SetCacheFrom(fullImageName)
+                .SetPath(".")
+                .SetTag(fullImageName)
+                .SetProcessWorkingDirectory(OutputDirectory)
+            );
 
-            Information("Pushing docker image...");
-            cmd = $"docker image push {imageName}";
-            StartShell(cmd, OutputDirectory).WaitForExit();
+            Log.Information($"Pushing {fullImageName}...");
+            DockerTasks.DockerImagePush(settings => settings
+                .SetName(fullImageName)
+            );
         });
 
 }

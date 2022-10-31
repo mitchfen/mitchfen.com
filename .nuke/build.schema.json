@@ -87,7 +87,7 @@
         },
         "Tag": {
           "type": "string",
-          "description": "Docker image tag - Default is 'latest'"
+          "description": "Docker image tag - Default is 'blazor'"
         },
         "Target": {
           "type": "array",
