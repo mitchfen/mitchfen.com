@@ -43,7 +43,7 @@ jobs:
             nuget-packages-
 
       - name: Build
-        run: dotnet run --project ./build/nukebuild.csproj --target Publish
+        run: dotnet run --project ./build/NukeBuild.csproj --target Publish
 
       - name: Upload output directory
         uses: actions/upload-artifact@v3
@@ -71,7 +71,7 @@ jobs:
         run: echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
       - name: Build and push image
-        run: dotnet run --project ./build/nukebuild.csproj --target BuildContainerImage --skip Publish
+        run: dotnet run --project ./build/NukeBuild.csproj --target BuildContainerImage --skip Publish
 
   cleanup:
     needs: publish-container
