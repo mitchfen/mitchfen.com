@@ -7,6 +7,7 @@ using Nuke.Common.Tooling;
 using Nuke.Common.Tools.DotNet;
 using Nuke.Common.Utilities.Collections;
 using Nuke.Common.Tools.Docker;
+using static Nuke.Common.Tooling.ProcessTasks;
 using static Nuke.Common.IO.FileSystemTasks;
 using static Nuke.Common.Tools.DotNet.DotNetTasks;
 
@@ -56,6 +57,7 @@ class Build : Nuke.Common.NukeBuild {
         .DependsOn(Clean)
         .Executes(() =>
         {
+            StartShell($"dotnet workload restore {Solution}").AssertZeroExitCode();
             DotNetRestore(settings => settings
                 .SetProjectFile(Solution)
                 .EnableUseLockFile()

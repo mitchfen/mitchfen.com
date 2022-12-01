@@ -14,5 +14,5 @@ As a DevOps engineer, I enjoy automating and overengineering the CI/CD more than
 ## Building the site
 The site is built using [Nuke](https://nuke.build/). This allows me to write both the build scripts and site in C#. 
 ```
-dotnet run --project ./build/nukebuild.csproj --target Publish
+dotnet run --project ./build/NukeBuild.csproj --target Publish
 ```

@@ -42,9 +42,6 @@ jobs:
           restore-keys: |
             nuget-packages-
 
-      - name: Restore dotnet workloads
-        run: dotnet workload restore ./src/MitchfenSite.csproj
-
       - name: Build
         run: dotnet run --project ./build/nukebuild.csproj --target Publish
 
