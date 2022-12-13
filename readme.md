@@ -2,8 +2,7 @@
 [![Close staging environment](https://github.com/mitchfen/mitchfen.xyz/actions/workflows/closeStaging.yml/badge.svg)](https://github.com/mitchfen/mitchfen.xyz/actions/workflows/closeStaging.yml)
 ## Mitchell Fenner's personal website
 
-A tiny Blazor WebAssembly site with links to my accounts.  
-As a DevOps engineer, I enjoy automating and overengineering the CI/CD more than designing a nice UI 😉.
+My personal site built with Blazor WebAssembly.
 
 ## CI/CD
 * On pull request creation, the [Build and Deploy](https://github.com/mitchfen/mitchfen.xyz/actions/workflows/buildAndDeploy.yml) workflow fires off to build the site and deploy it to a staging environment on Azure.  
@@ -12,7 +11,8 @@ As a DevOps engineer, I enjoy automating and overengineering the CI/CD more than
 * Dependabot is configured to update NuGet and GitHub Actions dependencies.
 
 ## Building the site
-The site is built using [Nuke](https://nuke.build/). This allows me to write both the build scripts and site in C#. 
-```
+The site is built using [Nuke build](https://nuke.build/). This allows me to write both the website and build scripts in C#. 
+```PowerShell
+# To publish the site to /output run:
 ./build.ps1 --Target Publish
 ```
