@@ -4,9 +4,9 @@
     "net7.0": {
       "Nuke.Common": {
         "type": "Direct",
-        "requested": "[6.2.1, )",
-        "resolved": "6.2.1",
-        "contentHash": "HVpJbVqfD1G1bif+07sbvZWoAFniEAv6e57SJoHDBRPJkzPQ50CDCNbjRccPyTfUq8RcQAMerqNuz9sLOU2i/g==",
+        "requested": "[6.3.0, )",
+        "resolved": "6.3.0",
+        "contentHash": "C1GT2vFFUWVoJomEjJ2sZX14ZmySZ1QLypTGZiOAkuUWvjDb7Cfl8d2tyFkLWjwoHbaexccSt0k2/vxPNEGdgQ==",
         "dependencies": {
           "Glob": "1.1.8",
           "JetBrains.Annotations": "2022.1.0",
@@ -20,7 +20,7 @@
           "Microsoft.IdentityModel.Clients.ActiveDirectory": "5.2.4",
           "Newtonsoft.Json": "12.0.3",
           "NuGet.Packaging": "5.11.0",
-          "Octokit": "0.51.0",
+          "Octokit": "4.0.2",
           "Serilog.Formatting.Compact": "1.1.0",
           "Serilog.Formatting.Compact.Reader": "1.0.5",
           "Serilog.Sinks.Console": "4.0.1",
@@ -338,8 +338,8 @@
       },
       "Octokit": {
         "type": "Transitive",
-        "resolved": "0.51.0",
-        "contentHash": "p+8/X9y340TaqJCHGdizDqJ7EbAkGZU0cLeIgVByokdZs6I8VKXQ+f2g6992mMm5m+LHevTKcW5879AfrQ8nQg=="
+        "resolved": "4.0.2",
+        "contentHash": "U9le66tGEF58SlIA7ZzEys9nvxxSEhLSNkzXHOHROCO9uzAxAB671oZ20I6FsfYAmg0mKS0gJZVifZhGNx7Gzg=="
       },
       "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl": {
         "type": "Transitive",
