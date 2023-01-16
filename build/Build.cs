@@ -7,30 +7,24 @@ using Nuke.Common.Tooling;
 using Nuke.Common.Tools.DotNet;
 using Nuke.Common.Utilities.Collections;
 using Nuke.Common.Tools.Docker;
-using static Nuke.Common.Tooling.ProcessTasks;
 using static Nuke.Common.IO.FileSystemTasks;
 using static Nuke.Common.Tools.DotNet.DotNetTasks;
 
 namespace NukeBuild;
 
 [ShutdownDotNetAfterServerBuild]
-class Build : Nuke.Common.NukeBuild {
+partial class Build : Nuke.Common.NukeBuild {
 
     public static int Main () => Execute<Build>(x => x.Compile);
     [Solution] readonly Solution Solution;
 
-    [Parameter("Configuration to build - Default is 'Debug' (local) or 'Release' (server)")]
-    readonly Configuration Configuration = IsLocalBuild ? Configuration.Debug : Configuration.Release;
+    [Parameter("Configuration to build")]
+    readonly string Configuration = IsLocalBuild ? "Debug" : "Release";
 
-    [Parameter("Docker image tag - Default is 'blazor'")]
+    [Parameter("Docker image tag - default is 'blazor'")]
     readonly string Tag = "blazor";
 
-    static AbsolutePath SourceDirectory => RootDirectory / "src";
-    static AbsolutePath OutputDirectory => RootDirectory / "output";
-    static AbsolutePath DockerfileDirectory => RootDirectory / "Docker";
-    const string BaseImageName = "ghcr.io/mitchfen/mitchfen.xyz";
-
-    Target StartupInformation => _ => _
+    Target LogStartupInformation => _ => _
         .Before(Clean)
         .Executes(() =>
         {
@@ -39,7 +33,7 @@ class Build : Nuke.Common.NukeBuild {
         });
 
     Target Clean => _ => _
-        .DependsOn(StartupInformation)
+        .DependsOn(LogStartupInformation)
         .Executes(() =>
         {
             if (IsLocalBuild) 
@@ -53,25 +47,13 @@ class Build : Nuke.Common.NukeBuild {
             }
         });
 
-    Target Restore => _ => _
-        .DependsOn(Clean)
-        .Executes(() =>
-        {
-            StartShell($"dotnet workload restore {Solution}").AssertZeroExitCode();
-            DotNetRestore(settings => settings
-                .SetProjectFile(Solution)
-                .EnableUseLockFile()
-            );
-        });
-
     Target Compile => _ => _
-        .DependsOn(Restore)
+        .DependsOn(Clean)
         .Executes(() =>
         {
             DotNetBuild(settings => settings
                 .SetProjectFile(Solution)
                 .SetConfiguration(Configuration)
-                .EnableNoRestore()
                 .EnableNoLogo()
             );
         });
@@ -109,5 +91,4 @@ class Build : Nuke.Common.NukeBuild {
                 .SetName(fullImageName)
             );
         });
-
 }
