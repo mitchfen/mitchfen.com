@@ -6,10 +6,6 @@
     "build": {
       "type": "object",
       "properties": {
-        "Configuration": {
-          "type": "string",
-          "description": "Configuration to build"
-        },
         "Continue": {
           "type": "boolean",
           "description": "Indicates to continue a previously failed build attempt"
@@ -72,7 +68,8 @@
               "Clean",
               "Compile",
               "LogStartupInformation",
-              "Publish"
+              "Publish",
+              "Restore"
             ]
           }
         },
@@ -94,7 +91,8 @@
               "Clean",
               "Compile",
               "LogStartupInformation",
-              "Publish"
+              "Publish",
+              "Restore"
             ]
           }
         },

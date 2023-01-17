@@ -2,11 +2,11 @@ using Serilog;
 using Nuke.Common;
 using Nuke.Common.CI;
 using Nuke.Common.IO;
-using Nuke.Common.ProjectModel;
 using Nuke.Common.Tooling;
 using Nuke.Common.Tools.DotNet;
 using Nuke.Common.Utilities.Collections;
 using Nuke.Common.Tools.Docker;
+using static Nuke.Common.Tooling.ProcessTasks;
 using static Nuke.Common.IO.FileSystemTasks;
 using static Nuke.Common.Tools.DotNet.DotNetTasks;
 
@@ -16,10 +16,6 @@ namespace NukeBuild;
 partial class Build : Nuke.Common.NukeBuild {
 
     public static int Main () => Execute<Build>(x => x.Compile);
-    [Solution] readonly Solution Solution;
-
-    [Parameter("Configuration to build")]
-    readonly string Configuration = IsLocalBuild ? "Debug" : "Release";
 
     [Parameter("Docker image tag - default is 'blazor'")]
     readonly string Tag = "blazor";
@@ -46,9 +42,20 @@ partial class Build : Nuke.Common.NukeBuild {
                 Log.Information("Clean step is skipped on CI environments.");
             }
         });
+    
+    Target Restore => _ => _
+        .DependsOn(Clean)
+        .Executes(() =>
+        {
+            StartShell($"dotnet workload restore {Solution}").AssertZeroExitCode();
+            DotNetRestore(settings => settings
+                .SetProjectFile(Solution)
+                .EnableUseLockFile()
+            );
+        });
 
     Target Compile => _ => _
-        .DependsOn(Clean)
+        .DependsOn(Restore)
         .Executes(() =>
         {
             DotNetBuild(settings => settings
