@@ -47,7 +47,7 @@ partial class Build : Nuke.Common.NukeBuild {
         .DependsOn(Clean)
         .Executes(() =>
         {
-            StartShell($"dotnet workload restore {Solution}").AssertZeroExitCode();
+            //StartShell($"dotnet workload restore {Solution}").AssertZeroExitCode();
             DotNetRestore(settings => settings
                 .SetProjectFile(Solution)
                 .EnableUseLockFile()
