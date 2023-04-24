@@ -9,6 +9,7 @@ using Nuke.Common.Tools.Docker;
 using static Nuke.Common.Tooling.ProcessTasks;
 using static Nuke.Common.IO.FileSystemTasks;
 using static Nuke.Common.Tools.DotNet.DotNetTasks;
+using System.Runtime.InteropServices;
 
 namespace NukeBuild;
 
@@ -47,7 +48,12 @@ partial class Build : Nuke.Common.NukeBuild {
         .DependsOn(Clean)
         .Executes(() =>
         {
-            StartShell($"dotnet workload restore {Solution}").AssertZeroExitCode();
+            string workloadRestoreCmd = $"dotnet workload restore {Solution}";
+            if ( RuntimeInformation.IsOSPlatform(OSPlatform.Linux)) {
+                workloadRestoreCmd = $"sudo {workloadRestoreCmd}";
+            }
+
+            StartShell(workloadRestoreCmd).AssertZeroExitCode();
             DotNetRestore(settings => settings
                 .SetProjectFile(Solution)
                 .EnableUseLockFile()
