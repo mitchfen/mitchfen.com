@@ -4,12 +4,12 @@ using Nuke.Common.CI;
 using Nuke.Common.IO;
 using Nuke.Common.Tooling;
 using Nuke.Common.Tools.DotNet;
-using Nuke.Common.Utilities.Collections;
 using Nuke.Common.Tools.Docker;
+using System.Runtime.InteropServices;
+using Nuke.Common.Utilities.Collections;
 using static Nuke.Common.Tooling.ProcessTasks;
 using static Nuke.Common.IO.FileSystemTasks;
 using static Nuke.Common.Tools.DotNet.DotNetTasks;
-using System.Runtime.InteropServices;
 
 namespace NukeBuild;
 
