@@ -68,6 +68,7 @@ partial class Build : Nuke.Common.NukeBuild {
                 .SetProjectFile(Solution)
                 .SetConfiguration(Configuration)
                 .EnableNoLogo()
+                .EnableNoRestore()
             );
         });
     
@@ -80,6 +81,7 @@ partial class Build : Nuke.Common.NukeBuild {
             DotNetPublish(settings => settings
                 .SetProject(SourceDirectory / "MitchfenSite.csproj")
                 .SetConfiguration(Configuration)
+                .EnableNoRestore()
                 .EnableNoBuild()
                 .EnableNoLogo()
                 .SetOutput(OutputDirectory)
