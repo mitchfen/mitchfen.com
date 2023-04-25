@@ -4,8 +4,9 @@ using Nuke.Common.CI;
 using Nuke.Common.IO;
 using Nuke.Common.Tooling;
 using Nuke.Common.Tools.DotNet;
-using Nuke.Common.Utilities.Collections;
 using Nuke.Common.Tools.Docker;
+using System.Runtime.InteropServices;
+using Nuke.Common.Utilities.Collections;
 using static Nuke.Common.Tooling.ProcessTasks;
 using static Nuke.Common.IO.FileSystemTasks;
 using static Nuke.Common.Tools.DotNet.DotNetTasks;
@@ -47,7 +48,12 @@ partial class Build : Nuke.Common.NukeBuild {
         .DependsOn(Clean)
         .Executes(() =>
         {
-            StartShell($"dotnet workload restore {Solution}").AssertZeroExitCode();
+            string workloadRestoreCmd = $"dotnet workload restore {Solution}";
+            if ( RuntimeInformation.IsOSPlatform(OSPlatform.Linux)) {
+                workloadRestoreCmd = $"sudo {workloadRestoreCmd}";
+            }
+
+            StartShell(workloadRestoreCmd).AssertZeroExitCode();
             DotNetRestore(settings => settings
                 .SetProjectFile(Solution)
                 .EnableUseLockFile()
@@ -62,6 +68,7 @@ partial class Build : Nuke.Common.NukeBuild {
                 .SetProjectFile(Solution)
                 .SetConfiguration(Configuration)
                 .EnableNoLogo()
+                .EnableNoRestore()
             );
         });
     
@@ -74,6 +81,7 @@ partial class Build : Nuke.Common.NukeBuild {
             DotNetPublish(settings => settings
                 .SetProject(SourceDirectory / "MitchfenSite.csproj")
                 .SetConfiguration(Configuration)
+                .EnableNoRestore()
                 .EnableNoBuild()
                 .EnableNoLogo()
                 .SetOutput(OutputDirectory)
