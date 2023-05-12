@@ -36,19 +36,19 @@ partial class Build : Nuke.Common.NukeBuild {
             if (IsLocalBuild) 
             {
                 Log.Information("Detected that build is running locally. Cleaning...");
-                SourceDirectory.GlobDirectories("**/bin", "**/obj").ForEach(DeleteDirectory);
-                EnsureCleanDirectory( OutputDirectory );
+                SourceDirectory.GlobDirectories("**/bin", "**/obj").ForEach(dir => dir.DeleteDirectory());
+                OutputDirectory.DeleteDirectory();
             }
             else {
                 Log.Information("Clean step is skipped on CI environments.");
             }
         });
-    
+
     Target Restore => _ => _
         .DependsOn(Clean)
         .Executes(() =>
         {
-            string workloadRestoreCmd = $"dotnet workload restore {Solution}";
+            var workloadRestoreCmd = $"dotnet workload restore {Solution}";
             if ( RuntimeInformation.IsOSPlatform(OSPlatform.Linux)) {
                 workloadRestoreCmd = $"sudo {workloadRestoreCmd}";
             }
@@ -71,7 +71,7 @@ partial class Build : Nuke.Common.NukeBuild {
                 .EnableNoRestore()
             );
         });
-    
+
     Target Publish => _ => _
         .DependsOn(Compile)
         .Executes(() =>
