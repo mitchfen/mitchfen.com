@@ -9,6 +9,6 @@ partial class Build {
     const string Configuration = "Release";
     static AbsolutePath SourceDirectory => RootDirectory / "src";
     static AbsolutePath OutputDirectory => RootDirectory / "output";
-    static AbsolutePath DockerfileDirectory => RootDirectory / "Docker";
+    static AbsolutePath DockerfileDirectory => RootDirectory / "deploy";
     const string BaseImageName = "ghcr.io/mitchfen/mitchfen.xyz";
 }
