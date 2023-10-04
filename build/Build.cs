@@ -1,3 +1,4 @@
+using System;
 using Serilog;
 using Nuke.Common;
 using Nuke.Common.CI;
@@ -21,7 +22,7 @@ partial class Build : Nuke.Common.NukeBuild {
     [Parameter("Docker image tag - default is 'blazor'")]
     readonly string Tag = "blazor";
 
-    Target LogStartupInformation => _ => _
+    Target LogStartupInformation => targetDefinition => targetDefinition
         .Before(Clean)
         .Executes(() =>
         {
@@ -29,7 +30,7 @@ partial class Build : Nuke.Common.NukeBuild {
             Log.Information($"Output directory: {OutputDirectory}");
         });
 
-    Target Clean => _ => _
+    Target Clean => targetDefinition => targetDefinition
         .DependsOn(LogStartupInformation)
         .Executes(() =>
         {
@@ -44,12 +45,12 @@ partial class Build : Nuke.Common.NukeBuild {
             }
         });
 
-    Target Restore => _ => _
+    Target Restore => targetDefinition => targetDefinition
         .DependsOn(Clean)
         .Executes(() =>
         {
             var workloadRestoreCmd = $"dotnet workload restore {Solution}";
-            if ( RuntimeInformation.IsOSPlatform(OSPlatform.Linux)) {
+            if ( RuntimeInformation.IsOSPlatform(OSPlatform.Linux) && Environment.GetEnvironmentVariable("CI") != "true" ) {
                 workloadRestoreCmd = $"sudo {workloadRestoreCmd}";
             }
 
@@ -60,7 +61,7 @@ partial class Build : Nuke.Common.NukeBuild {
             );
         });
 
-    Target Compile => _ => _
+    Target Compile => targetDefinition => targetDefinition
         .DependsOn(Restore)
         .Executes(() =>
         {
@@ -88,7 +89,7 @@ partial class Build : Nuke.Common.NukeBuild {
             );
         });
 
-    Target BuildContainerImage => _ => _
+    Target BuildContainerImage => targetDefinition => targetDefinition
         .DependsOn(Publish)
         .Executes(() =>
         {
