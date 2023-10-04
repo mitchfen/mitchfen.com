@@ -1,4 +1,3 @@
-using System;
 using Serilog;
 using Nuke.Common;
 using Nuke.Common.CI;
@@ -50,7 +49,7 @@ partial class Build : Nuke.Common.NukeBuild {
         .Executes(() =>
         {
             var workloadRestoreCmd = $"dotnet workload restore {Solution}";
-            if ( RuntimeInformation.IsOSPlatform(OSPlatform.Linux) && Environment.GetEnvironmentVariable("CI") != "true" ) {
+            if ( RuntimeInformation.IsOSPlatform(OSPlatform.Linux)) {
                 workloadRestoreCmd = $"sudo {workloadRestoreCmd}";
             }
 
