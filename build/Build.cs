@@ -99,11 +99,15 @@ partial class Build : Nuke.Common.NukeBuild {
                 .SetPath(".")
                 .SetTag(fullImageName)
                 .SetProcessWorkingDirectory(OutputDirectory)
+                .SetProcessLogOutput(false)
+                .EnableProcessAssertZeroExitCode()
             );
 
             Log.Information($"Pushing {fullImageName}...");
             DockerTasks.DockerImagePush(settings => settings
                 .SetName(fullImageName)
+                .SetProcessLogOutput(false)
+                .EnableProcessAssertZeroExitCode()
             );
         });
 }
