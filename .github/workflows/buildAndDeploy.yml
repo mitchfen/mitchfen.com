@@ -40,8 +40,7 @@ jobs:
         with:
           path: ~/.nuget/packages
           key: nuget-packages-${{ hashFiles('Directory.Packages.props') }}
-          restore-keys: |
-            nuget-packages-
+          restore-keys: nuget-packages-
 
       - name: Build
         run: dotnet run --project ./build/NukeBuild.csproj --target Publish
@@ -78,17 +77,6 @@ jobs:
 
       - name: Build and push image
         run: dotnet run --project ./build/NukeBuild.csproj --target BuildContainerImage --skip Publish
-
-  cleanup:
-    needs: publish-container
-    name: Cleanup untagged container images
-    runs-on: ubuntu-latest
-    steps:
-      - uses: mitchfen/cleanup-untagged-container-images@main
-        with:
-          username: 'mitchfen'
-          container-name: 'mitchfen.xyz'
-          token: ${{ secrets.GHCR_TOKEN }}
 
   deploy_job:
     if: ${{ github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed') }}
