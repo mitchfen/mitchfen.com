@@ -18,7 +18,6 @@ jobs:
           action: "close"
 
   cleanup:
-    needs: publish-container
     name: Cleanup untagged container images
     runs-on: ubuntu-latest
     steps:
