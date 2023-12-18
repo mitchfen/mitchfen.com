@@ -1,11 +1,8 @@
 ﻿@page "/project"
 
 
-<h3>@ProjectName (@ProjectLanguage)</h3>
-<p>@ProjectDescription</p>
-<sub><a href=@ProjectUrl>View the code</a></sub>
-<br />
-<hr />
+<h3><a href=@ProjectUrl>@ProjectName</a></h3>
+<p>@ProjectDescription (@ProjectLanguage)</p>
 
 @code {
     [Parameter]
