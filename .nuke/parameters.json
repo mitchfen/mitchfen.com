@@ -1,4 +1,5 @@
 {
   "$schema": "./build.schema.json",
-  "Solution": "mitchfen.xyz.sln"
+  "Solution": "mitchfen.xyz.sln",
+  "Configuration": "Release"
 }
