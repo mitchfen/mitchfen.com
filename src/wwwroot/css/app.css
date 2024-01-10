@@ -1,25 +1,23 @@
 ﻿@import url('https://fonts.googleapis.com/css?family=Inconsolata');
-
+:root {
+    --primary-color:lightseagreen;
+    --secondary-color:antiquewhite;
+}
 html,
 body {
     font-family: 'Inconsolata', Helvetica, Arial, sans-serif;
     font-size: larger;
     background-color: #282a36;
-    color: antiquewhite;
+    color: var(--secondary-color);
 }
 
 a {
-    color: greenyellow;
+    color: var(--primary-color);
     text-decoration: none;
 }
 
 a:hover {
     text-decoration: underline;
-}
-
-input {
-    background-color: aliceblue;
-    border: none
 }
 
 input:focus {
@@ -40,7 +38,7 @@ input:focus {
     flex: 12%;
     max-width: 14%;
     height: auto;
-    border-right-color: greenyellow;
+    border-right-color: var(--primary-color);
     border-right-style: solid;
     border-right-width: 1px;
 }
@@ -75,7 +73,7 @@ li {
         max-width: 100%;
         border-right-width: 0;
         border-bottom-width: 1px;
-        border-bottom-color: greenyellow;
+        border-bottom-color: var(--primary-color);
         border-bottom-style: solid;
         padding-bottom: 4%;
         text-align: left;
