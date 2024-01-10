@@ -6,6 +6,10 @@
     "build": {
       "type": "object",
       "properties": {
+        "Configuration": {
+          "type": "string",
+          "description": "Build configuration (Debug or Release)"
+        },
         "Continue": {
           "type": "boolean",
           "description": "Indicates to continue a previously failed build attempt"
@@ -69,6 +73,7 @@
               "Compile",
               "LogStartupInformation",
               "Publish",
+              "PushContainerImage",
               "Restore"
             ]
           }
@@ -92,6 +97,7 @@
               "Compile",
               "LogStartupInformation",
               "Publish",
+              "PushContainerImage",
               "Restore"
             ]
           }

@@ -6,6 +6,7 @@ using Nuke.Common.Tooling;
 using Nuke.Common.Tools.DotNet;
 using Nuke.Common.Tools.Docker;
 using System.Runtime.InteropServices;
+using Nuke.Common.ProjectModel;
 using Nuke.Common.Utilities.Collections;
 using static Nuke.Common.Tooling.ProcessTasks;
 using static Nuke.Common.IO.FileSystemTasks;
@@ -14,13 +15,22 @@ using static Nuke.Common.Tools.DotNet.DotNetTasks;
 namespace NukeBuild;
 
 [ShutdownDotNetAfterServerBuild]
-partial class Build : Nuke.Common.NukeBuild {
-
+class Build : Nuke.Common.NukeBuild {
+    
     public static int Main () => Execute<Build>(x => x.Compile);
-
+    
     [Parameter("Docker image tag - default is 'blazor'")]
     readonly string Tag = "blazor";
-
+    
+    [Parameter("Build configuration (Debug or Release)")]
+    readonly string Configuration = "Release";
+    
+    [Solution] readonly Solution Solution;
+    static AbsolutePath SourceDirectory => RootDirectory / "src";
+    static AbsolutePath OutputDirectory => RootDirectory / "output";
+    static AbsolutePath DockerfileDirectory => RootDirectory / "deploy";
+    string FullImageName => $"ghcr.io/mitchfen/mitchfen.xyz:{Tag}";
+    
     Target LogStartupInformation => targetDefinition => targetDefinition
         .Before(Clean)
         .Executes(() =>
@@ -36,7 +46,8 @@ partial class Build : Nuke.Common.NukeBuild {
             if (IsLocalBuild) 
             {
                 Log.Information("Detected that build is running locally. Cleaning...");
-                SourceDirectory.GlobDirectories("**/bin", "**/obj").ForEach(dir => dir.DeleteDirectory());
+                SourceDirectory.GlobDirectories("**/bin", "**/obj")
+                    .ForEach(dir => dir.DeleteDirectory());
                 OutputDirectory.DeleteDirectory();
             }
             else {
@@ -72,7 +83,7 @@ partial class Build : Nuke.Common.NukeBuild {
             );
         });
 
-    Target Publish => _ => _
+    Target Publish => targetDefinition => targetDefinition
         .DependsOn(Compile)
         .Executes(() =>
         {
@@ -93,19 +104,23 @@ partial class Build : Nuke.Common.NukeBuild {
         .Executes(() =>
         {
             Log.Information("Building docker image...");
-            var fullImageName = $"{BaseImageName}:{Tag}";
             DockerTasks.DockerImageBuild(settings => settings
-                .SetCacheFrom(fullImageName)
+                .SetCacheFrom(FullImageName)
                 .SetPath(".")
-                .SetTag(fullImageName)
+                .SetTag(FullImageName)
                 .SetProcessWorkingDirectory(OutputDirectory)
                 .SetProcessLogOutput(false)
                 .EnableProcessAssertZeroExitCode()
             );
-
-            Log.Information($"Pushing {fullImageName}...");
+        });
+    
+    Target PushContainerImage => targetDefinition => targetDefinition
+        .DependsOn(BuildContainerImage)
+        .Executes(() =>
+        {
+            Log.Information($"Pushing {FullImageName}...");
             DockerTasks.DockerImagePush(settings => settings
-                .SetName(fullImageName)
+                .SetName(FullImageName)
                 .SetProcessLogOutput(false)
                 .EnableProcessAssertZeroExitCode()
             );
