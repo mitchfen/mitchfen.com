@@ -77,7 +77,8 @@ li {
         border-bottom-style: solid;
         padding-bottom: 4%;
         text-align: left;
-        margin: auto;
+        flex-wrap: wrap;
+        align-content: flex-start
     }
 
     .flex-columnright {
