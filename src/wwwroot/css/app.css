@@ -78,7 +78,7 @@ li {
         padding-bottom: 4%;
         text-align: left;
         flex-wrap: wrap;
-        align-content: flex-start
+        align-content: flex-start;
     }
 
     .flex-columnright {
