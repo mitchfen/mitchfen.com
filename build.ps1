@@ -39,28 +39,7 @@ if ($null -ne (Get-Command "dotnet" -ErrorAction SilentlyContinue) -and `
     $env:DOTNET_EXE = (Get-Command "dotnet").Path
 }
 else {
-    # Download install script
-    $DotNetInstallFile = "$TempDirectory\dotnet-install.ps1"
-    New-Item -ItemType Directory -Path $TempDirectory -Force | Out-Null
-    [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
-    (New-Object System.Net.WebClient).DownloadFile($DotNetInstallUrl, $DotNetInstallFile)
-
-    # If global.json exists, load expected version
-    if (Test-Path $DotNetGlobalFile) {
-        $DotNetGlobal = $(Get-Content $DotNetGlobalFile | Out-String | ConvertFrom-Json)
-        if ($DotNetGlobal.PSObject.Properties["sdk"] -and $DotNetGlobal.sdk.PSObject.Properties["version"]) {
-            $DotNetVersion = $DotNetGlobal.sdk.version
-        }
-    }
-
-    # Install by channel or version
-    $DotNetDirectory = "$TempDirectory\dotnet-win"
-    if (!(Test-Path variable:DotNetVersion)) {
-        ExecSafe { & powershell $DotNetInstallFile -InstallDir $DotNetDirectory -Channel $DotNetChannel -NoPath }
-    } else {
-        ExecSafe { & powershell $DotNetInstallFile -InstallDir $DotNetDirectory -Version $DotNetVersion -NoPath }
-    }
-    $env:DOTNET_EXE = "$DotNetDirectory\dotnet.exe"
+    throw "The necesary version of .NET does not appear to be installed."
 }
 
 Write-Output "Microsoft (R) .NET SDK version $(& $env:DOTNET_EXE --version)"
