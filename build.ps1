@@ -14,12 +14,6 @@ $PSScriptRoot = Split-Path $MyInvocation.MyCommand.Path -Parent
 ###########################################################################
 
 $BuildProjectFile = "$PSScriptRoot\build\NukeBuild.csproj"
-$TempDirectory = "$PSScriptRoot\\.nuke\temp"
-
-$DotNetGlobalFile = "$PSScriptRoot\\global.json"
-$DotNetInstallUrl = "https://dot.net/v1/dotnet-install.ps1"
-$DotNetChannel = "Current"
-
 $env:DOTNET_SKIP_FIRST_TIME_EXPERIENCE = 1
 $env:DOTNET_CLI_TELEMETRY_OPTOUT = 1
 $env:DOTNET_MULTILEVEL_LOOKUP = 0
@@ -46,3 +40,4 @@ Write-Output "Microsoft (R) .NET SDK version $(& $env:DOTNET_EXE --version)"
 
 ExecSafe { & $env:DOTNET_EXE build $BuildProjectFile /nodeReuse:false /p:UseSharedCompilation=false -nologo -clp:NoSummary --verbosity quiet }
 ExecSafe { & $env:DOTNET_EXE run --project $BuildProjectFile --no-build -- $BuildArguments }
+
