@@ -1,13 +1,11 @@
-﻿@page "/project"
+@page "/certification"
 
 <p>
-    <strong>@Name</strong> 
-    <tertiarycolor>[@Language]</tertiarycolor>
+    • @Name
+    <tertiarycolor>[@Exam]</tertiarycolor>
     <quaternarycolor>[@Year]</quaternarycolor>
     <a href="@Url" target="_blank">[Link]</a>
-    <br/>
-    • @Description
-</p>
+</p>    
 
 @code {
     [Parameter]
@@ -17,11 +15,8 @@
     public string? Name { get; set; }
 
     [Parameter]
-    public string? Description { get; set; }
+    public string? Exam { get; set; }
 
     [Parameter]
     public string? Url { get; set; }
-
-    [Parameter]
-    public string? Language { get; set; }
 }
