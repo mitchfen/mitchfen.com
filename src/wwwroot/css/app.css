@@ -1,8 +1,19 @@
 ﻿@import url('https://fonts.googleapis.com/css?family=Inconsolata');
 :root {
-    --primary-color:lightseagreen;
-    --secondary-color:antiquewhite;
+    --primary-color:#50FA7B;
+    --secondary-color:#F8F8F2;
+    --tertiary-color:#FF79C6;
+    --quaternary-color:#BD93F9;
 }
+
+tertiarycolor {
+    color: var(--tertiary-color);
+}
+
+quaternarycolor {
+    color: var(--quaternary-color)
+}
+
 html,
 body {
     font-family: 'Inconsolata', Helvetica, Arial, sans-serif;
@@ -35,8 +46,8 @@ input:focus {
     display: flex;
     flex-direction: column;
     text-align: left;
-    flex: 12%;
-    max-width: 14%;
+    flex: 13%;
+    max-width: 16%;
     height: auto;
     border-right-color: var(--primary-color);
     border-right-style: solid;
@@ -50,6 +61,7 @@ input:focus {
     flex: 60%;
     margin-left: 40px;
 }
+
 
 .flex-verticalitem {
     padding-bottom: 5px;
