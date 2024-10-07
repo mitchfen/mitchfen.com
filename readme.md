@@ -5,14 +5,8 @@
 My personal site built with Blazor WebAssembly.
 
 ## Building the site
-The site is built using [Nuke build](https://nuke.build/). This allows me to write both the website and build scripts in C#. 
-```PowerShell
-# To publish the site to ./output you can run the PowerShell convenience script:
-./build.ps1 -Target Publish
-
-# or execute the Nuke project directly from any shell:
-dotnet run --project ./build/NukeBuild.csproj --target Publish
-```
+The site is built using [Nuke build](https://nuke.build/). This allows me to write both the website and build scripts in C#.  
+You can publish the site as a zip using `dotnet run --project ./build/NukeBuild.csproj --target Publish`
 
 ## CI/CD
 * On pull request creation, the [build and deploy](https://github.com/mitchfen/mitchfen.xyz/actions/workflows/buildAndDeploy.yml) workflow fires off to build the site and deploy it to a staging environment on Azure.
