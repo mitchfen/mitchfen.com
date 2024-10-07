@@ -28,7 +28,7 @@ class Build : Nuke.Common.NukeBuild {
     [Solution] readonly Solution Solution;
     static AbsolutePath SourceDirectory => RootDirectory / "src";
     static AbsolutePath OutputDirectory => RootDirectory / "output";
-    static AbsolutePath DockerfileDirectory => RootDirectory / "deploy";
+    static AbsolutePath DeployDirectory => RootDirectory / "deploy";
     string FullImageName => $"ghcr.io/mitchfen/mitchfen.xyz:{Tag}";
     
     Target LogStartupInformation => targetDefinition => targetDefinition
@@ -87,8 +87,8 @@ class Build : Nuke.Common.NukeBuild {
         .DependsOn(Compile)
         .Executes(() =>
         {
-            var dockerFilePath = DockerfileDirectory / "DockerFile";
-            var nginxConfigFilePath = DockerfileDirectory / "nginx.conf";
+            var dockerFilePath = DeployDirectory / "Dockerfile";
+            var nginxConfigFilePath = DeployDirectory / "nginx.conf";
             dockerFilePath.CopyToDirectory(OutputDirectory / "Dockerfile");
             nginxConfigFilePath.CopyToDirectory(OutputDirectory / "nginx.conf");
             DotNetPublish(settings => settings
