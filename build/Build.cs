@@ -89,8 +89,8 @@ class Build : Nuke.Common.NukeBuild {
         {
             var dockerFilePath = DeployDirectory / "Dockerfile";
             var nginxConfigFilePath = DeployDirectory / "nginx.conf";
-            dockerFilePath.CopyToDirectory(OutputDirectory / "Dockerfile");
-            nginxConfigFilePath.CopyToDirectory(OutputDirectory / "nginx.conf");
+            dockerFilePath.CopyToDirectory(OutputDirectory);
+            nginxConfigFilePath.CopyToDirectory(OutputDirectory);
             DotNetPublish(settings => settings
                 .SetProject(SourceDirectory / "MitchfenSite.csproj")
                 .SetConfiguration(Configuration)
