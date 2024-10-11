@@ -4,24 +4,24 @@
     "net8.0": {
       "Nuke.Common": {
         "type": "Direct",
-        "requested": "[8.1.0, )",
-        "resolved": "8.1.0",
-        "contentHash": "BhehNlq818mKBmz+mC94Cf5Hc3kPV4UhuMi9D7kQOAmykbpNcOOHYfCH6bbJkA6pDhjR7mGdhWDrX4E6+7Hm2A==",
+        "requested": "[8.1.1, )",
+        "resolved": "8.1.1",
+        "contentHash": "R8WDJZvC/35VOG7ruEYhdxLB60tDGRYTaEtEPERBMViGoHYndZLwFlmn6KxgLSslwaXj4BA8NK9wBvsZp65rQQ==",
         "dependencies": {
           "Azure.Identity": "1.12.0",
           "Azure.Security.KeyVault.Certificates": "4.6.0",
           "Azure.Security.KeyVault.Keys": "4.6.0",
           "Azure.Security.KeyVault.Secrets": "4.6.0",
-          "Nuke.Build": "8.1.0",
-          "Nuke.Build.Shared": "8.1.0",
-          "Nuke.ProjectModel": "8.1.0",
-          "Nuke.SolutionModel": "8.1.0",
-          "Nuke.Tooling": "8.1.0",
-          "Nuke.Utilities": "8.1.0",
-          "Nuke.Utilities.IO.Compression": "8.1.0",
-          "Nuke.Utilities.IO.Globbing": "8.1.0",
-          "Nuke.Utilities.Net": "8.1.0",
-          "Nuke.Utilities.Text.Json": "8.1.0",
+          "Nuke.Build": "8.1.1",
+          "Nuke.Build.Shared": "8.1.1",
+          "Nuke.ProjectModel": "8.1.1",
+          "Nuke.SolutionModel": "8.1.1",
+          "Nuke.Tooling": "8.1.1",
+          "Nuke.Utilities": "8.1.1",
+          "Nuke.Utilities.IO.Compression": "8.1.1",
+          "Nuke.Utilities.IO.Globbing": "8.1.1",
+          "Nuke.Utilities.Net": "8.1.1",
+          "Nuke.Utilities.Text.Json": "8.1.1",
           "Octokit": "13.0.1"
         }
       },
@@ -294,21 +294,21 @@
       },
       "Nuke.Build": {
         "type": "Transitive",
-        "resolved": "8.1.0",
-        "contentHash": "LYlLnVoCTtFn49vbfcPiALN22WEAcnV3J8gNj2lo0Sfe9Eaq07YFddrqDomlL57+qYczI1NUL4gijO//aNaHjA==",
+        "resolved": "8.1.1",
+        "contentHash": "gkXDj61d+NaeW95NHUBcXysCGXSBE485tUIPw+A29gsSVuAmfxJfkndyDPhtvIlm4SI+7V268wv99LIxQCc6fw==",
         "dependencies": {
           "Microsoft.ApplicationInsights": "2.22.0",
           "Microsoft.Extensions.DependencyModel": "8.0.0",
           "NJsonSchema": "10.9.0",
-          "Nuke.Build.Shared": "8.1.0",
-          "Nuke.ProjectModel": "8.1.0",
-          "Nuke.SolutionModel": "8.1.0",
-          "Nuke.Tooling": "8.1.0",
-          "Nuke.Utilities": "8.1.0",
-          "Nuke.Utilities.IO.Globbing": "8.1.0",
-          "Nuke.Utilities.Net": "8.1.0",
-          "Nuke.Utilities.Text.Json": "8.1.0",
-          "Nuke.Utilities.Text.Yaml": "8.1.0",
+          "Nuke.Build.Shared": "8.1.1",
+          "Nuke.ProjectModel": "8.1.1",
+          "Nuke.SolutionModel": "8.1.1",
+          "Nuke.Tooling": "8.1.1",
+          "Nuke.Utilities": "8.1.1",
+          "Nuke.Utilities.IO.Globbing": "8.1.1",
+          "Nuke.Utilities.Net": "8.1.1",
+          "Nuke.Utilities.Text.Json": "8.1.1",
+          "Nuke.Utilities.Text.Yaml": "8.1.1",
           "Serilog.Formatting.Compact": "3.0.0",
           "Serilog.Formatting.Compact.Reader": "4.0.0",
           "Serilog.Sinks.Console": "6.0.0",
@@ -317,98 +317,98 @@
       },
       "Nuke.Build.Shared": {
         "type": "Transitive",
-        "resolved": "8.1.0",
-        "contentHash": "khLjliwepjeo8tAGbtayCdOC1x64i51vFg3ZLqw5/wfbB/fb04jADqX5lpDBjGVy8wLqUr7L4xQIbg9psfPZrw==",
+        "resolved": "8.1.1",
+        "contentHash": "l/jT2djiZ+W2xci8fb1DYF3hpHLZWqbB+HkypWZ6bPKvsPDftIpjO8eDudUlPxMZLD/pR3Uz7L9IpPnazU7rHw==",
         "dependencies": {
-          "Nuke.Utilities": "8.1.0",
+          "Nuke.Utilities": "8.1.1",
           "System.Text.Json": "8.0.4"
         }
       },
       "Nuke.ProjectModel": {
         "type": "Transitive",
-        "resolved": "8.1.0",
-        "contentHash": "PXjg7yIH2OalR6xDVIhzNm1/v1Io6GdfU/IPHqsxvNazlYrRXs9pAsKR1gg/oytitoGrxx7RNsVW+LroKNPlPA==",
+        "resolved": "8.1.1",
+        "contentHash": "a68P6a+E7Bng81rlgpeS44o9iI+UQgPqAkElEvEiC65LIioLIhSnaXvucPpIX/xBbqszuBv4G6ntAtpFuw0aHQ==",
         "dependencies": {
           "Microsoft.Build": "17.10.4",
           "Microsoft.Build.Framework": "17.10.4",
           "Microsoft.Build.Locator": "1.7.8",
           "Microsoft.Build.Tasks.Core": "17.10.4",
           "Microsoft.Build.Utilities.Core": "17.10.4",
-          "Nuke.SolutionModel": "8.1.0",
-          "Nuke.Tooling": "8.1.0",
-          "Nuke.Utilities": "8.1.0"
+          "Nuke.SolutionModel": "8.1.1",
+          "Nuke.Tooling": "8.1.1",
+          "Nuke.Utilities": "8.1.1"
         }
       },
       "Nuke.SolutionModel": {
         "type": "Transitive",
-        "resolved": "8.1.0",
-        "contentHash": "h4e0fAai1RTC1wmBMqjbP2fz2mzcx1cKDOq4W198L/wJhvXGuWheqgobhaw58AtYnN8OLOgjdCeToGjCgmOxHw==",
+        "resolved": "8.1.1",
+        "contentHash": "SggvCe2/bRtfCEJFOPL860M4sS5TWcr3r3S/c+PjlwcgaCC8+EPMLXo/gHq9B0Mv3tCNYe+b38K35hx4OCIp7Q==",
         "dependencies": {
-          "Nuke.Utilities": "8.1.0"
+          "Nuke.Utilities": "8.1.1"
         }
       },
       "Nuke.Tooling": {
         "type": "Transitive",
-        "resolved": "8.1.0",
-        "contentHash": "K+VVKfYsGW/Is5sPyDe1F/UlaHveKotv1YXFecxc/KJ6LRJbH54zhCdY9rrXqzr84oyXtRP3puT9CXRtbNzJtA==",
+        "resolved": "8.1.1",
+        "contentHash": "5IDr62HTEq4nj56Yyv4H9v/7VcZY/fgP49oq+1AdxQqYD1vBNiRySkIOZqyPOkYSEmP9+Mctb2BzuO2j7TW8aQ==",
         "dependencies": {
           "Newtonsoft.Json": "13.0.3",
           "NuGet.Packaging": "6.10.1",
-          "Nuke.Utilities": "8.1.0",
+          "Nuke.Utilities": "8.1.1",
           "Serilog": "4.0.0"
         }
       },
       "Nuke.Utilities": {
         "type": "Transitive",
-        "resolved": "8.1.0",
-        "contentHash": "m375eJkwT5n7STeVKN4dbYljr07vVwl4W+eGj/b9+Vkbzn9e2i5GkA2XsPQaAlykiyB5lAioBoAB951gDsQgpA==",
+        "resolved": "8.1.1",
+        "contentHash": "f0edBx2v6SgDqQQrUTDBNgveuEzBT59Py7PfOwkn2ChWFsdZYce82FAEz02l6KYQrOgdfDTGdrIxAIgbMWf7mg==",
         "dependencies": {
           "JetBrains.Annotations": "2023.3.0"
         }
       },
       "Nuke.Utilities.IO.Compression": {
         "type": "Transitive",
-        "resolved": "8.1.0",
-        "contentHash": "xmZ+xZjrzL0hN/A6juGJMVnsmGRbqqwHtxziSjBvDCuWd/TywGYATjc+423IBDk/KMIdByoUfo01wD84e84V4Q==",
+        "resolved": "8.1.1",
+        "contentHash": "MXJ0tn9LNYT+sioSAwzsSGEMYi/de5/C6A8+jxUIGg75QzxLm81NcSZHJ2n9hHa5yV+zqHy+XRAuu5IljJ6M0w==",
         "dependencies": {
-          "Nuke.Utilities": "8.1.0",
+          "Nuke.Utilities": "8.1.1",
           "SharpZipLib": "1.4.2"
         }
       },
       "Nuke.Utilities.IO.Globbing": {
         "type": "Transitive",
-        "resolved": "8.1.0",
-        "contentHash": "8FWAP+lZt38H14Q2TSnMjR955O9oKLQESUV9nwSl+5qfgZg3UOgDhAtzumipSOVJTAi4srukvMm8NMZQSZywnQ==",
+        "resolved": "8.1.1",
+        "contentHash": "lzxe9U1ZxE+bQeoWcv3/Wv+HHfb/czuaEAFdAkHCFIXI97Crh5GCcrbyesRhdwGRXX/VLNkrzIRGqFkfIpDkxw==",
         "dependencies": {
           "Glob": "1.1.9",
-          "Nuke.Utilities": "8.1.0"
+          "Nuke.Utilities": "8.1.1"
         }
       },
       "Nuke.Utilities.Net": {
         "type": "Transitive",
-        "resolved": "8.1.0",
-        "contentHash": "QX2bN2U8zH16P7MLadfyiU2oOpR/1gIP7K6uOW+AeThQGJcaVeaYa7lFX4r9rAIdFApwa4Pg8Re19V5IVAJurg==",
+        "resolved": "8.1.1",
+        "contentHash": "GeBj0oSxgQvliuQTr2OL69JWFQ8SVag1wGYl/ixhtLpB6tDHjlzkkhwqcjlHtTGeFG7KBSaYzp9cy+qoavMDPA==",
         "dependencies": {
           "Newtonsoft.Json": "13.0.3",
-          "Nuke.Utilities": "8.1.0",
+          "Nuke.Utilities": "8.1.1",
           "System.Net.Http": "4.3.4"
         }
       },
       "Nuke.Utilities.Text.Json": {
         "type": "Transitive",
-        "resolved": "8.1.0",
-        "contentHash": "KwT2iqCPxpEDRrjb8r8/F3jnpGyUZr6g7IR7XEo8H5XNPNedLX8tKzk++47jA28Cu/Q1xlVpRQGKSIgwEOOCFA==",
+        "resolved": "8.1.1",
+        "contentHash": "IYkVT52CnUwLbfXOW31i4miafzmXrOY2XEQCpg0NQpoNNEbsmUN+tjzAHl+6JkPpHcfZ7Jhq00gcr9z9GYnplQ==",
         "dependencies": {
           "Newtonsoft.Json": "13.0.3",
-          "Nuke.Utilities": "8.1.0"
+          "Nuke.Utilities": "8.1.1"
         }
       },
       "Nuke.Utilities.Text.Yaml": {
         "type": "Transitive",
-        "resolved": "8.1.0",
-        "contentHash": "5bVnwgbsjXpvr+ACCJw6vx/CLBpGWXux1n3FbviRKq8+ABo1POJGt8JDlwTEE1+tgaQ8KMiEE7RMydB0kHY+Pw==",
+        "resolved": "8.1.1",
+        "contentHash": "RjbbpAcR2UZTP/39NDJcUrWgRMqiXAK1XgBzFOG2dYIKQsE5lQ280dlWlY4cCZJsYfoL6PZovq/PGspRvAHSwA==",
         "dependencies": {
-          "Nuke.Utilities": "8.1.0",
+          "Nuke.Utilities": "8.1.1",
           "YamlDotNet": "15.3.0"
         }
       },
