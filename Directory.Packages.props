@@ -3,7 +3,7 @@
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
   <ItemGroup>
-    <PackageVersion Include="Nuke.Common" Version="8.1.4" />
+    <PackageVersion Include="Nuke.Common" Version="9.0.1" />
     <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.10" />
     <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="8.0.10" />
   </ItemGroup>
