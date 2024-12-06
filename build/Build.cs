@@ -59,12 +59,14 @@ class Build : Nuke.Common.NukeBuild {
         .DependsOn(Clean)
         .Executes(() =>
         {
+            /*
             var workloadRestoreCmd = $"dotnet workload restore {Solution}";
             if ( RuntimeInformation.IsOSPlatform(OSPlatform.Linux)) {
                 workloadRestoreCmd = $"sudo {workloadRestoreCmd}";
             }
-
             StartShell(workloadRestoreCmd).AssertZeroExitCode();
+            */
+            
             DotNetRestore(settings => settings
                 .SetProjectFile(Solution)
                 .EnableUseLockFile()
