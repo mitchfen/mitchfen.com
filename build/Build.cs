@@ -9,7 +9,6 @@ using System.Runtime.InteropServices;
 using Nuke.Common.ProjectModel;
 using Nuke.Common.Utilities.Collections;
 using static Nuke.Common.Tooling.ProcessTasks;
-using static Nuke.Common.IO.FileSystemTasks;
 using static Nuke.Common.Tools.DotNet.DotNetTasks;
 
 namespace NukeBuild;
@@ -63,8 +62,8 @@ class Build : Nuke.Common.NukeBuild {
             if ( RuntimeInformation.IsOSPlatform(OSPlatform.Linux)) {
                 workloadRestoreCmd = $"sudo {workloadRestoreCmd}";
             }
-
             StartShell(workloadRestoreCmd).AssertZeroExitCode();
+            
             DotNetRestore(settings => settings
                 .SetProjectFile(Solution)
                 .EnableUseLockFile()
@@ -111,8 +110,6 @@ class Build : Nuke.Common.NukeBuild {
                 .SetPath(".")
                 .SetTag(FullImageName)
                 .SetProcessWorkingDirectory(OutputDirectory)
-                .SetProcessLogOutput(false)
-                .EnableProcessAssertZeroExitCode()
             );
         });
     
@@ -123,8 +120,6 @@ class Build : Nuke.Common.NukeBuild {
             Log.Information($"Pushing {FullImageName}...");
             DockerTasks.DockerImagePush(settings => settings
                 .SetName(FullImageName)
-                .SetProcessLogOutput(false)
-                .EnableProcessAssertZeroExitCode()
             );
         });
 }
