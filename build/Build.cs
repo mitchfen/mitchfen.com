@@ -58,7 +58,7 @@ class Build : Nuke.Common.NukeBuild {
         .DependsOn(Clean)
         .Executes(() =>
         {
-            var workloadRestoreCmd = $"dotnet workload restore {Solution}";
+            var workloadRestoreCmd = "dotnet workload restore ./src/MitchfenSite.csproj";
             if ( RuntimeInformation.IsOSPlatform(OSPlatform.Linux)) {
                 workloadRestoreCmd = $"sudo {workloadRestoreCmd}";
             }
