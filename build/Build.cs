@@ -59,9 +59,11 @@ class Build : Nuke.Common.NukeBuild {
         .Executes(() =>
         {
             var workloadRestoreCmd = "dotnet workload restore ./src/MitchfenSite.csproj";
-            if ( RuntimeInformation.IsOSPlatform(OSPlatform.Linux)) {
+            /*
+             if ( RuntimeInformation.IsOSPlatform(OSPlatform.Linux)) {
                 workloadRestoreCmd = $"sudo {workloadRestoreCmd}";
             }
+            */
             StartShell(workloadRestoreCmd).AssertZeroExitCode();
             
             DotNetRestore(settings => settings
