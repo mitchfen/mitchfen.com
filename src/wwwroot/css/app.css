@@ -1,5 +1,4 @@
-﻿@import url('https://fonts.googleapis.com/css?family=Inconsolata');
-:root {
+﻿:root {
     --primary-color:#50FA7B;
     --secondary-color:#F8F8F2;
     --tertiary-color:#FF79C6;
@@ -16,7 +15,7 @@ quaternarycolor {
 
 html,
 body {
-    font-family: 'Inconsolata', Helvetica, Arial, sans-serif;
+    font-family: Helvetica, Arial, sans-serif;
     font-size: larger;
     background-color: #282a36;
     color: var(--secondary-color);
