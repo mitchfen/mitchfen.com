@@ -1,6 +1,6 @@
 ﻿{
   "globalHeaders": {
-    "content-security-policy": "default-src 'self'; script-src 'wasm-unsafe-eval' 'unsafe-inline'",
+    "content-security-policy": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval' 'unsafe-inline';",
     "X-Frame-Options": "SAMEORIGIN",
     "Permissions-Policy": "geolocation=(), microphone=(), camera=()"
   }
