@@ -1,12 +1,7 @@
-﻿@page "/project"
-
-<p>
-    • @Name - 
-    <small>
-    <a href="@Url" target="_blank">[Link]</a>
+<li>
+    <a href="@Url" target="_blank">@Name</a> 
     <quaternarycolor>[@Year]</quaternarycolor>
-    </small>
-</p>
+</li>  
 
 @code {
     [Parameter]
@@ -16,11 +11,8 @@
     public string? Name { get; set; }
 
     [Parameter]
-    public string? Description { get; set; }
+    public string? Exam { get; set; }
 
     [Parameter]
     public string? Url { get; set; }
-
-    [Parameter]
-    public string? Language { get; set; }
 }

@@ -1,38 +1,48 @@
 ﻿@page "/"
-<PageTitle>Mitchell Fenner - Home</PageTitle>
+@using MitchfenSite.Components
+<PageTitle>Mitchell Fenner</PageTitle>
 
-<div class="flex-item">
+<div>
+    Welcome to mitchfen.xyz
     <br/>
-    Welcome to mitchfen.xyz.
     <br/>
-    Use the sidebar to check out some of the things I've been up to.
+    
+    <FindMeOnline/>
     <br/>
-    Or find me somewhere else online:
+
+    <!--
+    Checkout my certifications:
+    <Certifications/>
+    
     <br/>
-    <ul>
-        <li>
-            Email me: <a href="mailto:mitch@mitchfen.xyz">mitch@mitchfen.xyz</a>
-        </li>
-        <li>
-            <a href="https://linkedin.com/in/mitchfen" target="_blank">LinkedIn</a>
-        </li>
-        <li>
-            <a href="https://github.com/mitchfen" target="_blank">GitHub</a>
-        </li>
-        <li>
-            <a href="https://learn.microsoft.com/en-us/users/mitchfen/" target="_blank">Microsoft Learn</a>
-        </li>
-        <li>
-            <a href="https://orcid.org/0000-0002-9684-0447" target="_blank">Orcid</a>
-        </li>
-        <li>
-            <a href="https://leetcode.com/u/mitchfen/" target="_blank">LeetCode</a>
-        </li>
-        <li>
-            <a href="https://www.hackerrank.com/profile/mitchfen" target="_blank">HackerRank</a>
-        </li>
-        <li>
-            <a href="https://hub.docker.com/u/mitchfen" target="_blank">DockerHub</a>
-        </li>
-    </ul>
+    -->
+   
+    <!--
+    Or checkout what I'm doing in my 
+    <NavLink href="Homelab" Match="NavLinkMatch.All">
+        <span aria-hidden="true"></span>homelab 
+    </NavLink> 
+    -->
+    
+    <!--
+    <GenericDropdown Title="Checkout my certifications" @ref="certsDropdown">
+        <ul>
+            <Certifications/>
+        </ul>
+    </GenericDropdown>
+    -->
+    
+    <!--
+    <GenericDropdown Title="Checkout my old projects" @ref="projectsDropdown">
+        <ul>
+            <Projects/>
+        </ul>
+    </GenericDropdown>
+    -->
+    
 </div>
+
+@code {
+    private GenericDropdown certsDropdown;
+    private GenericDropdown projectsDropdown;
+}
