@@ -34,69 +34,9 @@ input:focus {
     outline: none;
 }
 
-.flex-row {
-    padding-top: 1%;
-    display: flex;
-    flex-direction: row;
-    text-align: center;
-}
-
-.flex-columnleft {
-    display: flex;
-    flex-direction: column;
-    text-align: left;
-    flex: 13%;
-    max-width: 16%;
-    height: auto;
-    border-right-color: var(--primary-color);
-    border-right-style: solid;
-    border-right-width: 1px;
-}
-
-.flex-columnright {
-    display: flex;
-    flex-direction: column;
-    text-align: left;
-    flex: 60%;
-    margin-left: 40px;
-}
-
-
-.flex-verticalitem {
-    padding-bottom: 5px;
-}
-
-.flex-item {
-    padding: 5px;
-    flex: 30%;
-}
 
 li {
     padding: 3px;
-}
-
-@media (max-width: 700px) {
-    .flex-row {
-        flex-direction: column;
-    }
-
-    .flex-columnleft {
-        max-width: 100%;
-        border-right-width: 0;
-        border-bottom-width: 1px;
-        border-bottom-color: var(--primary-color);
-        border-bottom-style: solid;
-        padding-bottom: 4%;
-        text-align: left;
-        flex-wrap: wrap;
-        align-content: flex-start;
-    }
-
-    .flex-columnright {
-        text-align: left;
-        padding-top: 3%;
-        margin: auto;
-    }
 }
 
 #blazor-error-ui {

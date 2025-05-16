@@ -1,0 +1,23 @@
+﻿<li>
+    <a href="@Url" target="_blank">@Name</a> 
+    <quaternarycolor>[@Year]</quaternarycolor> 
+    <tertiarycolor>[@Language]</tertiarycolor>
+    <br/>
+</li>
+
+@code {
+    [Parameter]
+    public string? Year { get; set; }
+    
+    [Parameter]
+    public string? Name { get; set; }
+
+    [Parameter]
+    public string? Description { get; set; }
+
+    [Parameter]
+    public string? Url { get; set; }
+
+    [Parameter]
+    public string? Language { get; set; }
+}
