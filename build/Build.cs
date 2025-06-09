@@ -18,8 +18,8 @@ class Build : Nuke.Common.NukeBuild {
     
     public static int Main () => Execute<Build>(x => x.Compile);
     
-    [Parameter("Docker image tag - default is 'blazor'")]
-    readonly string Tag = "blazor";
+    [Parameter("Docker image tag")]
+    readonly string Tag = "latest";
     
     [Parameter("Build configuration (Debug or Release)")]
     readonly string Configuration = "Release";

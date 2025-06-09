@@ -114,7 +114,7 @@
         },
         "Tag": {
           "type": "string",
-          "description": "Docker image tag - default is 'blazor'"
+          "description": "Docker image tag"
         }
       }
     },
