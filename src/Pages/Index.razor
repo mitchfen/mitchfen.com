@@ -1,48 +1,28 @@
 ﻿@page "/"
 @using MitchfenSite.Components
-<PageTitle>Mitchell Fenner</PageTitle>
+<PageTitle>Mitchell Fenner's personal website</PageTitle>
 
 <div>
-    Welcome to mitchfen.xyz
-    <br/>
-    <br/>
-    
+    <h3>Mitchell Fenner</h3>
     <FindMeOnline/>
-    <br/>
 
     <!--
-    Checkout my certifications:
-    <Certifications/>
-    
-    <br/>
-    -->
-   
-    <!--
-    Or checkout what I'm doing in my 
-    <NavLink href="Homelab" Match="NavLinkMatch.All">
-        <span aria-hidden="true"></span>homelab 
-    </NavLink> 
-    -->
-    
-    <!--
-    <GenericDropdown Title="Checkout my certifications" @ref="certsDropdown">
+    <GenericDropdown Title="my certifications" @ref="_certsDropdown">
         <ul>
             <Certifications/>
         </ul>
     </GenericDropdown>
-    -->
-    
-    <!--
-    <GenericDropdown Title="Checkout my old projects" @ref="projectsDropdown">
+
+    <GenericDropdown Title="my old projects" @ref="_projectsDropdown">
         <ul>
             <Projects/>
         </ul>
     </GenericDropdown>
     -->
-    
+
 </div>
 
 @code {
-    private GenericDropdown certsDropdown;
-    private GenericDropdown projectsDropdown;
+    //private GenericDropdown _certsDropdown;
+    //private GenericDropdown _projectsDropdown;
 }

@@ -1,7 +1,7 @@
 ﻿<div class="dropdown">
-    <h4 @onclick="ToggleDropdown" style="cursor: pointer;">
+    <p @onclick="ToggleDropdown" style="cursor: pointer;">
         @Title <small>@(_isDropdownOpen ? "∧" : "∨")</small>
-    </h4>
+    </p>
     @if (_isDropdownOpen)
     {
         @ChildContent
