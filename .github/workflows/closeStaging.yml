@@ -24,5 +24,5 @@ jobs:
       - uses: mitchfen/cleanup-untagged-container-images@main
         with:
           username: 'mitchfen'
-          container-name: 'mitchfen.xyz'
+          container-name: 'mitchfen.com'
           token: ${{ secrets.GHCR_TOKEN }}

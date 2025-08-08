@@ -28,7 +28,7 @@ class Build : Nuke.Common.NukeBuild {
     static AbsolutePath SourceDirectory => RootDirectory / "src";
     static AbsolutePath OutputDirectory => RootDirectory / "output";
     static AbsolutePath DeployDirectory => RootDirectory / "deploy";
-    string FullImageName => $"ghcr.io/mitchfen/mitchfen.xyz:{Tag}";
+    string FullImageName => $"ghcr.io/mitchfen/mitchfen.com:{Tag}";
     
     Target LogStartupInformation => targetDefinition => targetDefinition
         .Before(Clean)
