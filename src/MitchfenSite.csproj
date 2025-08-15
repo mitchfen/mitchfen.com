@@ -15,12 +15,4 @@
     <PackageReference Include="Microsoft.NET.Sdk.WebAssembly.Pack" />
   </ItemGroup>
 
-  <ItemGroup>
-    <AdditionalFiles Include="Components\Certification.razor" />
-    <AdditionalFiles Include="Components\Certifications.razor" />
-    <AdditionalFiles Include="Components\Homelab.razor" />
-    <AdditionalFiles Include="Components\Project.razor" />
-    <AdditionalFiles Include="Components\Projects.razor" />
-  </ItemGroup>
-
 </Project>
