@@ -1,8 +1,9 @@
 ﻿:root {
-    --primary-color:#50FA7B;
-    --secondary-color:#F8F8F2;
-    --tertiary-color:#FF79C6;
-    --quaternary-color:#BD93F9;
+    --primary-color:#FF5FAF;
+    --secondary-color:#cccccc;
+    --tertiary-color:#0DBC79;
+    --quaternary-color:#F5F543;
+    --background-color:#1E1E1E;
 }
 
 tertiarycolor {
@@ -15,9 +16,9 @@ quaternarycolor {
 
 html,
 body {
-    font-family: Roboto, Helvetica, sans-serif;
+    font-family: Helvetica, Roboto, sans-serif;
     font-size: larger;
-    background-color: #282a36;
+    background-color: var(--background-color);
     color: var(--secondary-color);
 }
 
