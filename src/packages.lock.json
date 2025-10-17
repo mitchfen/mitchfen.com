@@ -17,9 +17,9 @@
       },
       "Microsoft.AspNetCore.Components.WebAssembly.DevServer": {
         "type": "Direct",
-        "requested": "[9.0.9, )",
-        "resolved": "9.0.9",
-        "contentHash": "BugXmep9XLmU6CNJVs0GBEASbH3qWLSsW05HZcZswnOmQMOx6GaAS+9H7tgtgCWznIMxldZRwpO1/jfH31FbAw=="
+        "requested": "[9.0.10, )",
+        "resolved": "9.0.10",
+        "contentHash": "zdP+b0B6QYZiDDHe7Yx29kCffp1ETq+sMH6/jYAqcJOMDAYDRd+prgDMLtdqlOptiW62hRpfiJ/Xdil80TV5Eg=="
       },
       "Microsoft.NET.ILLink.Tasks": {
         "type": "Direct",
