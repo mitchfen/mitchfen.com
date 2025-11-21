@@ -17,12 +17,12 @@ jobs:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_DEPLOYMENT_TOKEN }}
           action: "close"
 
-  cleanup:
-    name: Cleanup untagged container images
-    runs-on: ubuntu-latest
-    steps:
-      - uses: mitchfen/cleanup-untagged-container-images@main
-        with:
-          username: 'mitchfen'
-          container-name: 'mitchfen.com'
-          token: ${{ secrets.GHCR_TOKEN }}
+  #cleanup:
+    #name: Cleanup untagged container images
+    #runs-on: ubuntu-latest
+    #steps:
+      #- uses: mitchfen/cleanup-untagged-container-images@main
+        #with:
+          #username: 'mitchfen'
+          #container-name: 'mitchfen.com'
+          #token: ${{ secrets.GHCR_TOKEN }}
