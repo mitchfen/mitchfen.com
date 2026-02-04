@@ -6,6 +6,7 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch: 
 
 # Set permissions of GITHUB_TOKEN for dependabot
 permissions:
