@@ -4,9 +4,9 @@
     "net10.0": {
       "Microsoft.AspNetCore.App.Internal.Assets": {
         "type": "Direct",
-        "requested": "[10.0.1, )",
-        "resolved": "10.0.1",
-        "contentHash": "rafnWkNfJPA0nCZ5u9bFLiIhCv+aGDWBPJMejuROFMHEpsNhTdv8Cvhv+2jIH+b5485FhndbiwOQJUBMeBa6BQ=="
+        "requested": "[10.0.0, )",
+        "resolved": "10.0.0",
+        "contentHash": "0gZrESKwnlmbE8Br8XIy3kk7Pj0++9T2Ly+A8BFYYgo5EgfqWEln26cho+l92KOaHUzclhvz314RiwE910s24g=="
       },
       "Microsoft.AspNetCore.Components.WebAssembly": {
         "type": "Direct",
@@ -23,9 +23,9 @@
       },
       "Microsoft.AspNetCore.Components.WebAssembly.DevServer": {
         "type": "Direct",
-        "requested": "[10.0.2, )",
-        "resolved": "10.0.2",
-        "contentHash": "PxZuemv+NCofS6Mivh9Ke2krvILyTTZMUDaZnzG+VkhpGxqPaCjSSUhZN9AxJwvRxpmpTEDylwCarzq5nOlo8w=="
+        "requested": "[10.0.3, )",
+        "resolved": "10.0.3",
+        "contentHash": "BYWLabl3xbopAqRu1ZZaYiur0J9Hp9oRDq6AfmMI/Q8pVeTRXUhtJwzVpQdyc9e8PNO44xWM8imbe+L41zfB0Q=="
       },
       "Microsoft.DotNet.HotReload.WebAssembly.Browser": {
         "type": "Direct",
