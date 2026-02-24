@@ -1,0 +1,303 @@
+@using Microsoft.AspNetCore.Components.Web
+@inject IJSRuntime JSRuntime
+
+<div class="terminal-container" @onclick="FocusInput">
+    <div class="terminal-output">
+        @foreach (var line in OutputLines)
+        {
+            <div class="terminal-line">@((MarkupString)line)</div>
+        }
+        
+        <div class="input-row">
+            <span class="prompt">guest <span class="prompt-char">$</span></span>
+            <div class="input-wrapper">
+                <input @ref="inputElement"
+                       @bind="currentInput"
+                       @bind:event="oninput"
+                       @onkeydown="HandleKeyDown"
+                       class="terminal-input"
+                       spellcheck="false"
+                       autocomplete="off" />
+                <span class="terminal-cursor-spacer">@currentInput</span><span class="terminal-cursor"></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    private string currentInput = "";
+    private ElementReference inputElement;
+    private List<string> OutputLines = new();
+    private List<string> CommandHistory = new();
+    private int historyIndex = 0;
+
+    public class Project
+    {
+        public string Name { get; set; } = "";
+        public string Description { get; set; } = "";
+        public string? Link { get; set; }
+        public bool IsRedacted { get; set; }
+    }
+
+    private List<Project> Projects = new()
+    {
+        new Project { 
+            Name = "mitchfen.com", 
+            Description = "This Blazor-powered terminal", 
+            Link = "https://github.com/mitchfen/mitchfen.com" 
+        },
+        new Project { 
+            Name = "HomeLab", 
+            Description = "Upcoming project", 
+            IsRedacted = true 
+        }
+    };
+
+    protected override void OnInitialized()
+    {
+        OutputLines.Add("<span class='comment'>MitchNet (C) 2026. TTY4 connected.</span>");
+        OutputLines.Add(""); 
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await FocusInput();
+            await AutoTypeHelp();
+        }
+        await ScrollToBottom();
+    }
+
+    private async Task AutoTypeHelp()
+    {
+        await Task.Delay(500);
+        string cmd = "help";
+        foreach (var c in cmd)
+        {
+            currentInput += c;
+            StateHasChanged();
+            await Task.Delay(100);
+        }
+        await Task.Delay(300);
+        ExecuteCommand();
+        StateHasChanged();
+    }
+
+    private async Task FocusInput() => await inputElement.FocusAsync();
+
+    private async Task ScrollToBottom() => await JSRuntime.InvokeVoidAsync("scrollToBottom");
+
+    private void HandleKeyDown(KeyboardEventArgs e)
+    {
+        if (e.Key == "Enter")
+        {
+            ExecuteCommand();
+        }
+        else if (e.Key == "ArrowUp")
+        {
+            if (historyIndex > 0)
+            {
+                historyIndex--;
+                currentInput = CommandHistory[historyIndex];
+            }
+        }
+        else if (e.Key == "ArrowDown")
+        {
+            if (historyIndex < CommandHistory.Count)
+            {
+                historyIndex++;
+                currentInput = historyIndex == CommandHistory.Count ? "" : CommandHistory[historyIndex];
+            }
+        }
+    }
+
+    private void ExecuteCommand()
+    {
+        var cmd = currentInput;
+        OutputLines.Add($"<div class='executed-cmd'><span class='prompt'>guest <span class='prompt-char'>$</span></span> {cmd}</div>");
+
+        if (!string.IsNullOrWhiteSpace(cmd))
+        {
+            CommandHistory.Add(cmd);
+            historyIndex = CommandHistory.Count;
+            ProcessCommand(cmd.Trim().ToLower());
+        }
+        else
+        {
+             OutputLines.Add("");
+        }
+
+        currentInput = "";
+    }
+
+    private void ProcessCommand(string cmd)
+    {
+        switch (cmd)
+        {
+            case "help":
+                OutputLines.Add("<span class='purple'>Available commands:</span>");
+                OutputLines.Add("  <span class='cyan'>about</span>       <span class='comment'>- Bio</span>");
+                OutputLines.Add("  <span class='cyan'>projects</span>    <span class='comment'>- Work</span>");
+                OutputLines.Add("  <span class='cyan'>socials</span>     <span class='comment'>- Links</span>");
+                OutputLines.Add("  <span class='cyan'>clear</span>       <span class='comment'>- Wipe screen</span>");
+                break;
+            
+            case "about":
+                OutputLines.Add("I'm <span class='green'>Mitchell Fenner</span>, and I ensure robust, secure, and cost optimized operation of critical <span class='purple'>SaaS applications</span> 🛡️");
+                OutputLines.Add("With expertise in <span class='cyan'>Azure</span>, <span class='cyan'>Kubernetes</span>, <span class='orange'>Infrastructure as Code</span>, and <span class='orange'>DevSecOps</span>,");
+                OutputLines.Add("I focus on automating everything involved in operations—from application and infrastructure deployments to <span class='green'>CI pipelines</span> and <span class='green'>dashboards</span>.");
+                OutputLines.Add("");
+                break;
+
+            case "projects":
+                OutputLines.Add("<span class='purple'>Selected Work:</span>");
+                foreach (var project in Projects)
+                {
+                    if (project.IsRedacted)
+                    {
+                        OutputLines.Add($"• <span class='comment'>[REDACTED]</span> - {project.Description}");
+                    }
+                    else if (!string.IsNullOrEmpty(project.Link))
+                    {
+                        OutputLines.Add($"• <a href='{project.Link}' target='_blank'>{project.Name}</a> - {project.Description}");
+                    }
+                    else
+                    {
+                        OutputLines.Add($"• <span class='green'>{project.Name}</span> - {project.Description}");
+                    }
+                }
+                break;
+            
+            case "socials":
+                OutputLines.Add("<span class='purple'>Connect:</span>");
+                OutputLines.Add("• <a href='https://github.com/mitchfen' target='_blank'>GitHub</a>");
+                OutputLines.Add("• <a href='https://linkedin.com/in/mitchfen' target='_blank'>LinkedIn</a>");
+                break;
+
+            case "clear":
+                OutputLines.Clear();
+                break;
+                
+            case "sudo":
+                OutputLines.Add("<span class='red'>Nice try, Professor Falken.</span>");
+                break;
+            
+            case "global thermonuclear war":
+                OutputLines.Add("<span class='comment'>GREETINGS PROFESSOR FALKEN.</span>");
+                OutputLines.Add("<span class='comment'>A STRANGE GAME.</span>");
+                OutputLines.Add("<span class='comment'>THE ONLY WINNING MOVE IS NOT TO PLAY.</span>");
+                break;
+
+            default:
+                OutputLines.Add($"<span class='red'>Command not found: {cmd}</span>. Try <span class='cyan'>help</span>.");
+                break;
+        }
+    }
+}
+
+<style>
+    .terminal-container {
+        padding: 1rem;
+        min-height: 100vh;
+        cursor: text;
+        box-sizing: border-box;
+    }
+
+    .terminal-output {
+        max-width: 900px;
+        margin: 0 auto;
+        font-size: 1rem;
+        line-height: 1.5;
+    }
+
+    .terminal-line {
+        margin-bottom: 0.2rem;
+        word-break: break-word;
+        white-space: pre-wrap;
+    }
+
+    .input-row {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        margin-top: 0.5rem;
+    }
+
+    .input-wrapper {
+        display: flex;
+        align-items: center;
+        flex-grow: 1;
+        position: relative;
+        margin-left: 5px;
+    }
+
+    .terminal-input {
+        background: transparent;
+        border: none;
+        color: transparent; /* Text is invisible because we overlay it */
+        font-family: inherit;
+        font-size: inherit;
+        width: 100%;
+        outline: none;
+        padding: 0;
+        caret-color: transparent; /* Hide native cursor */
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 2;
+    }
+
+    .terminal-cursor-spacer {
+        color: var(--dracula-fg);
+        white-space: pre-wrap;
+        pointer-events: none;
+        word-break: break-all;
+    }
+
+    .terminal-cursor {
+        display: inline-block;
+        width: 10px;
+        height: 1.2rem;
+        background-color: var(--dracula-pink);
+        animation: blink 1s step-end infinite;
+        vertical-align: middle;
+    }
+
+    @@keyframes blink { 
+        from, to { opacity: 1; } 
+        50% { opacity: 0; } 
+    }
+
+    @@media (min-width: 768px) {
+        .terminal-container {
+            padding: 2rem;
+        }
+        .terminal-output {
+            font-size: 1.1rem;
+        }
+        .terminal-input {
+            margin-left: 10px;
+        }
+    }
+
+    /* Prompt Styling */
+    .prompt { color: var(--dracula-green); font-weight: bold; }
+    .prompt-char { color: var(--dracula-fg); margin-left: 5px; font-weight: normal; }
+
+    .executed-cmd { 
+        opacity: 0.8; 
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    /* Theme colors */
+    .comment { color: var(--dracula-comment); font-style: italic; }
+    .cyan    { color: var(--dracula-cyan); }
+    .green   { color: var(--dracula-green); }
+    .purple  { color: var(--dracula-purple); }
+    .orange  { color: var(--dracula-orange); }
+    .yellow  { color: var(--dracula-yellow); }
+    .red     { color: var(--dracula-red); }
+    .cmd     { color: var(--dracula-pink); font-weight: bold; }
+</style>
