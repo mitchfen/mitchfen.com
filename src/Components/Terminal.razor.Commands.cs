@@ -7,6 +7,7 @@ public partial class Terminal
         switch (cmd)
         {
             case "help":
+                OutputLines.Add("<span class='orange'>Available commands:</span>");
                 OutputLines.Add("  <span class='cyan'>about</span>");
                 OutputLines.Add("  <span class='cyan'>projects</span>");
                 OutputLines.Add("  <span class='cyan'>socials</span>");
@@ -14,10 +15,12 @@ public partial class Terminal
                 break;
             
             case "about":
+                OutputLines.Add("<span class='orange'>About me:</span>");
                 OutputLines.Add("I'm <span class='green'>Mitchell Fenner</span>, a Senior Cloud Operations Engineer, homelab enthusiast</span>, and avid rock climber.");
                 break;
 
             case "projects":
+                OutputLines.Add("<span class='orange'>My projects:</span>");
                 foreach (var project in Projects)
                 {
                     if (project.IsRedacted)
@@ -36,6 +39,7 @@ public partial class Terminal
                 break;
             
             case "socials":
+                OutputLines.Add("<span class='orange'>Social links:</span>");
                 OutputLines.Add("• <a href='https://github.com/mitchfen' target='_blank'>GitHub</a>");
                 OutputLines.Add("• <a href='https://linkedin.com/in/mitchfen' target='_blank'>LinkedIn</a>");
                 break;
