@@ -25,6 +25,32 @@ html, body {
     font-family: var(--terminal-font);
 }
 
+.loading-container {
+    font-family: 'IBM Plex Mono', monospace;
+    color: #f8f8f2;
+    background-color: #282a36;
+    height: 100vh;
+    padding: 1rem;
+    box-sizing: border-box;
+}
+
+.loading-content {
+    max-width: 900px;
+    margin: 0 auto;
+    line-height: 1.5;
+    font-size: 1.1rem;
+}
+
+.loading-ok {
+    color: #50fa7b;
+}
+
+.loading-progress {
+    color: #ffb86c;
+}
+
+
+
 a {
     color: var(--dracula-cyan);
     text-decoration: none;
@@ -70,7 +96,7 @@ html {
 /* Terminal Styles */
 .terminal-container {
     padding: 1rem;
-    height: 100vh;
+    height: 100dvh;
     cursor: text;
     box-sizing: border-box;
     overflow-y: auto;
@@ -175,3 +201,8 @@ html {
 .yellow  { color: var(--dracula-yellow); }
 .red     { color: var(--dracula-red); }
 .cmd     { color: var(--dracula-pink); font-weight: bold; text-shadow: 0 0 5px var(--dracula-pink); }
+
+@media (min-width: 768px) {
+    #app > div { padding: 2rem !important; }
+}
+

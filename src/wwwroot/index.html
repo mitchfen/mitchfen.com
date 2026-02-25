@@ -9,12 +9,13 @@
     <link href="css/app.css" rel="stylesheet" />
 </head>
 
-<body style="background-color: #282a36;">
+<body>
     <div id="app">
-        <div style="font-family: 'IBM Plex Mono', monospace; color: #f8f8f2; background-color: #282a36; height: 100vh; padding: 1rem; box-sizing: border-box;">
-            <div style="max-width: 900px; margin: 0 auto; line-height: 1.5; font-size: 1.1rem;">
-                [ <span style="color: #50fa7b;">OK</span> ] Loading Blazor WebAssembly...<br>
-                [ <span style="color: #50fa7b;">OK</span> ] Applying Dracula theme...<br>
+        <div class="loading-container">
+            <div class="loading-content">
+                [ <span class="loading-ok">OK</span> ] Loading Blazor WebAssembly...<br>
+                [ <span class="loading-ok">OK</span> ] Applying theme...<br>
+                [ <span class="loading-progress">In Progress</span> ] Beseeching the Omnissiah to route our packets...<br>
             </div>
         </div>
     </div>
@@ -25,25 +26,8 @@
         <a class="dismiss">🗙</a>
     </div>
 
-    <style>
-        @keyframes blink { 
-            from, to { opacity: 1; } 
-            50% { opacity: 0; } 
-        }
-        @media (min-width: 768px) {
-            #app > div { padding: 2rem !important; }
-        }
-    </style>
-
-    <script src="_framework/blazor.webassembly.js"></script>
-    <script>
-        window.scrollToBottom = () => {
-            const terminal = document.querySelector('.terminal-container');
-            if (terminal) {
-                terminal.scrollTop = terminal.scrollHeight;
-            }
-        };
-    </script>
+    <script src="_framework/blazor.webassembly.js" autostart="false"></script>
+    <script src="js/site.js"></script>
 </body>
 
 </html>
