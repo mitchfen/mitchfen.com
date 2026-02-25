@@ -11,13 +11,16 @@
 
 <body style="background-color: #282a36;">
     <div id="app">
-        <div style="font-family: 'IBM Plex Mono', monospace; color: #f8f8f2; background-color: #282a36; height: 100vh; padding: 2rem; box-sizing: border-box;">
-            <div style="max-width: 900px; margin: 0 auto; line-height: 1.6; font-size: 1.1rem;">
-                <span style="color: #6272a4; font-style: italic;">MitchNet (C) 2026. TTY4 connected.</span><br>
+        <div style="font-family: 'IBM Plex Mono', monospace; color: #f8f8f2; background-color: #282a36; height: 100vh; padding: 1rem; box-sizing: border-box;">
+            <div style="max-width: 900px; margin: 0 auto; line-height: 1.5; font-size: 1.1rem;">
+                <span style="color: #6272a4; font-style: italic;">welcome [guest] to [mitchfen.com]</span><br>
                 <br>
                 [ <span style="color: #50fa7b;">OK</span> ] Loading Blazor WebAssembly...<br>
                 [ <span style="color: #50fa7b;">OK</span> ] Applying Dracula theme...<br>
-                <span style="display: inline-block; width: 10px; height: 1.2rem; background-color: #ff79c6; margin-left: 5px; vertical-align: middle; animation: blink 1s step-end infinite;"></span>
+                <div style="display: flex; align-items: center; margin-top: 1.5rem;">
+                    <span style="color: #ff79c6; font-weight: bold;">guest <span style="color: #bd93f9; font-weight: normal; margin-left: 5px;">$</span></span>
+                    <span style="display: inline-block; width: 10px; height: 1.2rem; background-color: #f8f8f2; margin-left: 10px; vertical-align: middle; animation: blink 1s step-end infinite; box-shadow: 0 0 8px #f8f8f2;"></span>
+                </div>
             </div>
         </div>
     </div>
@@ -33,12 +36,18 @@
             from, to { opacity: 1; } 
             50% { opacity: 0; } 
         }
+        @media (min-width: 768px) {
+            #app > div { padding: 2rem !important; }
+        }
     </style>
 
     <script src="_framework/blazor.webassembly.js"></script>
     <script>
         window.scrollToBottom = () => {
-            window.scrollTo(0, document.body.scrollHeight);
+            const terminal = document.querySelector('.terminal-container');
+            if (terminal) {
+                terminal.scrollTop = terminal.scrollHeight;
+            }
         };
     </script>
 </body>

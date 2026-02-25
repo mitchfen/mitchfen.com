@@ -33,9 +33,9 @@ a {
 }
 
 a:hover {
-    color: var(--dracula-pink);
-    border-bottom: 1px solid var(--dracula-pink);
-    background-color: rgba(255, 121, 198, 0.1);
+    color: var(--dracula-purple);
+    border-bottom: 1px solid var(--dracula-purple);
+    background-color: rgba(189, 147, 249, 0.1);
 }
 
 #app {
@@ -43,32 +43,135 @@ a:hover {
     min-height: 100vh;
 }
 
+/* Hide scrollbar for Chrome, Safari and Opera */
 ::-webkit-scrollbar {
-    width: 8px;
+    display: none;
 }
 
-::-webkit-scrollbar-track {
-    background: var(--dracula-bg); 
-}
- 
-::-webkit-scrollbar-thumb {
-    background: var(--dracula-current);
-    border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: var(--dracula-comment); 
+/* Hide scrollbar for IE, Edge and Firefox */
+html {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
 }
 
 #blazor-error-ui {
     display: none;
     background: var(--dracula-current);
-    color: var(--dracula-red);
+    color: var(--dracula-pink);
     bottom: 0;
     position: fixed;
     width: 100%;
     z-index: 1000;
     padding: 1rem;
     font-family: var(--terminal-font);
-    border-top: 2px solid var(--dracula-red);
+    border-top: 2px solid var(--dracula-pink);
 }
+
+/* Terminal Styles */
+.terminal-container {
+    padding: 1rem;
+    height: 100vh;
+    cursor: text;
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+.terminal-output {
+    max-width: 900px;
+    margin: 0 auto;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.terminal-line {
+    margin-bottom: 0.5rem;
+    word-break: break-word;
+    white-space: pre-wrap;
+}
+
+.input-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 1.5rem;
+}
+
+.input-wrapper {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    position: relative;
+    margin-left: 5px;
+}
+
+.terminal-input {
+    background: transparent;
+    border: none;
+    color: transparent;
+    font-family: inherit;
+    font-size: inherit;
+    width: 100%;
+    outline: none;
+    padding: 0;
+    caret-color: transparent;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+}
+
+.terminal-cursor-spacer {
+    color: var(--dracula-fg); /* Make active input white */
+    white-space: pre-wrap;
+    pointer-events: none;
+    word-break: break-all;
+}
+
+.terminal-cursor {
+    display: inline-block;
+    width: 10px;
+    height: 1.2rem;
+    background-color: var(--dracula-fg);
+    animation: blink 1s step-end infinite;
+    vertical-align: middle;
+    box-shadow: 0 0 8px var(--dracula-fg); /* Glow on cursor */
+}
+
+@keyframes blink { 
+    from, to { opacity: 1; } 
+    50% { opacity: 0; } 
+}
+
+@media (min-width: 768px) {
+    .terminal-container {
+        padding: 2rem;
+    }
+    .terminal-output {
+        font-size: 1.1rem;
+    }
+    .terminal-input {
+        margin-left: 10px;
+    }
+}
+
+/* Prompt & Theme Styling */
+.prompt { color: var(--dracula-pink); font-weight: bold; }
+.prompt-char { color: var(--dracula-purple); margin-left: 5px; font-weight: normal; }
+
+.executed-cmd { 
+    opacity: 0.8; 
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--dracula-fg); /* Executed commands turn white */
+}
+
+.comment { color: var(--dracula-comment); font-style: italic; }
+.cyan    { color: var(--dracula-cyan); }
+.green   { color: var(--dracula-green); }
+.purple  { color: var(--dracula-purple); }
+.orange  { color: var(--dracula-orange); }
+.yellow  { color: var(--dracula-yellow); }
+.red     { color: var(--dracula-red); }
+.cmd     { color: var(--dracula-pink); font-weight: bold; text-shadow: 0 0 5px var(--dracula-pink); }
