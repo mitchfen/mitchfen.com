@@ -35,8 +35,34 @@
         }
     </style>
 
-    <script src="_framework/blazor.webassembly.js"></script>
+    <script src="_framework/blazor.webassembly.js" autostart="false"></script>
     <script>
+        window.onerror = function (msg, url, lineNo, columnNo, error) {
+            const errorDiv = document.createElement('div');
+            errorDiv.style.color = '#ff5555';
+            errorDiv.style.position = 'fixed';
+            errorDiv.style.bottom = '0';
+            errorDiv.style.left = '0';
+            errorDiv.style.width = '100%';
+            errorDiv.style.background = '#282a36';
+            errorDiv.style.padding = '10px';
+            errorDiv.style.fontSize = '12px';
+            errorDiv.style.zIndex = '9999';
+            errorDiv.style.borderTop = '2px solid #ff5555';
+            errorDiv.innerHTML = '<b>Error:</b> ' + msg + '<br><b>Url:</b> ' + url + '<br><b>Line:</b> ' + lineNo;
+            document.body.appendChild(errorDiv);
+            return false;
+        };
+
+        Blazor.start().catch(function (error) {
+            console.error(error);
+            const errorDiv = document.createElement('div');
+            errorDiv.style.color = '#ff5555';
+            errorDiv.style.padding = '20px';
+            errorDiv.innerHTML = '<h1>Blazor failed to start</h1><pre>' + error.toString() + '</pre>';
+            document.getElementById('app').appendChild(errorDiv);
+        });
+
         window.scrollToBottom = () => {
             const terminal = document.querySelector('.terminal-container');
             if (terminal) {

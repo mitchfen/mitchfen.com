@@ -70,7 +70,7 @@ html {
 /* Terminal Styles */
 .terminal-container {
     padding: 1rem;
-    height: 100vh;
+    height: 100dvh;
     cursor: text;
     box-sizing: border-box;
     overflow-y: auto;
