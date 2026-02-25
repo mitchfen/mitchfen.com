@@ -16,7 +16,7 @@ public partial class Terminal
             
             case "about":
                 OutputLines.Add("<span class='orange'>About me:</span>");
-                OutputLines.Add("I'm <span class='green'>Mitchell Fenner</span>, a Senior Cloud Operations Engineer, homelab enthusiast</span>, and avid rock climber.");
+                OutputLines.Add("I'm <span class='green'>Mitchell Fenner</span>, a Senior Cloud Operations Engineer, homelab enthusiast, and avid rock climber.");
                 break;
 
             case "projects":
