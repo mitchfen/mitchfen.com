@@ -9,14 +9,14 @@
     <link href="css/app.css" rel="stylesheet" />
 </head>
 
-<body>
+<body style="background-color: #282a36;">
     <div id="app">
-    <form>
-      <fieldset>
-        <legend>mitchell fenner</legend>
-          <p>welcome to mitchen.com 🤗</p>
-      </fieldset>
-    </form>
+        <div style="font-family: 'IBM Plex Mono', monospace; color: #f8f8f2; background-color: #282a36; height: 100vh; padding: 1rem; box-sizing: border-box;">
+            <div style="max-width: 900px; margin: 0 auto; line-height: 1.5; font-size: 1.1rem;">
+                [ <span style="color: #50fa7b;">OK</span> ] Loading Blazor WebAssembly...<br>
+                [ <span style="color: #50fa7b;">OK</span> ] Applying Dracula theme...<br>
+            </div>
+        </div>
     </div>
 
     <div id="blazor-error-ui">
@@ -24,7 +24,26 @@
         <a href="" class="reload">reload</a>
         <a class="dismiss">🗙</a>
     </div>
+
+    <style>
+        @keyframes blink { 
+            from, to { opacity: 1; } 
+            50% { opacity: 0; } 
+        }
+        @media (min-width: 768px) {
+            #app > div { padding: 2rem !important; }
+        }
+    </style>
+
     <script src="_framework/blazor.webassembly.js"></script>
+    <script>
+        window.scrollToBottom = () => {
+            const terminal = document.querySelector('.terminal-container');
+            if (terminal) {
+                terminal.scrollTop = terminal.scrollHeight;
+            }
+        };
+    </script>
 </body>
 
 </html>

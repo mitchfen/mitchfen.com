@@ -1,0 +1,24 @@
+@namespace MitchfenSite.Components
+
+<div class="terminal-container" @onclick="FocusInput">
+    <div class="terminal-output">
+        @foreach (var line in OutputLines)
+        {
+            <div class="terminal-line">@((MarkupString)line)</div>
+        }
+        
+        <div class="input-row">
+            <span class="prompt">guest <span class="prompt-char">$</span></span>
+            <div class="input-wrapper">
+                <input @ref="inputElement"
+                       @bind="currentInput"
+                       @bind:event="oninput"
+                       @onkeydown="HandleKeyDown"
+                       class="terminal-input"
+                       spellcheck="false"
+                       autocomplete="off" />
+                <span class="terminal-cursor-spacer">@currentInput</span><span class="terminal-cursor"></span>
+            </div>
+        </div>
+    </div>
+</div>
