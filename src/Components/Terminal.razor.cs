@@ -64,7 +64,8 @@ public partial class Terminal
     private void ExecuteCommand()
     {
         var cmd = currentInput;
-        OutputLines.Add($"<div class='executed-cmd'><span class='prompt'>guest <span class='prompt-char'>$</span></span> {cmd}</div>");
+        var encodedCmd = System.Net.WebUtility.HtmlEncode(cmd);
+        OutputLines.Add($"<div class='executed-cmd'><span class='prompt'>guest <span class='prompt-char'>$</span></span> {encodedCmd}</div>");
 
         if (!string.IsNullOrWhiteSpace(cmd))
         {

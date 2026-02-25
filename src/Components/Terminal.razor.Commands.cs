@@ -60,7 +60,8 @@ public partial class Terminal
                 break;
 
             default:
-                OutputLines.Add($"<span class='red'>Command not found: {cmd}</span>");
+                var encodedCmd = System.Net.WebUtility.HtmlEncode(cmd);
+                OutputLines.Add($"<span class='red'>Command not found: {encodedCmd}</span>");
                 break;
         }
     }
