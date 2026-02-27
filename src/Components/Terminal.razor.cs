@@ -24,7 +24,7 @@ public partial class Terminal
         if (firstRender)
         {
             await FocusInput();
-            await AutoTypeHelp();
+            await AutoTypeWelcome();
         }
 
         if (_shouldScroll)
@@ -34,10 +34,10 @@ public partial class Terminal
         }
     }
 
-    private async Task AutoTypeHelp()
+    private async Task AutoTypeWelcome()
     {
         await Task.Delay(500);
-        string cmd = "help";
+        string cmd = "welcome";
         foreach (var c in cmd)
         {
             currentInput += c;
