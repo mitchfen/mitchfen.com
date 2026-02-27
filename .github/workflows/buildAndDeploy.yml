@@ -68,7 +68,7 @@ jobs:
           dotnet-version: '10.0.x'
 
       - name: Download output from build job
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: output
           path: output
@@ -89,7 +89,7 @@ jobs:
       url: ${{ steps.deploy.outputs.static_web_app_url }}
     steps:
       - name: Download output from build job
-        uses: actions/download-artifact@v6
+        uses: actions/download-artifact@v8
         with:
           name: output
           path: output
