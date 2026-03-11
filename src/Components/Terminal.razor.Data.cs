@@ -24,8 +24,8 @@ public partial class Terminal
             Link = "https://github.com/mitchfen/mitchfen.com" 
         },
        new Project { 
-            Name = "osrs-herb-run-helper", 
-            Description = "Quickly find the most profitable herb to farm.", 
+            Name = "OSRS herb price checker",
+            Description = "Quickly determine which herb to farm.", 
             Link = "https://github.com/mitchfen/osrs-herb-run-helper" 
         },
  
