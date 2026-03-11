@@ -8,21 +8,22 @@ public partial class Terminal
         {
             case "help":
                 OutputLines.Add("  <span class='cyan'>about</span> - get info about me");
-                OutputLines.Add("  <span class='cyan'>projects</span> - see what I'm working on");
+                OutputLines.Add("  <span class='cyan'>projects</span> - coding projects I've done");
                 OutputLines.Add("  <span class='cyan'>socials</span> - find me elsewhere online");
-                OutputLines.Add("  <span class='cyan'>clear</span> - clear the screen");
                 break;
             
             case "about":
-                OutputLines.Add("I'm <span class='green'>Mitchell Fenner</span>, a Senior Cloud Operations Engineer and homelab enthusiast.");
+                OutputLines.Add("I'm a Senior Cloud Operations engineer and homelab enthusiast.");
+                OutputLines.Add("Web development isn't my specialty, I just put this together for fun.");
+                OutputLines.Add("Typically I'm focused on infra, kubernetes, networking, etc.");
+                OutputLines.Add("");
+                OutputLines.Add("Hope to add a section soon about my homelab setup.");
                 break;
 
             case "welcome":
-                OutputLines.Add("<span class='green'>Welcome to Mitchell Fenner's personal website 🤗</span>");
+                OutputLines.Add("<span class='cyan'>Welcome to Mitchell Fenner's personal website 🤗</span>");
                 OutputLines.Add("<span class='comment'>Hint: type help to view commands</span>");
                 break;
-
-
 
             case "projects":
                 foreach (var project in Projects)

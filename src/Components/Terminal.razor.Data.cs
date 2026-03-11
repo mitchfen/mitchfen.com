@@ -4,34 +4,30 @@ namespace MitchfenSite.Components;
 
 public partial class Terminal
 {
-    private const string Header = "<span class='comment'>welcome [guest] to [mitchfen.com]</span>";
+    private const string Header = "<span class='comment'>welcome to the mitchfen.com's TTY interface</span>";
 
     private List<Project> Projects = new()
     {
-       new Project { 
-            Name = "HomeLab", 
-            Description = "Upcoming project", 
-            IsRedacted = true 
-        },
-       new Project { 
-            Name = "Nanoleaf aurora controller", 
-            Description = "Webapp running in my homelab to control my lights.", 
+        new Project { 
+            Name = "Nanoleaf Aurora Controller", 
+            Description = "Let anyone on my network control the lights.", 
             Link = "https://github.com/mitchfen/nanoleaf-controller" 
         },
-       new Project { 
-            Name = "Old School Runescape herb run helper", 
-            Description = "Find the most profitable herb.", 
-            Link = "https://github.com/mitchfen/osrs-herb-run-helper" 
+        new Project { 
+            Name = "Momentum", 
+            Description = "Help me start my day with momentum.", 
+            Link = "https://github.com/mitchfen/momentum" 
         },
-       new Project { 
+        new Project { 
             Name = "mitchfen.com", 
-            Description = "This Blazor-powered website.", 
+            Description = "This website.", 
             Link = "https://github.com/mitchfen/mitchfen.com" 
         },
        new Project { 
-            Name = "Daily todo tracker", 
-            Description = "Webapp running on my homelab to track daily tasks.", 
-            Link = "https://github.com/mitchfen/DailyTodo" 
-        }
-   };
+            Name = "osrs-herb-run-helper", 
+            Description = "Quickly find the most profitable herb to farm.", 
+            Link = "https://github.com/mitchfen/osrs-herb-run-helper" 
+        },
+ 
+  };
 }
