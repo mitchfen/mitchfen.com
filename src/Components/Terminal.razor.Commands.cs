@@ -16,8 +16,6 @@ public partial class Terminal
                 OutputLines.Add("I'm a Senior Cloud Operations engineer and homelab enthusiast.");
                 OutputLines.Add("Web development isn't my specialty, I just put this together for fun.");
                 OutputLines.Add("Typically I'm focused on infra, kubernetes, networking, etc.");
-                OutputLines.Add("");
-                OutputLines.Add("Hope to add a section soon about my homelab setup.");
                 break;
 
             case "welcome":
@@ -28,17 +26,25 @@ public partial class Terminal
             case "projects":
                 foreach (var project in Projects)
                 {
+                    var tags = "";
+                    if (project.IsSelfHosted)
+                        tags += "<span class='green'>[self hosted]</span> ";
+                    if (project.IsCli)
+                        tags += "<span class='prompt-char'>[cli]</span> ";
+                    if (project.IsCloudHosted)
+                        tags += "<span class='yellow'>[cloud hosted]</span> ";
+                    
                     if (project.IsRedacted)
                     {
-                        OutputLines.Add($"• <span class='comment'>[REDACTED]</span> - {project.Description}");
+                        OutputLines.Add($"• {tags}<span class='comment'>[REDACTED]</span>");
                     }
                     else if (!string.IsNullOrEmpty(project.Link))
                     {
-                        OutputLines.Add($"• <a href='{project.Link}' target='_blank'>{project.Name}</a> - {project.Description}");
+                        OutputLines.Add($"• {tags}<a href='{project.Link}' target='_blank'>{project.Name}</a>");
                     }
                     else
                     {
-                        OutputLines.Add($"• <span class='green'>{project.Name}</span> - {project.Description}");
+                        OutputLines.Add($"• {tags}<span class='green'>{project.Name}</span>");
                     }
                 }
                 break;
