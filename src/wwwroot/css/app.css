@@ -41,6 +41,12 @@ html, body {
     font-size: 1.1rem;
 }
 
+@media (max-width: 767px) {
+    .loading-content {
+        font-size: 0.85rem;
+    }
+}
+
 .loading-ok {
     color: #50fa7b;
 }

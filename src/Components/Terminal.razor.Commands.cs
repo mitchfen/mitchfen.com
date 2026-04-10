@@ -22,7 +22,7 @@ public partial class Terminal
 
             case "welcome":
                 OutputLines.Add("<span class='cyan'>Welcome to Mitchell Fenner's personal website 🤗</span>");
-                OutputLines.Add("<span class='comment'>Hint: type help to view commands</span>");
+                OutputLines.Add("<span class='comment'>Hint: type 'help' to view commands</span>");
                 break;
 
             case "projects":
@@ -30,9 +30,9 @@ public partial class Terminal
                 break;
             
             case "socials":
-                OutputLines.Add("• <a href='https://github.com/mitchfen' target='_blank'>GitHub</a>");
-                OutputLines.Add("• <a href='https://linkedin.com/in/mitchfen' target='_blank'>LinkedIn</a>");
-                OutputLines.Add("• <a href='mailto:mitch@mitchfen.com' target='_blank'>Send me an email</a>");
+                OutputLines.Add("• <a href='https://github.com/mitchfen' target='_blank' rel='noopener noreferrer'>GitHub</a>");
+                OutputLines.Add("• <a href='https://linkedin.com/in/mitchfen' target='_blank' rel='noopener noreferrer'>LinkedIn</a>");
+                OutputLines.Add("• <a href='mailto:mitch@mitchfen.com' target='_blank' rel='noopener noreferrer'>Send me an email</a>");
                 break;
 
             case "clear":
@@ -76,7 +76,7 @@ public partial class Terminal
             }
             else if (!string.IsNullOrEmpty(project.Link))
             {
-                OutputLines.Add($"{indentation}• {tagString}<a href='{project.Link}' target='_blank'>{project.Name}</a>");
+                OutputLines.Add($"{indentation}• {tagString}<a href='{project.Link}' target='_blank' rel='noopener noreferrer'>{project.Name}</a>");
             }
             else
             {
