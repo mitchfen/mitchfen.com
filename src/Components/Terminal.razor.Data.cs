@@ -4,33 +4,39 @@ namespace MitchfenSite.Components;
 
 public partial class Terminal
 {
-    private const string Header = "<span class='comment'>welcome to the mitchfen.com's TTY interface</span>";
-
     private List<Project> Projects = new()
     {
         new Project { 
-            Name = "Nanoleaf Aurora Controller", 
-            Description = "", 
-            Link = "https://github.com/mitchfen/nanoleaf-controller",
-            IsSelfHosted = true
-        },
-        new Project { 
-            Name = "WiZ Controller", 
-            Description = "", 
-            Link = "https://github.com/mitchfen/wiz-controller",
-            IsSelfHosted = true
-        },
-        new Project { 
-            Name = "Momentum", 
-            Description = "", 
-            Link = "https://github.com/mitchfen/momentum",
-            IsSelfHosted = true
-        },
-        new Project { 
-            Name = "Weight Tracker", 
-            Description = "", 
-            Link = "https://github.com/mitchfen/weight-tracker",
-            IsSelfHosted = true
+            Name = "My homelab ⚗️", 
+            Description = "Infrastructure and automation for my home lab.", 
+            Link = "https://github.com/mitchfen/homelab",
+            Children = new()
+            {
+                new Project { 
+                    Name = "Nanoleaf Aurora Controller", 
+                    Description = "", 
+                    Link = "https://github.com/mitchfen/nanoleaf-controller",
+                    IsSelfHosted = true
+                },
+                new Project { 
+                    Name = "WiZ Controller", 
+                    Description = "", 
+                    Link = "https://github.com/mitchfen/wiz-controller",
+                    IsSelfHosted = true
+                },
+                new Project { 
+                    Name = "Momentum", 
+                    Description = "", 
+                    Link = "https://github.com/mitchfen/momentum",
+                    IsSelfHosted = true
+                },
+                new Project { 
+                    Name = "Weight Tracker", 
+                    Description = "", 
+                    Link = "https://github.com/mitchfen/weight-tracker",
+                    IsSelfHosted = true
+                }
+            }
         },
         new Project { 
             Name = "mitchfen.com", 

@@ -15,8 +15,6 @@ public partial class Terminal
 
     protected override void OnInitialized()
     {
-        OutputLines.Add(Header);
-        OutputLines.Add(""); 
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)

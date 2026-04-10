@@ -9,4 +9,5 @@ public class Project
     public bool IsSelfHosted { get; set; }
     public bool IsCli { get; set; }
     public bool IsCloudHosted { get; set; }
+    public List<Project> Children { get; set; } = new();
 }
