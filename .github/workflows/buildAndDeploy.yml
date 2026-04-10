@@ -8,12 +8,9 @@ on:
       - main
   workflow_dispatch: 
 
-# Set permissions of GITHUB_TOKEN for dependabot
+# Set minimum permissions at workflow level for dependabot
 permissions:
-  contents: write
-  pull-requests: write
-  packages: write
-  checks: write
+  contents: read
 
 concurrency:
   group: ${{ github.head_ref || github.ref }}
@@ -58,6 +55,9 @@ jobs:
     name: Publish container image
     needs: build
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -74,7 +74,9 @@ jobs:
           path: output
 
       - name: Login to ghcr.io
-        run: echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+        env:
+          CR_PAT: ${{ secrets.GITHUB_TOKEN }}
+        run: echo "$CR_PAT" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
       - name: Build and push image
         run: dotnet run --project ./build/NukeBuild.csproj --target PushContainerImage --skip Publish
@@ -84,6 +86,9 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     name: Deploy to Azure
+    permissions:
+      contents: read
+      pull-requests: write
     environment:
       name: 'mitchfen.com'
       url: ${{ steps.deploy.outputs.static_web_app_url }}

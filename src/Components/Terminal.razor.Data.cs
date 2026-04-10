@@ -13,7 +13,7 @@ public partial class Terminal
             Children = new()
             {
                 new Project { 
-                    Name = "Nanoleaf Aurora Controller", 
+                    Name = "Nanoleaf Controller", 
                     Description = "", 
                     Link = "https://github.com/mitchfen/nanoleaf-controller",
                     IsSelfHosted = true
