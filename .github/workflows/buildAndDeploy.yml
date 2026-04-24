@@ -74,9 +74,11 @@ jobs:
           path: output
 
       - name: Login to ghcr.io
-        env:
-          CR_PAT: ${{ secrets.GITHUB_TOKEN }}
-        run: echo "$CR_PAT" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build and push image
         run: dotnet run --project ./build/NukeBuild.csproj --target PushContainerImage --skip Publish
