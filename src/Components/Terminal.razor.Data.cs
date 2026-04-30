@@ -55,12 +55,6 @@ public partial class Terminal
             Description = "", 
             Link = "https://github.com/mitchfen/highsec-ore-price-checker",
             IsCli = true
-        },
-        new Project { 
-            Name = "Update Arch", 
-            Description = "", 
-            Link = "https://github.com/mitchfen/update-arch",
-            IsCli = true
         }
     };
 }
