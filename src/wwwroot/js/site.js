@@ -5,6 +5,11 @@ window.scrollToBottom = () => {
     }
 };
 
+window.detectMobile = () => {
+    const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+    return /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(userAgent.toLowerCase());
+};
+
 // Manually start Blazor and handle startup failures
 if (window.Blazor) {
     window.Blazor.start().catch(function (error) {

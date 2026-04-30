@@ -6,18 +6,25 @@ public partial class Terminal
 {
     private void ProcessCommand(string cmd)
     {
+        if (cmd.StartsWith("sudo "))
+        {
+            OutputLines.Add("<span class='red'>User is not in the sudoers file. This incident will be reported.</span>");
+            return;
+        }
+
         switch (cmd)
         {
             case "help":
                 OutputLines.Add("  <span class='cyan'>about</span> - get info about me");
-                OutputLines.Add("  <span class='cyan'>projects</span> - hobby projects I've done");
-                OutputLines.Add("  <span class='cyan'>socials</span> - find me elsewhere online");
+                OutputLines.Add("  <span class='cyan'>projects</span> - see my personal projects");
+                OutputLines.Add("  <span class='cyan'>links</span> - find me elsewhere online");
+                OutputLines.Add("  <span class='cyan'>sudo</span> - run a command as root");
+                OutputLines.Add("  <span class='cyan'>global thermonuclear war</span> - shall we play a game?");
                 break;
             
             case "about":
                 OutputLines.Add("I'm a Senior Cloud Operations engineer and homelab enthusiast.");
-                OutputLines.Add("Web development isn't my specialty, I just put this together for fun.");
-                OutputLines.Add("Typically I'm focused on infra, kubernetes, networking, etc.");
+                OutputLines.Add("I specialize in Microsoft Azure, Kubernetes, infrastructure as code, and automation of all kinds. Check my LinkedIn for more.");
                 break;
 
             case "welcome":
@@ -29,7 +36,7 @@ public partial class Terminal
                 DisplayProjects(Projects);
                 break;
             
-            case "socials":
+            case "links":
                 OutputLines.Add("• <a href='https://github.com/mitchfen' target='_blank' rel='noopener noreferrer'>GitHub</a>");
                 OutputLines.Add("• <a href='https://linkedin.com/in/mitchfen' target='_blank' rel='noopener noreferrer'>LinkedIn</a>");
                 OutputLines.Add("• <a href='mailto:mitch@mitchfen.com' target='_blank' rel='noopener noreferrer'>Send me an email</a>");

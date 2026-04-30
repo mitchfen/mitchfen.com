@@ -1,0 +1,23 @@
+# Copy this file to terraform.tfvars and fill in your values
+# DO NOT commit terraform.tfvars to version control
+
+# Required: Your DigitalOcean API token
+# Get it from: https://cloud.digitalocean.com/account/api/tokens
+do_token = "your_digitalocean_api_token_here"
+
+# GitHub repository (usually mitchfen/mitchfen.com)
+github_repo = "mitchfen/mitchfen.com"
+
+# Branch to deploy from
+github_branch = "main"
+
+# Your domain name
+domain_name = "mitchfen.com"
+
+# Number of app instances
+instance_count = 1
+
+# Instance size (basic-xs is free tier eligible)
+# Options: basic-xs, basic-sm, basic-md, basic-lg, basic-xl
+# See: https://docs.digitalocean.com/products/app-platform/concepts/instance-types/
+instance_size = "basic-xs"
