@@ -1,6 +1,6 @@
 ﻿{
   "globalHeaders": {
-    "content-security-policy": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com; img-src 'self' data:;",
+    "content-security-policy": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval' 'sha256-QOLZruFdc1ucChmDem5UP0x1EdPXygeSbhmphXJG1SA='; style-src 'self' https://fonts.googleapis.com 'sha256-pByZoMdsA1Sdn//Wk+jRC3z58YqJKSw6MpgmuQzNHLo=' 'unsafe-hashes'; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com; img-src 'self' data:;",
     "X-Frame-Options": "SAMEORIGIN",
     "X-Content-Type-Options": "nosniff",
     "Referrer-Policy": "strict-origin-when-cross-origin",
