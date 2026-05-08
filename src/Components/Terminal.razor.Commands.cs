@@ -15,14 +15,14 @@ public partial class Terminal
             case "welcome":
                 OutputLines.Add("<span class='green'>Welcome to Mitchell Fenner's personal website 🫡</span>");
                 OutputLines.Add("I'm a Senior Cloud Operations engineer and homelab enthusiast.");
-                OutputLines.Add("My work centers around Azure, Kubernetes, release management, Microsoft Sentinel, and automation of all kinds. Checkout my LinkedIn for more.");
+                OutputLines.Add("My work centers around Azure, Kubernetes, release management, Microsoft Sentinel, and automation of all kinds.");
                 OutputLines.Add("When I'm not working I'm often playing with my own bare metal server and home network. Check it out at <a href='https://github.com/mitchfen/homelab' target='_blank' rel='noopener noreferrer'>github.com/mitchfen/homelab</a>");
                 break;
             
             case "links":
-                OutputLines.Add("• GitHub: <a href='https://github.com/mitchfen' target='_blank' rel='noopener noreferrer'>github.com/mitchfen</a>");
-                OutputLines.Add("• LinkedIn: <a href='https://linkedin.com/in/mitchfen' target='_blank' rel='noopener noreferrer'>linkedin.com/in/mitchfen</a>");
-                OutputLines.Add("• Send me an email: <a href='mailto:mitch@mitchfen.com' target='_blank' rel='noopener noreferrer'>mitch@mitchfen.com</a>");
+                OutputLines.Add("• <a href='https://github.com/mitchfen' target='_blank' rel='noopener noreferrer'>github.com/mitchfen</a>");
+                OutputLines.Add("• <a href='https://linkedin.com/in/mitchfen' target='_blank' rel='noopener noreferrer'>linkedin.com/in/mitchfen</a>");
+                OutputLines.Add("• <a href='mailto:mitch@mitchfen.com' target='_blank' rel='noopener noreferrer'>mitch@mitchfen.com</a>");
                 break;
 
             case "clear":
