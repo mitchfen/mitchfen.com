@@ -13,10 +13,6 @@ public partial class Terminal
     private List<string> OutputLines = new();
     private bool _shouldScroll = false;
 
-    protected override void OnInitialized()
-    {
-    }
-
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
@@ -34,22 +30,8 @@ public partial class Terminal
 
     private async Task AutoTypeWelcome()
     {
-        bool isMobile = await JSRuntime.InvokeAsync<bool>("detectMobile");
-        
         await Task.Delay(500);
         string cmd = "welcome";
-        foreach (var c in cmd)
-        {
-            currentInput += c;
-            StateHasChanged();
-            await Task.Delay(100);
-        }
-        await Task.Delay(300);
-        ExecuteCommand();
-        StateHasChanged();
-
-        await Task.Delay(500);
-        cmd = "about";
         foreach (var c in cmd)
         {
             currentInput += c;
@@ -71,21 +53,6 @@ public partial class Terminal
         await Task.Delay(300);
         ExecuteCommand();
         StateHasChanged();
-
-        if (!isMobile)
-        {
-            await Task.Delay(500);
-            cmd = "projects";
-            foreach (var c in cmd)
-            {
-                currentInput += c;
-                StateHasChanged();
-                await Task.Delay(100);
-            }
-            await Task.Delay(300);
-            ExecuteCommand();
-            StateHasChanged();
-        }
     }
 
     private async Task FocusInput() => await inputElement.FocusAsync();

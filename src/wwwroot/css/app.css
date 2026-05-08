@@ -55,8 +55,6 @@ html, body {
     color: #ffb86c;
 }
 
-
-
 a {
     color: var(--dracula-cyan);
     text-decoration: none;
@@ -201,12 +199,8 @@ html {
 
 .comment { color: var(--dracula-comment); font-style: italic; }
 .cyan    { color: var(--dracula-cyan); }
-.green   { color: var(--dracula-green); }
-.purple  { color: var(--dracula-purple); }
-.orange  { color: var(--dracula-orange); }
-.yellow  { color: var(--dracula-yellow); }
+.green{ color: var(--dracula-green); }
 .red     { color: var(--dracula-red); }
-.cmd     { color: var(--dracula-pink); font-weight: bold; text-shadow: 0 0 5px var(--dracula-pink); }
 
 @media (min-width: 768px) {
     #app > div { padding: 2rem !important; }
