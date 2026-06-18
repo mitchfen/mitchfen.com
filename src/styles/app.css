@@ -179,7 +179,7 @@ html {
     .terminal-output {
         font-size: 1.1rem;
     }
-    .input-wrapper {
+    .input-wrapper, .cmd-text {
         margin-left: 10px;
     }
 }
@@ -195,6 +195,12 @@ html {
     margin-top: 1.5rem;
     margin-bottom: 0.5rem;
     color: var(--dracula-fg); /* Executed commands turn white */
+}
+
+.cmd-text {
+    margin-left: 5px;
+    word-break: break-word;
+    white-space: pre-wrap;
 }
 
 .comment { color: var(--dracula-comment); font-style: italic; }

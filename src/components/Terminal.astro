@@ -110,7 +110,7 @@ import '../styles/app.css';
         
         // Render command prompt line
         const encoded = escapeHtml(cmd);
-        const cmdRowHtml = `<span class="prompt">guest<span class="prompt-char">$</span></span> ${encoded}`;
+        const cmdRowHtml = `<span class="prompt">guest<span class="prompt-char">$</span></span><span class="cmd-text">${encoded}</span>`;
         addLine(cmdRowHtml, 'executed-cmd');
         
         if (trimmed.length > 0) {
