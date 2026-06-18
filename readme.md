@@ -1,2 +1,19 @@
-Mitchell Fenner's personal site built with Blazor WebAssembly: https://mitchfen.com
+Mitchell Fenner's personal site built with Astro: https://mitchfen.com
 
+## Running Locally
+
+To run the site locally, ensure you have Node.js installed, then execute:
+
+```bash
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+```
+
+Build static files to `./output/wwwroot`:
+
+```bash
+npm run build
+```

@@ -179,14 +179,14 @@ html {
     .terminal-output {
         font-size: 1.1rem;
     }
-    .terminal-input {
+    .input-wrapper {
         margin-left: 10px;
     }
 }
 
 /* Prompt & Theme Styling */
 .prompt { color: var(--dracula-pink); font-weight: bold; }
-.prompt-char { color: var(--dracula-purple); margin-left: 5px; font-weight: normal; }
+.prompt-char { color: var(--dracula-purple); margin-left: 0px; font-weight: normal; }
 
 .executed-cmd { 
     opacity: 0.8; 
