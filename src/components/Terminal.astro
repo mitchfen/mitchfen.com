@@ -60,12 +60,7 @@ import '../styles/app.css';
         }
         
         switch (cmd) {
-            case 'welcome':
-                addLine("Welcome to Mitchell Fenner's personal website 🤗");
-                addLine("I'm a Senior Cloud Operations engineer and homelab enthusiast.");
-                addLine("My work centers around Azure, Kubernetes, release management, Microsoft Sentinel, and automation of all kinds.");
-                addLine("When I'm not working I'm often playing with my own bare metal server and home network. Check it out <a href='https://github.com/mitchfen/homelab/blob/main/README.md' target='_blank' rel='noopener noreferrer'>here</a>.");
-                break;
+
                 
             case 'links':
                 addLine("• <a href='https://github.com/mitchfen' target='_blank' rel='noopener noreferrer'>github.com/mitchfen</a>");
@@ -90,7 +85,6 @@ import '../styles/app.css';
                 
             case 'help':
                 addLine("<span class='comment'>Available commands:</span>");
-                addLine("  <span class='cyan'>welcome</span> - about me");
                 addLine("  <span class='cyan'>links</span> - find me elsewhere online");
                 addLine("  <span class='cyan'>clear</span> - clear the screen");
                 addLine("  <span class='cyan'>sudo</span> - run a command as root");
@@ -164,8 +158,24 @@ import '../styles/app.css';
         // Auto-type on startup
         (async () => {
             terminalInput.focus();
-            await new Promise(resolve => setTimeout(resolve, 500));
-            await typeCommand('welcome');
+            await new Promise(resolve => setTimeout(resolve, 300));
+            
+            const bootLogs = [
+                "[ <span class='green'> OK </span> ] Loaded Cloud Operations Engineer module.",
+                "[ <span class='green'> OK </span> ] Initialized Azure and Kubernetes subsystems.",
+                "[ <span class='green'> OK </span> ] Mounted Microsoft Sentinel and IaC drives.",
+                "[ <span class='cyan'>INFO</span> ] Welcome to Mitchell Fenner's personal website 🤗",
+                "[ <span class='cyan'>INFO</span> ] Off-duty: Playing with bare metal server and home network.",
+                "[ <span class='cyan'>INFO</span> ] Homelab documentation available <a href='https://github.com/mitchfen/homelab/blob/main/README.md' target='_blank' rel='noopener noreferrer'>here</a>."
+            ];
+
+            for (const log of bootLogs) {
+                addLine(log);
+                scrollToBottom();
+                await new Promise(resolve => setTimeout(resolve, 150));
+            }
+            
+            addLine("");
             await new Promise(resolve => setTimeout(resolve, 500));
             await typeCommand('links');
         })();
