@@ -88,16 +88,20 @@ import '../styles/app.css';
                 addLine("<span class='comment'>THE ONLY WINNING MOVE IS NOT TO PLAY.</span>");
                 break;
                 
-            default:
-                const encoded = escapeHtml(cmd);
-                addLine(`<span class='red'>Command not found: ${encoded}</span>`);
-                addLine("");
+            case 'help':
                 addLine("<span class='comment'>Available commands:</span>");
                 addLine("  <span class='cyan'>welcome</span> - about me");
                 addLine("  <span class='cyan'>links</span> - find me elsewhere online");
                 addLine("  <span class='cyan'>clear</span> - clear the screen");
                 addLine("  <span class='cyan'>sudo</span> - run a command as root");
                 addLine("  <span class='cyan'>global thermonuclear war</span> - shall we play a game?");
+                break;
+                
+            default:
+                const encoded = escapeHtml(cmd);
+                addLine(`<span class='red'>Command not found: ${encoded}</span>`);
+                addLine("");
+                processCommand('help');
                 break;
         }
     }
