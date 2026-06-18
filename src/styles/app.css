@@ -28,46 +28,15 @@ html, body {
     -moz-osx-font-smoothing: grayscale;
 }
 
-.loading-container {
-    font-family: 'IBM Plex Mono', monospace;
-    color: #f8f8f2;
-    background-color: #282a36;
-    height: 100vh;
-    padding: 1rem;
-    box-sizing: border-box;
-}
-
-.loading-content {
-    max-width: 900px;
-    margin: 0 auto;
-    line-height: 1.5;
-    font-size: 1.1rem;
-}
-
-@media (max-width: 767px) {
-    .loading-content {
-        font-size: 0.85rem;
-    }
-}
-
-.loading-ok {
-    color: #50fa7b;
-}
-
-.loading-progress {
-    color: #ffb86c;
-}
 
 a {
     color: var(--dracula-cyan);
     text-decoration: none;
-    border-bottom: 1px dashed var(--dracula-cyan);
     transition: all 0.2s ease;
 }
 
 a:hover {
     color: var(--dracula-purple);
-    border-bottom: 1px solid var(--dracula-purple);
     background-color: rgba(189, 147, 249, 0.1);
 }
 
@@ -87,18 +56,6 @@ html {
     scrollbar-width: none;  /* Firefox */
 }
 
-#blazor-error-ui {
-    display: none;
-    background: var(--dracula-current);
-    color: var(--dracula-pink);
-    bottom: 0;
-    position: fixed;
-    width: 100%;
-    z-index: 1000;
-    padding: 1rem;
-    font-family: var(--terminal-font);
-    border-top: 2px solid var(--dracula-pink);
-}
 
 /* Terminal Styles */
 .terminal-container {
