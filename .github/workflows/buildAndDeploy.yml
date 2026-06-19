@@ -18,7 +18,7 @@ concurrency:
 
 defaults:
   run:
-    shell: pwsh
+    shell: bash
 
 jobs:
   build:
@@ -28,20 +28,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10
 
-      - name: Setup .NET Core SDK
-        uses: actions/setup-dotnet@9a946fdbd5fb07b82b2f5a4466058b876ab72bb2
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          dotnet-version: '10.0.x'
+          node-version: '20'
+          cache: 'npm'
 
-      - name: Cache Nuget packages
-        uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae
-        with:
-          path: ~/.nuget/packages
-          key: nuget-packages-${{ hashFiles('Directory.Packages.props') }}
-          restore-keys: nuget-packages-
+      - name: Install dependencies
+        run: npm ci
 
       - name: Build
-        run: dotnet run --project ./build/NukeBuild.csproj --target Publish
+        run: npm run build
 
       - name: Upload output directory
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
@@ -62,11 +59,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10
 
-      - name: Setup .NET Core SDK
-        uses: actions/setup-dotnet@9a946fdbd5fb07b82b2f5a4466058b876ab72bb2
-        with:
-          dotnet-version: '10.0.x'
-
       - name: Download output from build job
         uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c
         with:
@@ -80,11 +72,13 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build and push image
-        run: dotnet run --project ./build/NukeBuild.csproj --target PushContainerImage --skip Publish
+      - name: Build and push container image
+        run: |
+          docker build -t ghcr.io/mitchfen/mitchfen.com:latest ./output
+          docker push ghcr.io/mitchfen/mitchfen.com:latest
 
   deploy_job:
-    if: ${{ github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed') }}
+    if: ${{ github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed' && github.actor != 'dependabot[bot]') }}
     needs: build
     runs-on: ubuntu-latest
     name: Deploy to Azure
@@ -108,5 +102,5 @@ jobs:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_DEPLOYMENT_TOKEN }}
           repo_token: ${{ secrets.GITHUB_TOKEN }} # Used for Github integrations
           action: "upload"
-          skip_app_build: true # The app has already been built by Nuke
+          skip_app_build: true # The app has already been built
           app_location: "output/wwwroot"

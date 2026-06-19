@@ -1,0 +1,192 @@
+---
+import '../styles/app.css';
+---
+
+<div class="terminal-container" id="terminalContainer">
+    <div class="terminal-output">
+        <div id="outputLines"></div>
+        
+        <div class="input-row" id="inputRow" style="display: none;">
+            <span class="prompt">.<span class="prompt-char"></span></span>
+            <div class="input-wrapper">
+                <input id="terminalInput"
+                       class="terminal-input"
+                       spellcheck="false"
+                       autocomplete="off"
+                       type="text" />
+                <span class="terminal-cursor-spacer" id="cursorSpacer"></span><span class="terminal-cursor"></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const terminalContainer = document.getElementById('terminalContainer') as HTMLDivElement;
+    const outputLines = document.getElementById('outputLines') as HTMLDivElement;
+    const terminalInput = document.getElementById('terminalInput') as HTMLInputElement;
+    const cursorSpacer = document.getElementById('cursorSpacer') as HTMLSpanElement;
+
+    // Helper to escape HTML characters
+    function escapeHtml(str: string): string {
+        return str
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#039;');
+    }
+
+    // Keep scroll at the bottom
+    function scrollToBottom() {
+        if (terminalContainer) {
+            terminalContainer.scrollTop = terminalContainer.scrollHeight;
+        }
+    }
+
+    // Helper to add HTML content lines
+    function addLine(htmlContent: string, className = 'terminal-line') {
+        if (!outputLines) return;
+        const line = document.createElement('div');
+        line.className = className;
+        line.innerHTML = htmlContent;
+        outputLines.appendChild(line);
+    }
+
+    // Process commands
+    function processCommand(cmd: string) {
+        if (cmd.startsWith('sudo ')) {
+            addLine("<span class='red'>User is not in the sudoers file. This incident will be reported.</span>");
+            return;
+        }
+        
+        switch (cmd) {
+
+            case 'about':
+                addLine("Welcome to Mitchell Fenner's personal website.");
+                addLine("I'm a Senior Cloud Operations engineer and homelab enthusiast.");
+                addLine("My work centers around Azure, Kubernetes, release management, Microsoft Sentinel, and automation of all kinds.");
+                addLine("When I'm not working I'm often playing with <a href='https://github.com/mitchfen/homelab' target='_blank' rel='noopener noreferrer'>my own bare metal server and home network.</a>");
+                break;
+                
+            case 'links':
+                addLine("GitHub: <a href='https://github.com/mitchfen' target='_blank' rel='noopener noreferrer'>github.com/mitchfen</a>");
+                addLine("LinkedIn: <a href='https://linkedin.com/in/mitchfen' target='_blank' rel='noopener noreferrer'>linkedin.com/in/mitchfen</a>");
+                addLine("Email: <a href='mailto:mitch@mitchfen.com' target='_blank' rel='noopener noreferrer'>mitch@mitchfen.com</a>");
+                break;
+                
+            case 'clear':
+                if (outputLines) {
+                    outputLines.innerHTML = '';
+                }
+                break;
+                
+            case 'sudo':
+                addLine("<span class='red'>User is not in the sudoers file. This incident will be reported.</span>");
+                break;
+                
+            case 'global thermonuclear war':
+                addLine("<span class='comment'>A STRANGE GAME.</span>");
+                addLine("<span class='comment'>THE ONLY WINNING MOVE IS NOT TO PLAY.</span>");
+                break;
+                
+            case '?':
+                addLine("Available commands: about    links    clear");
+                break;
+                
+            default:
+                const encoded = escapeHtml(cmd);
+                addLine(`<span class='red'>Command not found: ${encoded}</span>`);
+                addLine("");
+                processCommand('?');
+                break;
+        }
+    }
+
+    // Execute entered command
+    function executeCommand() {
+        if (!terminalInput || !cursorSpacer) return;
+        const cmd = terminalInput.value;
+        const trimmed = cmd.trim().toLowerCase();
+        
+        // Render command prompt line
+        const encoded = escapeHtml(cmd);
+        const cmdRowHtml = `<span class="prompt">.<span class="prompt-char"></span></span><span class="cmd-text">${encoded}</span>`;
+        addLine(cmdRowHtml, 'executed-cmd');
+        
+        if (trimmed.length > 0) {
+            processCommand(trimmed);
+        } else {
+            addLine('', 'terminal-line');
+        }
+        
+        terminalInput.value = '';
+        cursorSpacer.textContent = '';
+        scrollToBottom();
+    }
+
+    // Auto-typing animation helper
+    async function typeCommand(cmd: string) {
+        if (!terminalInput || !cursorSpacer) return;
+        for (const char of cmd) {
+            terminalInput.value += char;
+            cursorSpacer.textContent = terminalInput.value;
+            scrollToBottom();
+            await new Promise(resolve => setTimeout(resolve, 100));
+        }
+        await new Promise(resolve => setTimeout(resolve, 300));
+        executeCommand();
+    }
+
+    // Set up events on DOM load
+    if (terminalContainer && terminalInput && cursorSpacer) {
+        // Focus input on click anywhere on terminal
+        terminalContainer.addEventListener('click', () => {
+            terminalInput.focus();
+        });
+
+        // Mirror input value to the cursor spacer for positioning
+        terminalInput.addEventListener('input', () => {
+            cursorSpacer.textContent = terminalInput.value;
+            scrollToBottom();
+        });
+
+        // Handle Enter keypress
+        terminalInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                executeCommand();
+            }
+        });
+
+        // Auto-type on startup
+        (async () => {
+            await new Promise(resolve => setTimeout(resolve, 100));
+            
+            const now = new Date();
+            const dateStr = now.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+            const timeStr = now.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' }).toLowerCase();
+
+            const bootLogs = [
+                `Connected to mitchfen.com port 443 via TLS.`,
+                ``,
+                `It is ${timeStr} on ${dateStr}.`,
+                `There is 1 local user.`,
+                ``,
+                `Type ? for a command list.`,
+                ``,
+                `Available commands: about    links    clear`
+            ];
+
+            for (const log of bootLogs) {
+                addLine(log);
+                scrollToBottom();
+                await new Promise(resolve => setTimeout(resolve, 20));
+            }
+            
+            addLine("");
+            
+            const inputRow = document.getElementById('inputRow');
+            if (inputRow) inputRow.style.display = 'flex';
+            terminalInput.focus();
+        })();
+    }
+</script>

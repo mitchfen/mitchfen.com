@@ -1,0 +1,158 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&display=swap');
+
+:root {
+    --bg-color: #FFFFFF;
+    --fg-color: #000000;
+    --terminal-font: 'IBM Plex Mono', 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-color: #000000;
+        --fg-color: #FFFFFF;
+    }
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    background-color: var(--bg-color);
+    color: var(--fg-color);
+    font-family: var(--terminal-font);
+    font-weight: 500;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+    color: var(--fg-color);
+    text-decoration: underline;
+    transition: all 0.2s ease;
+}
+
+a:hover {
+    color: var(--bg-color);
+    background-color: var(--fg-color);
+}
+
+#app {
+    width: 100%;
+    min-height: 100vh;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+html {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/* Terminal Styles */
+.terminal-container {
+    padding: 1rem;
+    height: 100dvh;
+    cursor: text;
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+.terminal-output {
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.terminal-line {
+    margin-bottom: 0.5rem;
+    word-break: break-word;
+    white-space: pre-wrap;
+}
+
+.input-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 1.5rem;
+}
+
+.input-wrapper {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    position: relative;
+    margin-left: 5px;
+}
+
+.terminal-input {
+    background: transparent;
+    border: none;
+    color: transparent;
+    font-family: inherit;
+    font-size: inherit;
+    width: 100%;
+    outline: none;
+    padding: 0;
+    caret-color: transparent;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+}
+
+.terminal-cursor-spacer {
+    color: var(--fg-color);
+    white-space: pre-wrap;
+    pointer-events: none;
+    word-break: break-all;
+}
+
+.terminal-cursor {
+    display: inline-block;
+    width: 0.6em;
+    height: 1.2em;
+    background-color: var(--fg-color);
+    animation: blink 1s step-end infinite;
+    vertical-align: middle;
+}
+
+@keyframes blink { 
+    from, to { opacity: 1; } 
+    50% { opacity: 0; } 
+}
+
+@media (min-width: 768px) {
+    .terminal-container {
+        padding: 2rem;
+    }
+    .terminal-output {
+        font-size: 1.1rem;
+    }
+    .input-wrapper, .cmd-text {
+        margin-left: 10px;
+    }
+}
+
+.prompt { color: var(--fg-color); font-weight: bold; }
+.prompt-char { color: var(--fg-color); margin-left: 0px; font-weight: normal; }
+
+.executed-cmd { 
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--fg-color);
+}
+
+.cmd-text {
+    margin-left: 5px;
+    word-break: break-word;
+    white-space: pre-wrap;
+}
+
+.red { color: #ff0000; }
+
+@media (min-width: 768px) {
+    #app > div { padding: 2rem !important; }
+}

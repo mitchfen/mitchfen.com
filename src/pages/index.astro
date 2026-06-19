@@ -1,6 +1,10 @@
+---
+import Terminal from '../components/Terminal.astro';
+import '../styles/app.css';
+---
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -19,8 +23,8 @@
     <title>Mitchell Fenner - Senior Cloud Operations Engineer</title>
     <base href="/" />
     <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
-    <link href="css/app.css" rel="stylesheet" />
-    <script type="application/ld+json">
+    
+    <script type="application/ld+json" is:inline>
     {
       "@context": "https://schema.org",
       "@type": "Person",
@@ -36,25 +40,9 @@
     }
     </script>
 </head>
-
 <body>
     <div id="app">
-        <div class="loading-container">
-            <div class="loading-content">
-                [ <span class="loading-ok">OK</span> ] Preparing incantations...<br>
-                [ <span class="loading-progress">...</span> ] Negotiating with the Machine Spirit...<br>
-            </div>
-        </div>
+        <Terminal />
     </div>
-
-    <div id="blazor-error-ui">
-        uh oh! an error has occurred.
-        <a href="" class="reload">reload</a>
-        <a class="dismiss">🗙</a>
-    </div>
-
-    <script src="_framework/blazor.webassembly.js" autostart="false"></script>
-    <script src="js/site.js"></script>
 </body>
-
 </html>

@@ -1,0 +1,16 @@
+{
+  "name": "mitchfen.com",
+  "type": "module",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "astro dev --host",
+    "start": "astro dev",
+    "build": "astro build",
+    "postbuild": "cp deploy/Dockerfile output/ && cp deploy/nginx.conf output/",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "astro": "^4.16.18"
+  }
+}
