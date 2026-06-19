@@ -6,8 +6,8 @@ import '../styles/app.css';
     <div class="terminal-output">
         <div id="outputLines"></div>
         
-        <div class="input-row">
-            <span class="prompt">guest<span class="prompt-char">$</span></span>
+        <div class="input-row" id="inputRow" style="display: none;">
+            <span class="prompt">.<span class="prompt-char"></span></span>
             <div class="input-wrapper">
                 <input id="terminalInput"
                        class="terminal-input"
@@ -61,11 +61,17 @@ import '../styles/app.css';
         
         switch (cmd) {
 
+            case 'about':
+                addLine("Welcome to Mitchell Fenner's personal website.");
+                addLine("I'm a Senior Cloud Operations engineer and homelab enthusiast.");
+                addLine("My work centers around Azure, Kubernetes, release management, Microsoft Sentinel, and automation of all kinds.");
+                addLine("When I'm not working I'm often playing with <a href='https://github.com/mitchfen/homelab' target='_blank' rel='noopener noreferrer'>my own bare metal server and home network.</a>");
+                break;
                 
             case 'links':
-                addLine("• <a href='https://github.com/mitchfen' target='_blank' rel='noopener noreferrer'>github.com/mitchfen</a>");
-                addLine("• <a href='https://linkedin.com/in/mitchfen' target='_blank' rel='noopener noreferrer'>linkedin.com/in/mitchfen</a>");
-                addLine("• <a href='mailto:mitch@mitchfen.com' target='_blank' rel='noopener noreferrer'>mitch@mitchfen.com</a>");
+                addLine("GitHub: <a href='https://github.com/mitchfen' target='_blank' rel='noopener noreferrer'>github.com/mitchfen</a>");
+                addLine("LinkedIn: <a href='https://linkedin.com/in/mitchfen' target='_blank' rel='noopener noreferrer'>linkedin.com/in/mitchfen</a>");
+                addLine("Email: <a href='mailto:mitch@mitchfen.com' target='_blank' rel='noopener noreferrer'>mitch@mitchfen.com</a>");
                 break;
                 
             case 'clear':
@@ -83,19 +89,15 @@ import '../styles/app.css';
                 addLine("<span class='comment'>THE ONLY WINNING MOVE IS NOT TO PLAY.</span>");
                 break;
                 
-            case 'help':
-                addLine("<span class='comment'>Available commands:</span>");
-                addLine("  <span class='cyan'>links</span> - find me elsewhere online");
-                addLine("  <span class='cyan'>clear</span> - clear the screen");
-                addLine("  <span class='cyan'>sudo</span> - run a command as root");
-                addLine("  <span class='cyan'>global thermonuclear war</span> - shall we play a game?");
+            case '?':
+                addLine("Available commands: about    links    clear");
                 break;
                 
             default:
                 const encoded = escapeHtml(cmd);
                 addLine(`<span class='red'>Command not found: ${encoded}</span>`);
                 addLine("");
-                processCommand('help');
+                processCommand('?');
                 break;
         }
     }
@@ -108,7 +110,7 @@ import '../styles/app.css';
         
         // Render command prompt line
         const encoded = escapeHtml(cmd);
-        const cmdRowHtml = `<span class="prompt">guest<span class="prompt-char">$</span></span><span class="cmd-text">${encoded}</span>`;
+        const cmdRowHtml = `<span class="prompt">.<span class="prompt-char"></span></span><span class="cmd-text">${encoded}</span>`;
         addLine(cmdRowHtml, 'executed-cmd');
         
         if (trimmed.length > 0) {
@@ -157,27 +159,34 @@ import '../styles/app.css';
 
         // Auto-type on startup
         (async () => {
-            terminalInput.focus();
-            await new Promise(resolve => setTimeout(resolve, 300));
+            await new Promise(resolve => setTimeout(resolve, 100));
             
+            const now = new Date();
+            const dateStr = now.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+            const timeStr = now.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' }).toLowerCase();
+
             const bootLogs = [
-                "[ <span class='green'> OK </span> ] Loaded Cloud Operations Engineer module.",
-                "[ <span class='green'> OK </span> ] Initialized Azure and Kubernetes subsystems.",
-                "[ <span class='green'> OK </span> ] Mounted Microsoft Sentinel and IaC drives.",
-                "[ <span class='cyan'>INFO</span> ] Welcome to Mitchell Fenner's personal website 🤗",
-                "[ <span class='cyan'>INFO</span> ] Off-duty: Playing with bare metal server and home network.",
-                "[ <span class='cyan'>INFO</span> ] Homelab documentation available <a href='https://github.com/mitchfen/homelab/blob/main/README.md' target='_blank' rel='noopener noreferrer'>here</a>."
+                `Connected to mitchfen.com port 443 via TLS.`,
+                ``,
+                `It is ${timeStr} on ${dateStr}.`,
+                `There is 1 local user.`,
+                ``,
+                `Type ? for a command list.`,
+                ``,
+                `Available commands: about    links    clear`
             ];
 
             for (const log of bootLogs) {
                 addLine(log);
                 scrollToBottom();
-                await new Promise(resolve => setTimeout(resolve, 150));
+                await new Promise(resolve => setTimeout(resolve, 20));
             }
             
             addLine("");
-            await new Promise(resolve => setTimeout(resolve, 500));
-            await typeCommand('links');
+            
+            const inputRow = document.getElementById('inputRow');
+            if (inputRow) inputRow.style.display = 'flex';
+            terminalInput.focus();
         })();
     }
 </script>

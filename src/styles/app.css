@@ -1,43 +1,39 @@
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&display=swap');
 
 :root {
-    --dracula-bg: #282a36;
-    --dracula-current: #44475a;
-    --dracula-fg: #f8f8f2;
-    --dracula-comment: #6272a4;
-    --dracula-cyan: #8be9fd;
-    --dracula-green: #50fa7b;
-    --dracula-orange: #ffb86c;
-    --dracula-pink: #ff79c6;
-    --dracula-purple: #bd93f9;
-    --dracula-red: #ff5555;
-    --dracula-yellow: #f1fa8c;
-
+    --bg-color: #FFFFFF;
+    --fg-color: #000000;
     --terminal-font: 'IBM Plex Mono', 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-color: #000000;
+        --fg-color: #FFFFFF;
+    }
 }
 
 html, body {
     margin: 0;
     padding: 0;
     min-height: 100vh;
-    background-color: var(--dracula-bg);
-    color: var(--dracula-fg);
+    background-color: var(--bg-color);
+    color: var(--fg-color);
     font-family: var(--terminal-font);
     font-weight: 500;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
 
-
 a {
-    color: var(--dracula-cyan);
-    text-decoration: none;
+    color: var(--fg-color);
+    text-decoration: underline;
     transition: all 0.2s ease;
 }
 
 a:hover {
-    color: var(--dracula-purple);
-    background-color: rgba(189, 147, 249, 0.1);
+    color: var(--bg-color);
+    background-color: var(--fg-color);
 }
 
 #app {
@@ -45,17 +41,14 @@ a:hover {
     min-height: 100vh;
 }
 
-/* Hide scrollbar for Chrome, Safari and Opera */
 ::-webkit-scrollbar {
     display: none;
 }
 
-/* Hide scrollbar for IE, Edge and Firefox */
 html {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
-
 
 /* Terminal Styles */
 .terminal-container {
@@ -67,8 +60,6 @@ html {
 }
 
 .terminal-output {
-    max-width: 900px;
-    margin: 0 auto;
     font-size: 1rem;
     line-height: 1.5;
 }
@@ -111,7 +102,7 @@ html {
 }
 
 .terminal-cursor-spacer {
-    color: var(--dracula-fg); /* Make active input white */
+    color: var(--fg-color);
     white-space: pre-wrap;
     pointer-events: none;
     word-break: break-all;
@@ -119,12 +110,11 @@ html {
 
 .terminal-cursor {
     display: inline-block;
-    width: 10px;
-    height: 1.2rem;
-    background-color: var(--dracula-fg);
+    width: 0.6em;
+    height: 1.2em;
+    background-color: var(--fg-color);
     animation: blink 1s step-end infinite;
     vertical-align: middle;
-    box-shadow: 0 0 8px var(--dracula-fg); /* Glow on cursor */
 }
 
 @keyframes blink { 
@@ -144,17 +134,15 @@ html {
     }
 }
 
-/* Prompt & Theme Styling */
-.prompt { color: var(--dracula-pink); font-weight: bold; }
-.prompt-char { color: var(--dracula-purple); margin-left: 0px; font-weight: normal; }
+.prompt { color: var(--fg-color); font-weight: bold; }
+.prompt-char { color: var(--fg-color); margin-left: 0px; font-weight: normal; }
 
 .executed-cmd { 
-    opacity: 0.8; 
     display: flex;
     flex-wrap: wrap;
     margin-top: 1.5rem;
     margin-bottom: 0.5rem;
-    color: var(--dracula-fg); /* Executed commands turn white */
+    color: var(--fg-color);
 }
 
 .cmd-text {
@@ -163,12 +151,8 @@ html {
     white-space: pre-wrap;
 }
 
-.comment { color: var(--dracula-comment); font-style: italic; }
-.cyan    { color: var(--dracula-cyan); }
-.green{ color: var(--dracula-green); }
-.red     { color: var(--dracula-red); }
+.red { color: #ff0000; }
 
 @media (min-width: 768px) {
     #app > div { padding: 2rem !important; }
 }
-
