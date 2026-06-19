@@ -1,6 +1,4 @@
 User-agent: *
 Allow: /
-Disallow: /bin/
-Disallow: /obj/
 
-Sitemap: https://mitchfen.com/sitemap.xml
+Sitemap: https://mitchfen.com/sitemap-index.xml

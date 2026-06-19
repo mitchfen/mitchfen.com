@@ -1,39 +1,62 @@
 ---
-import '../styles/app.css';
+import "../styles/app.css";
 ---
 
 <div class="terminal-container" id="terminalContainer">
     <div class="terminal-output">
         <div id="outputLines"></div>
-        
+
         <div class="input-row" id="inputRow" style="display: none;">
             <span class="prompt">.<span class="prompt-char"></span></span>
             <div class="input-wrapper">
-                <input id="terminalInput"
-                       class="terminal-input"
-                       spellcheck="false"
-                       autocomplete="off"
-                       type="text" />
-                <span class="terminal-cursor-spacer" id="cursorSpacer"></span><span class="terminal-cursor"></span>
+                <input
+                    id="terminalInput"
+                    class="terminal-input"
+                    spellcheck="false"
+                    autocomplete="off"
+                    type="text"
+                />
+                <span class="terminal-cursor-spacer" id="cursorSpacer"
+                ></span><span class="terminal-cursor"></span>
             </div>
         </div>
     </div>
 </div>
 
 <script>
-    const terminalContainer = document.getElementById('terminalContainer') as HTMLDivElement;
-    const outputLines = document.getElementById('outputLines') as HTMLDivElement;
-    const terminalInput = document.getElementById('terminalInput') as HTMLInputElement;
-    const cursorSpacer = document.getElementById('cursorSpacer') as HTMLSpanElement;
+    const terminalContainer = document.getElementById(
+        "terminalContainer",
+    ) as HTMLDivElement;
+    const outputLines = document.getElementById(
+        "outputLines",
+    ) as HTMLDivElement;
+    const terminalInput = document.getElementById(
+        "terminalInput",
+    ) as HTMLInputElement;
+    const cursorSpacer = document.getElementById(
+        "cursorSpacer",
+    ) as HTMLSpanElement;
+
+    let idleTimeout: ReturnType<typeof setTimeout>;
+    let userInteracted = false;
+
+    function startIdleTimeout() {
+        idleTimeout = setTimeout(() => {
+            if (!userInteracted) {
+                addLine("<span class='yellow'>SHALL WE PLAY A GAME?</span>");
+                scrollToBottom();
+            }
+        }, 15000);
+    }
 
     // Helper to escape HTML characters
     function escapeHtml(str: string): string {
         return str
-            .replace(/&/g, '&amp;')
-            .replace(/</g, '&lt;')
-            .replace(/>/g, '&gt;')
-            .replace(/"/g, '&quot;')
-            .replace(/'/g, '&#039;');
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
     }
 
     // Keep scroll at the bottom
@@ -44,60 +67,99 @@ import '../styles/app.css';
     }
 
     // Helper to add HTML content lines
-    function addLine(htmlContent: string, className = 'terminal-line') {
+    function addLine(htmlContent: string, className = "terminal-line") {
         if (!outputLines) return;
-        const line = document.createElement('div');
+        const line = document.createElement("div");
         line.className = className;
         line.innerHTML = htmlContent;
         outputLines.appendChild(line);
     }
 
     // Process commands
-    function processCommand(cmd: string) {
-        if (cmd.startsWith('sudo ')) {
-            addLine("<span class='red'>User is not in the sudoers file. This incident will be reported.</span>");
+    function processCommand(rawCmd: string) {
+        const cmd = rawCmd.trim().toLowerCase();
+
+        if (cmd.startsWith("sudo ") || cmd === "sudo") {
+            addLine(
+                "<span class='red'>User is not in the sudoers file. This incident will be reported.</span>",
+            );
             return;
         }
-        
-        switch (cmd) {
 
-            case 'about':
-                addLine("Welcome to Mitchell Fenner's personal website.");
-                addLine("I'm a Senior Cloud Operations engineer and homelab enthusiast.");
-                addLine("My work centers around Azure, Kubernetes, release management, Microsoft Sentinel, and automation of all kinds.");
-                addLine("When I'm not working I'm often playing with <a href='https://github.com/mitchfen/homelab' target='_blank' rel='noopener noreferrer'>my own bare metal server and home network.</a>");
+        if (cmd.startsWith("cd ") || cmd === "cd") {
+            const targetDir = rawCmd.trim().slice(2).trim() || "~";
+            addLine(
+                `<span class='red'>cd: ${escapeHtml(targetDir)}: Permission denied</span>`,
+            );
+            return;
+        }
+
+        if (cmd.startsWith("ls ") || cmd === "ls") {
+            addLine("");
+            return;
+        }
+
+        if (cmd.includes("global thermonuclear war")) {
+            addLine("<span class='yellow'>A STRANGE GAME.</span>");
+            addLine(
+                "<span class='yellow'>THE ONLY WINNING MOVE IS NOT TO PLAY.</span>",
+            );
+            return;
+        }
+
+        switch (cmd) {
+            case "about":
+                addLine("This is Mitchell Fenner's personal website, welcome!");
+                addLine(
+                    "I'm a Senior Cloud Operations engineer and homelab enthusiast.",
+                );
+                addLine(
+                    "My work centers around SaaS, DevOps,Azure, Kubernetes, Microsoft Sentinel, and automation of all kinds.",
+                );
+                addLine(
+                    "When I'm not working I'm often playing with " +
+                        "<a href='https://github.com/mitchfen/homelab' target='_blank' rel='noopener noreferrer'>" +
+                        "my own bare metal server and home network.</a>",
+                );
                 break;
-                
-            case 'links':
-                addLine("GitHub: <a href='https://github.com/mitchfen' target='_blank' rel='noopener noreferrer'>github.com/mitchfen</a>");
-                addLine("LinkedIn: <a href='https://linkedin.com/in/mitchfen' target='_blank' rel='noopener noreferrer'>linkedin.com/in/mitchfen</a>");
-                addLine("Email: <a href='mailto:mitch@mitchfen.com' target='_blank' rel='noopener noreferrer'>mitch@mitchfen.com</a>");
+
+            case "links":
+                addLine(
+                    "GitHub: <a href='https://github.com/mitchfen' target='_blank' rel='noopener noreferrer'>github.com/mitchfen</a>",
+                );
+                addLine(
+                    "LinkedIn: <a href='https://linkedin.com/in/mitchfen' target='_blank' rel='noopener noreferrer'>linkedin.com/in/mitchfen</a>",
+                );
+                addLine(
+                    "Email: <a href='mailto:mitch@mitchfen.com' target='_blank' rel='noopener noreferrer'>mitch@mitchfen.com</a>",
+                );
                 break;
-                
-            case 'clear':
+
+            /*  
+            case "clear":
                 if (outputLines) {
-                    outputLines.innerHTML = '';
+                    outputLines.innerHTML = "";
                 }
                 break;
-                
-            case 'sudo':
-                addLine("<span class='red'>User is not in the sudoers file. This incident will be reported.</span>");
+            */
+
+            case "pwd":
+                addLine("/home/guest");
                 break;
-                
-            case 'global thermonuclear war':
-                addLine("<span class='comment'>A STRANGE GAME.</span>");
-                addLine("<span class='comment'>THE ONLY WINNING MOVE IS NOT TO PLAY.</span>");
+
+            case "help":
+                addLine(
+                    "Available commands: [about, links, sudo, ls, cd, pwd]",
+                );
                 break;
-                
-            case '?':
-                addLine("Available commands: about    links    clear");
-                break;
-                
+
             default:
-                const encoded = escapeHtml(cmd);
-                addLine(`<span class='red'>Command not found: ${encoded}</span>`);
+                const encoded = escapeHtml(rawCmd);
+                addLine(
+                    `<span class='red'>Command not found: ${encoded}</span>`,
+                );
                 addLine("");
-                processCommand('?');
+                processCommand("help");
                 break;
         }
     }
@@ -107,20 +169,20 @@ import '../styles/app.css';
         if (!terminalInput || !cursorSpacer) return;
         const cmd = terminalInput.value;
         const trimmed = cmd.trim().toLowerCase();
-        
+
         // Render command prompt line
         const encoded = escapeHtml(cmd);
-        const cmdRowHtml = `<span class="prompt">.<span class="prompt-char"></span></span><span class="cmd-text">${encoded}</span>`;
-        addLine(cmdRowHtml, 'executed-cmd');
-        
+        const cmdRowHtml = `<span class="prompt">.<span class="prompt-char"></span></span><span class="cmd-text gray">${encoded}</span>`;
+        addLine(cmdRowHtml, "executed-cmd");
+
         if (trimmed.length > 0) {
             processCommand(trimmed);
         } else {
-            addLine('', 'terminal-line');
+            addLine("", "terminal-line");
         }
-        
-        terminalInput.value = '';
-        cursorSpacer.textContent = '';
+
+        terminalInput.value = "";
+        cursorSpacer.textContent = "";
         scrollToBottom();
     }
 
@@ -131,62 +193,73 @@ import '../styles/app.css';
             terminalInput.value += char;
             cursorSpacer.textContent = terminalInput.value;
             scrollToBottom();
-            await new Promise(resolve => setTimeout(resolve, 100));
+            await new Promise((resolve) => setTimeout(resolve, 100));
         }
-        await new Promise(resolve => setTimeout(resolve, 300));
+        await new Promise((resolve) => setTimeout(resolve, 300));
         executeCommand();
     }
 
     // Set up events on DOM load
     if (terminalContainer && terminalInput && cursorSpacer) {
         // Focus input on click anywhere on terminal
-        terminalContainer.addEventListener('click', () => {
+        terminalContainer.addEventListener("click", () => {
             terminalInput.focus();
         });
 
         // Mirror input value to the cursor spacer for positioning
-        terminalInput.addEventListener('input', () => {
+        terminalInput.addEventListener("input", () => {
             cursorSpacer.textContent = terminalInput.value;
             scrollToBottom();
         });
 
         // Handle Enter keypress
-        terminalInput.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') {
+        terminalInput.addEventListener("keydown", (e) => {
+            userInteracted = true;
+            clearTimeout(idleTimeout);
+            if (e.key === "Enter") {
                 executeCommand();
             }
         });
 
         // Auto-type on startup
         (async () => {
-            await new Promise(resolve => setTimeout(resolve, 100));
-            
+            await new Promise((resolve) => setTimeout(resolve, 100));
+
             const now = new Date();
-            const dateStr = now.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-            const timeStr = now.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' }).toLowerCase();
+            const dateStr = now.toLocaleDateString("en-US", {
+                weekday: "long",
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+            });
+            const timeStr = now
+                .toLocaleTimeString("en-US", {
+                    hour: "numeric",
+                    minute: "2-digit",
+                })
+                .toLowerCase();
 
             const bootLogs = [
-                `Connected to mitchfen.com port 443 via TLS.`,
+                `MITCH OS v3.1.2 (tty1)`,
+                `Memory test: 640K OK.`,
                 ``,
-                `It is ${timeStr} on ${dateStr}.`,
-                `There is 1 local user.`,
+                `Welcome [<span class='yellow'>guest</span>]. It is ${timeStr} on ${dateStr}.`,
                 ``,
-                `Type ? for a command list.`,
-                ``,
-                `Available commands: about    links    clear`
+                `Type <span class='green'>help</span> for a command list.`,
             ];
 
             for (const log of bootLogs) {
                 addLine(log);
                 scrollToBottom();
-                await new Promise(resolve => setTimeout(resolve, 20));
+                await new Promise((resolve) => setTimeout(resolve, 20));
             }
-            
+
             addLine("");
-            
-            const inputRow = document.getElementById('inputRow');
-            if (inputRow) inputRow.style.display = 'flex';
+
+            const inputRow = document.getElementById("inputRow");
+            if (inputRow) inputRow.style.display = "flex";
             terminalInput.focus();
+            startIdleTimeout();
         })();
     }
 </script>
