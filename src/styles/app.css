@@ -3,6 +3,7 @@
 :root {
     --bg-color: #FFFFFF;
     --fg-color: #000000;
+    --link-color: #0066cc;
     --terminal-font: 'IBM Plex Mono', 'JetBrains Mono', 'Fira Code', monospace;
 }
 
@@ -10,6 +11,7 @@
     :root {
         --bg-color: #000000;
         --fg-color: #FFFFFF;
+        --link-color: #58a6ff;
     }
 }
 
@@ -26,14 +28,14 @@ html, body {
 }
 
 a {
-    color: var(--fg-color);
-    text-decoration: underline;
+    color: var(--link-color);
+    text-decoration: none;
     transition: all 0.2s ease;
 }
 
 a:hover {
     color: var(--bg-color);
-    background-color: var(--fg-color);
+    background-color: var(--link-color);
 }
 
 #app {

@@ -258,8 +258,26 @@ import "../styles/app.css";
 
             const inputRow = document.getElementById("inputRow");
             if (inputRow) inputRow.style.display = "flex";
-            terminalInput.focus();
-            startIdleTimeout();
+
+            // Detect touch-first/mobile/tablet screens
+            const isTouchFirstOrSmall = 
+                window.matchMedia("(pointer: coarse)").matches || 
+                window.innerWidth <= 1024;
+
+            if (isTouchFirstOrSmall) {
+                // Prevent idle prompt and auto-type key info
+                userInteracted = true;
+                clearTimeout(idleTimeout);
+
+                await new Promise((resolve) => setTimeout(resolve, 600));
+                await typeCommand("about");
+                await new Promise((resolve) => setTimeout(resolve, 1000));
+                await typeCommand("links");
+            } else {
+                // Focus and wait for user on desktop/laptop
+                terminalInput.focus();
+                startIdleTimeout();
+            }
         })();
     }
 </script>
