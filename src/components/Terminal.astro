@@ -37,7 +37,7 @@ import "../styles/app.css";
         "cursorSpacer",
     ) as HTMLSpanElement;
 
-    let idleTimeout: ReturnType<typeof setTimeout>;
+    let idleTimeout: ReturnType<typeof setTimeout> | undefined = undefined;
     let userInteracted = false;
 
     function startIdleTimeout() {
