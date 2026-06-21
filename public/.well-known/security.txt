@@ -1,0 +1,5 @@
+# Security contact information for mitchfen.com
+Contact: mailto:mitch@mitchfen.com
+Expires: 2027-06-21T09:00:00.000Z
+Preferred-Languages: en
+Canonical: https://mitchfen.com/.well-known/security.txt
