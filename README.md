@@ -12,8 +12,3 @@ npm install
 npm run dev
 ```
 
-Build static files to `./output/wwwroot`:
-
-```bash
-npm run build
-```
