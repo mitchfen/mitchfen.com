@@ -91,12 +91,12 @@ import "../styles/app.css";
             case "about":
                 addLine("This is <span class='cyan'>Mitchell Fenner</span>'s personal website.");
                 addLine(
-                    "I'm a Senior Cloud Operations engineer whose work centers around Azure, Kubernetes, SaaS, DevOps and automation.",
+                    "I'm a Senior Cloud Operations engineer focused on Azure, Kubernetes, SaaS, DevOps, and automating everything.",
                 );
                 addLine(
-                    "When I'm not working I'm often tinkering with " +
+                    "Outside my day job, I enjoy hacking on my personal cloud (aka " +
                         "<a href='https://github.com/mitchfen/homelab' target='_blank' rel='noopener noreferrer'>" +
-                        "my homelab</a>.",
+                        "my homelab</a>), and rock climbing.",
                 );
                 break;
 
@@ -202,7 +202,7 @@ import "../styles/app.css";
             await new Promise((resolve) => setTimeout(resolve, 100));
 
             const bootLogs = [
-                `Welcome [<span class="yellow">guest</span>] to MITCH OS`
+                `Welcome [<span class="yellow">guest</span>] to mitchfen.com [tty1]`
             ];
 
             for (const log of bootLogs) {
