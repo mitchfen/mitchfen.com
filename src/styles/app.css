@@ -4,6 +4,12 @@
     --bg-color: #FFFFFF;
     --fg-color: #000000;
     --link-color: #0066cc;
+    --green: #00cc00;
+    --magenta: #ff00ff;
+    --cyan: #00ffff;
+    --red: #ff0000;
+    --yellow: #ddb500;
+    --gray: #888888;
     --terminal-font: 'IBM Plex Mono', 'JetBrains Mono', 'Fira Code', monospace;
 }
 
@@ -142,8 +148,8 @@ html {
     }
 }
 
-.prompt { color: var(--fg-color); font-weight: bold; }
-.prompt-char { color: var(--fg-color); margin-left: 0px; font-weight: normal; }
+.prompt { color: var(--green); font-weight: bold; }
+.prompt-char { color: var(--green); margin-left: 0px; font-weight: normal; }
 
 .executed-cmd { 
     display: flex;
@@ -159,10 +165,13 @@ html {
     white-space: pre-wrap;
 }
 
-.red { color: #ff0000; }
-.green { color: #00cc00; }
-.yellow { color: #ddb500; }
-.gray { color: #888888; }
+.red { color: var(--red); }
+.green { color: var(--green); }
+.yellow { color: var(--yellow); }
+.gray { color: var(--gray); }
+.magenta { color: var(--magenta); }
+.cyan { color: var(--cyan); }
+
 @media (min-width: 768px) {
     #app > div { padding: 2rem !important; }
 }

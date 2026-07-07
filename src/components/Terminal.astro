@@ -7,7 +7,7 @@ import "../styles/app.css";
         <div id="outputLines"></div>
 
         <div class="input-row" id="inputRow" style="display: none;">
-            <span class="prompt">.<span class="prompt-char"></span></span>
+            <span class="prompt">><span class="prompt-char"></span></span>
             <div class="input-wrapper">
                 <input
                     id="terminalInput"
@@ -36,18 +36,6 @@ import "../styles/app.css";
     const cursorSpacer = document.getElementById(
         "cursorSpacer",
     ) as HTMLSpanElement;
-
-    let idleTimeout: ReturnType<typeof setTimeout> | undefined = undefined;
-    let userInteracted = false;
-
-    function startIdleTimeout() {
-        idleTimeout = setTimeout(() => {
-            if (!userInteracted) {
-                addLine("<span class='yellow'>SHALL WE PLAY A GAME?</span>");
-                scrollToBottom();
-            }
-        }, 15000);
-    }
 
     // Helper to escape HTML characters
     function escapeHtml(str: string): string {
@@ -99,39 +87,31 @@ import "../styles/app.css";
             return;
         }
 
-        if (cmd.includes("global thermonuclear war")) {
-            addLine("<span class='yellow'>A STRANGE GAME.</span>");
-            addLine(
-                "<span class='yellow'>THE ONLY WINNING MOVE IS NOT TO PLAY.</span>",
-            );
-            return;
-        }
-
         switch (cmd) {
             case "about":
-                addLine("This is Mitchell Fenner's personal website, welcome!");
+                addLine("This is <span class='cyan'>Mitchell Fenner</span>'s personal website.");
                 addLine(
-                    "I'm a Senior Cloud Operations engineer and homelab enthusiast.",
+                    "I'm a Senior Cloud Operations engineer whose work centers around Azure, Kubernetes, SaaS, DevOps and automation.",
                 );
                 addLine(
-                    "My work centers around SaaS, DevOps,Azure, Kubernetes, Microsoft Sentinel, and automation of all kinds.",
-                );
-                addLine(
-                    "When I'm not working I'm often playing with " +
+                    "When I'm not working I'm often tinkering with " +
                         "<a href='https://github.com/mitchfen/homelab' target='_blank' rel='noopener noreferrer'>" +
-                        "my own bare metal server and home network.</a>",
+                        "my homelab</a>.",
                 );
                 break;
 
             case "links":
                 addLine(
-                    "GitHub: <a href='https://github.com/mitchfen' target='_blank' rel='noopener noreferrer'>github.com/mitchfen</a>",
+                    "Email: <a href='mailto:mitch@mitchfen.com' target='_blank' rel='noopener noreferrer'>mitch@mitchfen.com</a>",
                 );
                 addLine(
                     "LinkedIn: <a href='https://linkedin.com/in/mitchfen' target='_blank' rel='noopener noreferrer'>linkedin.com/in/mitchfen</a>",
                 );
                 addLine(
-                    "Email: <a href='mailto:mitch@mitchfen.com' target='_blank' rel='noopener noreferrer'>mitch@mitchfen.com</a>",
+                    "GitHub: <a href='https://github.com/mitchfen' target='_blank' rel='noopener noreferrer'>github.com/mitchfen</a>",
+                );
+                addLine(
+                    "Substack: <a href='https://substack.com/@mitchfen' target='_blank' rel='noopener noreferrer'>substack.com/@mitchfen</a>",
                 );
                 break;
 
@@ -170,7 +150,7 @@ import "../styles/app.css";
 
         // Render command prompt line
         const encoded = escapeHtml(cmd);
-        const cmdRowHtml = `<span class="prompt">.<span class="prompt-char"></span></span><span class="cmd-text gray">${encoded}</span>`;
+        const cmdRowHtml = `<span class="prompt">><span class="prompt-char"></span></span><span class="cmd-text gray">${encoded}</span>`;
         addLine(cmdRowHtml, "executed-cmd");
 
         if (trimmed.length > 0) {
@@ -212,8 +192,6 @@ import "../styles/app.css";
 
         // Handle Enter keypress
         terminalInput.addEventListener("keydown", (e) => {
-            userInteracted = true;
-            clearTimeout(idleTimeout);
             if (e.key === "Enter") {
                 executeCommand();
             }
@@ -223,29 +201,8 @@ import "../styles/app.css";
         (async () => {
             await new Promise((resolve) => setTimeout(resolve, 100));
 
-            const now = new Date();
-            const dateStr = now.toLocaleDateString("en-US", {
-                weekday: "long",
-                year: "numeric",
-                month: "long",
-                day: "numeric",
-            });
-            const timeStr = now
-                .toLocaleTimeString("en-US", {
-                    hour: "numeric",
-                    minute: "2-digit",
-                })
-                .toLowerCase();
-
             const bootLogs = [
-                `MITCH OS v3.1.2 (tty1)`,
-                `Memory test: 640K OK.`,
-                ``,
-                `Welcome [<span class='yellow'>guest</span>].`,
-                ``,
-                `It is ${timeStr} ${dateStr}.`,
-                ``,
-                `Type <span class='green'>help</span> for a command list.`,
+                `Welcome [<span class="yellow">guest</span>] to MITCH OS`
             ];
 
             for (const log of bootLogs) {
@@ -259,25 +216,11 @@ import "../styles/app.css";
             const inputRow = document.getElementById("inputRow");
             if (inputRow) inputRow.style.display = "flex";
 
-            // Detect touch-first/mobile/tablet screens
-            const isTouchFirstOrSmall = 
-                window.matchMedia("(pointer: coarse)").matches || 
-                window.innerWidth <= 1024;
-
-            if (isTouchFirstOrSmall) {
-                // Prevent idle prompt and auto-type key info
-                userInteracted = true;
-                clearTimeout(idleTimeout);
-
-                await new Promise((resolve) => setTimeout(resolve, 600));
-                await typeCommand("about");
-                await new Promise((resolve) => setTimeout(resolve, 1000));
-                await typeCommand("links");
-            } else {
-                // Focus and wait for user on desktop/laptop
-                terminalInput.focus();
-                startIdleTimeout();
-            }
+            await new Promise((resolve) => setTimeout(resolve, 600));
+            await typeCommand("about");
+            await new Promise((resolve) => setTimeout(resolve, 1000));
+            await typeCommand("links");
+            terminalInput.focus();
         })();
     }
 </script>
