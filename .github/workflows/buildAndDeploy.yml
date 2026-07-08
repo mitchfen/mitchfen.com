@@ -45,6 +45,7 @@ jobs:
         with:
           name: output
           path: ./output
+          include-hidden-files: true
           retention-days: 1
 
   publish-container:
