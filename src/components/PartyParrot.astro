@@ -1,0 +1,116 @@
+---
+// Pure CSS Party Parrot component
+---
+
+<div class="party-parrot">
+  <div class="parrot-body">
+    <div class="parrot-head">
+      <div class="parrot-eye"></div>
+      <div class="parrot-beak"></div>
+    </div>
+    <div class="parrot-wing"></div>
+    <div class="parrot-tail"></div>
+  </div>
+</div>
+
+<style>
+  .party-parrot {
+    display: inline-block;
+    font-size: 1em;
+    line-height: 1;
+    vertical-align: middle;
+  }
+
+  .parrot-body {
+    position: relative;
+    width: 1em;
+    height: 1em;
+    animation: partyBob 0.6s ease-in-out infinite;
+    transform-origin: center center;
+  }
+
+  .parrot-head {
+    position: absolute;
+    width: 0.6em;
+    height: 0.6em;
+    background: #3dbfef;
+    border-radius: 50%;
+    top: 0;
+    left: 0.2em;
+    border: 0.08em solid #000;
+  }
+
+  .parrot-eye {
+    position: absolute;
+    width: 0.1em;
+    height: 0.15em;
+    background: #000;
+    border-radius: 50%;
+    top: 0.15em;
+    left: 0.15em;
+  }
+
+  .parrot-beak {
+    position: absolute;
+    width: 0.2em;
+    height: 0.12em;
+    background: #bd3c96;
+    border-radius: 0 0.06em 0.06em 0;
+    top: 0.3em;
+    right: -0.05em;
+    border: 0.04em solid #000;
+    border-left: none;
+  }
+
+  .parrot-wing {
+    position: absolute;
+    width: 0.35em;
+    height: 0.5em;
+    background: #3dbfef;
+    border-radius: 50% 20%;
+    top: 0.35em;
+    left: 0.1em;
+    border: 0.08em solid #000;
+    animation: partyWing 0.6s ease-in-out infinite;
+    transform-origin: right center;
+  }
+
+  .parrot-tail {
+    position: absolute;
+    width: 0.3em;
+    height: 0.4em;
+    background: linear-gradient(135deg, #3dbfef 50%, #2a9ec4 50%);
+    clip-path: polygon(0 0, 100% 20%, 100% 80%, 0 100%);
+    bottom: 0.1em;
+    right: -0.1em;
+    animation: partyTail 0.6s ease-in-out infinite;
+    transform-origin: right center;
+  }
+
+  @keyframes partyBob {
+    0%, 100% {
+      transform: translateY(0) rotate(0deg);
+    }
+    50% {
+      transform: translateY(-0.05em) rotate(-3deg);
+    }
+  }
+
+  @keyframes partyWing {
+    0%, 100% {
+      transform: rotateZ(0deg);
+    }
+    50% {
+      transform: rotateZ(-15deg);
+    }
+  }
+
+  @keyframes partyTail {
+    0%, 100% {
+      transform: rotateZ(0deg);
+    }
+    50% {
+      transform: rotateZ(8deg);
+    }
+  }
+</style>
