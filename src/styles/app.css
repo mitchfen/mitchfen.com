@@ -1,9 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&display=swap');
 
 :root {
-    --bg-color: #FFFFFF;
-    --fg-color: #000000;
-    --link-color: #0066cc;
+    --bg-color: #000000;
+    --fg-color: #FFFFFF;
+    --link-color: #58a6ff;
     --green: #00cc00;
     --magenta: #ff00ff;
     --cyan: #00ffff;
@@ -11,14 +11,6 @@
     --yellow: #ddb500;
     --gray: #888888;
     --terminal-font: 'IBM Plex Mono', 'JetBrains Mono', 'Fira Code', monospace;
-}
-
-@media (prefers-color-scheme: dark) {
-    :root {
-        --bg-color: #000000;
-        --fg-color: #FFFFFF;
-        --link-color: #58a6ff;
-    }
 }
 
 html, body {
