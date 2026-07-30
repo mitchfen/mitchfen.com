@@ -89,9 +89,9 @@ import "../styles/app.css";
 
         switch (cmd) {
             case "about":
-                addLine("This is <span class='cyan'>Mitchell Fenner</span>'s personal website.");
+                addLine("This is <span class='green'>Mitchell Fenner's</span> personal website.");
                 addLine(
-                    "I'm a Senior Cloud Operations engineer focused on Azure, Kubernetes, SaaS, DevOps, and automating everything.",
+                    "I'm a <span class='green'>Senior Cloud Operations Engineer</span> focused on Azure, Kubernetes, SaaS, DevOps, and automating everything.",
                 );
                 addLine(
                     "Outside my day job, I enjoy hacking on my personal cloud (aka " +
@@ -110,9 +110,14 @@ import "../styles/app.css";
                 addLine(
                     "GitHub: <a href='https://github.com/mitchfen' target='_blank' rel='noopener noreferrer'>github.com/mitchfen</a>",
                 );
+                /* 
+                addLine(
+                    "Boot.dev: <a href='https://www.boot.dev/u/mitchfen' target='_blank' rel='noopener noreferrer'>boot.dev/u/mitchfen</a>",
+                );
                 addLine(
                     "Substack: <a href='https://substack.com/@mitchfen' target='_blank' rel='noopener noreferrer'>substack.com/@mitchfen</a>",
                 );
+                */
                 break;
 
             case "clear":
@@ -171,9 +176,9 @@ import "../styles/app.css";
             terminalInput.value += char;
             cursorSpacer.textContent = terminalInput.value;
             scrollToBottom();
-            await new Promise((resolve) => setTimeout(resolve, 100));
+            await new Promise((resolve) => setTimeout(resolve, 50));
         }
-        await new Promise((resolve) => setTimeout(resolve, 300));
+        await new Promise((resolve) => setTimeout(resolve, 200));
         executeCommand();
     }
 
@@ -202,7 +207,7 @@ import "../styles/app.css";
             await new Promise((resolve) => setTimeout(resolve, 100));
 
             const bootLogs = [
-                `<img src='/parrot.gif' alt='party parrot' style='height: 1.5em; display: inline; margin: 0 4px; vertical-align: baseline;' /> Welcome [<span class="yellow">guest</span>] to mitchfen.com <img src='/parrot.gif' alt='party parrot' style='height: 1.5em; display: inline; margin: 0 4px; vertical-align: baseline;' />`
+                `<img src='/parrot.gif' alt='party parrot' style='height: 1.5em; display: inline; margin: 0 4px; vertical-align: baseline;' /> Welcome to mitchfen.com <img src='/parrot.gif' alt='party parrot' style='height: 1.5em; display: inline; margin: 0 4px; vertical-align: baseline;' />`
             ];
 
             for (const log of bootLogs) {
