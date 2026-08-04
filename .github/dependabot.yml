@@ -7,6 +7,10 @@ updates:
       timezone: 'America/Detroit'
       day: 'friday'
       time: '10:00'
+    groups:
+      npm-dependencies:
+        patterns:
+          - "*"
     assignees:
       - "mitchfen"
 
@@ -17,5 +21,9 @@ updates:
       timezone: 'America/Detroit'
       day: 'friday'
       time: '10:00'
+    groups:
+      github-actions:
+        patterns:
+          - "*"
     assignees:
       - "mitchfen"
