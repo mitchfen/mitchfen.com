@@ -14,11 +14,8 @@
 }
 
 .red { color: var(--red); }
-.green { color: var(--green); }
-.yellow { color: var(--yellow); }
 .gray { color: var(--gray); }
 .magenta { color: var(--magenta); }
-.cyan { color: var(--cyan); }
 
 html, body {
     margin: 0;
@@ -39,7 +36,7 @@ a {
 }
 
 a:hover {
-    color: var(--green);
+    color: var(--link-color);
     background-color: var(--bg-color);
 }
 
