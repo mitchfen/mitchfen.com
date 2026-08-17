@@ -74,26 +74,17 @@ import "../styles/app.css";
             return;
         }
 
-        if (cmd.startsWith("cd ") || cmd === "cd") {
-            const targetDir = rawCmd.trim().slice(2).trim() || "~";
-            addLine(
-                `<span class='red'>cd: ${escapeHtml(targetDir)}: Permission denied</span>`,
-            );
-            return;
-        }
-
-        if (cmd.startsWith("ls ") || cmd === "ls") {
-            addLine("");
-            return;
-        }
-
         switch (cmd) {
-            case "about":
-                addLine("This is <span class='magenta'>Mitchell Fenner's</span> personal website.");
+            case "welcome":
+                addLine("This is Mitchell Fenner's personal website! <img src='/parrot.gif' alt='party parrot' style='height: 1.5em; display: inline; margin: 0 4px; vertical-align: baseline;' /> ");
+                break;
+
+            case "bio":
                 addLine(
-                    "I'm a Senior Cloud Operations Engineer focused on Azure, Kubernetes, CI/CD, DevSecOps, and automating everything. Outside my day job, I enjoy building my personal cloud (aka " +
+                    "I'm a cloud engineer focused on Azure, Kubernetes, CI/CD, DevSecOps, and automating everything.")
+                addLine("Outside my day job, I enjoy tinkering with " +
                     "<a href='https://github.com/mitchfen/homelab' target='_blank' rel='noopener noreferrer'>" +
-                    "my home server</a>), and rock climbing.",
+                    "my home server</a> and rock climbing.",
                 );
                 break;
 
@@ -123,13 +114,9 @@ import "../styles/app.css";
                 }
                 break;
 
-            case "pwd":
-                addLine("/home/guest");
-                break;
-
             case "help":
                 addLine(
-                    "Available commands: [about, links, sudo, ls, cd, pwd, clear]",
+                    "Available commands: [welcome, bio, links, sudo, clear]",
                 );
                 break;
 
@@ -204,7 +191,7 @@ import "../styles/app.css";
             await new Promise((resolve) => setTimeout(resolve, 100));
 
             const bootLogs = [
-                `<img src='/parrot.gif' alt='party parrot' style='height: 1.5em; display: inline; margin: 0 4px; vertical-align: baseline;' /> Welcome to mitchfen.com <img src='/parrot.gif' alt='party parrot' style='height: 1.5em; display: inline; margin: 0 4px; vertical-align: baseline;' />`
+                `Welcome [<span class="yellow">guest</span>] to mitchfen.com`
             ];
 
             for (const log of bootLogs) {
@@ -218,8 +205,10 @@ import "../styles/app.css";
             const inputRow = document.getElementById("inputRow");
             if (inputRow) inputRow.style.display = "flex";
 
-            await new Promise((resolve) => setTimeout(resolve, 600));
-            await typeCommand("about");
+            await new Promise((resolve) => setTimeout(resolve, 700));
+            await typeCommand("welcome");
+            await new Promise((resolve) => setTimeout(resolve, 1000));
+            await typeCommand("bio");
             await new Promise((resolve) => setTimeout(resolve, 1000));
             await typeCommand("links");
             terminalInput.focus();

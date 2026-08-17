@@ -14,8 +14,8 @@
 }
 
 .red { color: var(--red); }
+.yellow { color: var(--yellow); }
 .gray { color: var(--gray); }
-.magenta { color: var(--magenta); }
 
 html, body {
     margin: 0;
