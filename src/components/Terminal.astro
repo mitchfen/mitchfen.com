@@ -75,16 +75,16 @@ import "../styles/app.css";
         }
 
         switch (cmd) {
-            case "welcome":
-                addLine("This is Mitchell Fenner's personal website! <img src='/parrot.gif' alt='party parrot' style='height: 1.5em; display: inline; margin: 0 4px; vertical-align: baseline;' /> ");
+            case "parrot":
+                addLine("<img src='/parrot.gif' alt='party parrot' style='height: 1.5em; display: inline; margin: 0 4px; vertical-align: baseline;' />");
                 break;
 
             case "bio":
                 addLine(
                     "I'm a cloud engineer focused on Azure, Kubernetes, CI/CD, DevSecOps, and automating everything.")
-                addLine("Outside my day job, I enjoy tinkering with " +
+                addLine("Outside my day job, I enjoy tinkering with my " +
                     "<a href='https://github.com/mitchfen/homelab' target='_blank' rel='noopener noreferrer'>" +
-                    "my home server</a> and rock climbing.",
+                    "home server</a> and rock climbing.",
                 );
                 break;
 
@@ -116,7 +116,7 @@ import "../styles/app.css";
 
             case "help":
                 addLine(
-                    "Available commands: [welcome, bio, links, sudo, clear]",
+                    "Available commands: [bio, links, sudo, clear]",
                 );
                 break;
 
@@ -191,7 +191,7 @@ import "../styles/app.css";
             await new Promise((resolve) => setTimeout(resolve, 100));
 
             const bootLogs = [
-                `Welcome [<span class="yellow">guest</span>] to mitchfen.com`
+                `Welcome [<span class="yellow">guest</span>] to Mitchell Fenner's personal website. `,
             ];
 
             for (const log of bootLogs) {
@@ -205,12 +205,12 @@ import "../styles/app.css";
             const inputRow = document.getElementById("inputRow");
             if (inputRow) inputRow.style.display = "flex";
 
-            await new Promise((resolve) => setTimeout(resolve, 700));
-            await typeCommand("welcome");
             await new Promise((resolve) => setTimeout(resolve, 1000));
             await typeCommand("bio");
             await new Promise((resolve) => setTimeout(resolve, 1000));
             await typeCommand("links");
+            await new Promise((resolve) => setTimeout(resolve, 3000));
+            await typeCommand("parrot");
             terminalInput.focus();
         })();
     }
