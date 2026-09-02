@@ -6,6 +6,7 @@
     "dev": "astro dev --host",
     "build": "astro build",
     "postbuild": "cp deploy/Dockerfile output/ && cp deploy/nginx.conf output/",
+    "dependencies:update": "npm-check-updates --upgrade && npm install",
     "astro": "astro"
   },
   "dependencies": {
@@ -15,5 +16,8 @@
   "allowScripts": {
     "esbuild": true,
     "sharp": true
+  },
+  "devDependencies": {
+    "npm-check-updates": "^23.1.0"
   }
 }
