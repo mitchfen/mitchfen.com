@@ -69,15 +69,30 @@ jobs:
           git fetch origin "$UPDATE_BRANCH:refs/remotes/origin/$UPDATE_BRANCH" || true
           git push --force-with-lease origin "HEAD:$UPDATE_BRANCH"
 
-      - name: Open pull request
+      - name: Open pull request and enable auto-merge
         if: steps.changes.outputs.updated == 'true'
         env:
           BASE_BRANCH: ${{ github.event.repository.default_branch }}
         run: |
-          if [[ -z "$(gh pr list --head "$UPDATE_BRANCH" --base "$BASE_BRANCH" --state open --json number --jq '.[0].number')" ]]; then
-            gh pr create \
+          pr_url="$(gh pr list \
+            --head "$UPDATE_BRANCH" \
+            --base "$BASE_BRANCH" \
+            --state open \
+            --json url \
+            --jq '.[0].url')"
+
+          if [[ -z "$pr_url" ]]; then
+            pr_url="$(gh pr create \
               --base "$BASE_BRANCH" \
               --head "$UPDATE_BRANCH" \
               --title "Update npm dependencies" \
-              --body "Automated weekly update of all npm dependencies, including major versions. The lockfile was regenerated and the site build completed successfully."
+              --body "Automated weekly update of all npm dependencies, including major versions. The lockfile was regenerated and the site build completed successfully.")"
+          fi
+
+          auto_merge_method="$(gh pr view "$pr_url" --json autoMergeRequest --jq '.autoMergeRequest.mergeMethod // ""')"
+          if [[ "$auto_merge_method" != "SQUASH" ]]; then
+            if [[ -n "$auto_merge_method" ]]; then
+              gh pr merge --disable-auto "$pr_url"
+            fi
+            gh pr merge --auto --squash "$pr_url"
           fi
