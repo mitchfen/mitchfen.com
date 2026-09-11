@@ -75,28 +75,34 @@ import "../styles/app.css";
         }
 
         switch (cmd) {
-            case "parrot":
-                addLine("<img src='/parrot.gif' alt='party parrot' style='height: 1.5em; display: inline; margin: 0 4px; vertical-align: baseline;' />");
-                break;
-
             case "bio":
                 addLine(
-                    "I'm a cloud engineer focused on Azure, Kubernetes, CI/CD, DevSecOps, and automating everything.")
-                addLine("Outside my day job, I enjoy tinkering with my " +
+                    "Mitchell Fenner is a cloud engineer focused on Azure, Kubernetes, CI/CD, DevSecOps, and automating everything. Outside his day job, he enjoys building out his " +
                     "<a href='https://github.com/mitchfen/homelab' target='_blank' rel='noopener noreferrer'>" +
-                    "home server</a> and rock climbing.",
+                    "home server</a>.",
                 );
+                break;
+
+            case "certifications":
+                addLine("<a href='https://www.credly.com/badges/e2a509a6-6015-4a65-a538-834fae8e398d/public_url' target='_blank' rel='noopener noreferrer'>Certified Kubernetes Administrator</a>");
+                addLine("<a href='https://learn.microsoft.com/en-us/users/mitchfen/transcript/vme62tkm1nx1jp9' target='_blank' rel='noopener noreferrer'>Azure Solutions Architect Expert</a>");
+                addLine("<a href='https://learn.microsoft.com/en-us/users/mitchfen/transcript/vme62tkm1nx1jp9' target='_blank' rel='noopener noreferrer'>DevOps Engineer Expert</a>");
+                addLine("<a href='https://learn.microsoft.com/en-us/users/mitchfen/transcript/vme62tkm1nx1jp9' target='_blank' rel='noopener noreferrer'>GitHub Actions</a>");
+                addLine("<a href='https://learn.microsoft.com/en-us/users/mitchfen/transcript/vme62tkm1nx1jp9' target='_blank' rel='noopener noreferrer'>Azure Administrator Associate</a>");
+                addLine("<a href='https://learn.microsoft.com/en-us/users/mitchfen/transcript/vme62tkm1nx1jp9' target='_blank' rel='noopener noreferrer'>Azure AI Fundamentals</a>");
+                addLine("<a href='https://learn.microsoft.com/en-us/users/mitchfen/transcript/vme62tkm1nx1jp9' target='_blank' rel='noopener noreferrer'>Security, Compliance, and Identity Fundamentals</a>");
+                addLine("<a href='https://learn.microsoft.com/en-us/users/mitchfen/transcript/vme62tkm1nx1jp9' target='_blank' rel='noopener noreferrer'>Azure Fundamentals</a>");
                 break;
 
             case "links":
                 addLine(
-                    "Email: <a href='mailto:mitch@mitchfen.com' target='_blank' rel='noopener noreferrer'>mitch@mitchfen.com</a>",
+                    "GitHub: <a href='https://github.com/mitchfen' target='_blank' rel='noopener noreferrer'>github.com/mitchfen</a>",
                 );
                 addLine(
                     "LinkedIn: <a href='https://linkedin.com/in/mitchfen' target='_blank' rel='noopener noreferrer'>linkedin.com/in/mitchfen</a>",
                 );
                 addLine(
-                    "GitHub: <a href='https://github.com/mitchfen' target='_blank' rel='noopener noreferrer'>github.com/mitchfen</a>",
+                    "Email: <a href='mailto:mitch@mitchfen.com' target='_blank' rel='noopener noreferrer'>mitch@mitchfen.com</a>",
                 );
                 /* 
                 addLine(
@@ -116,7 +122,7 @@ import "../styles/app.css";
 
             case "help":
                 addLine(
-                    "Available commands: [bio, links, sudo, clear]",
+                    "Available commands: [bio, certifications, links, sudo, clear]",
                 );
                 break;
 
@@ -188,10 +194,8 @@ import "../styles/app.css";
 
         // Auto-type on startup
         (async () => {
-            await new Promise((resolve) => setTimeout(resolve, 100));
-
             const bootLogs = [
-                `Welcome [<span class="yellow">guest</span>] to Mitchell Fenner's personal website. `,
+                `<img src="/parrot.gif" alt="" aria-hidden="true" style="height: 1.5em; display: inline; margin: 0 4px; vertical-align: baseline;" /> Welcome [<span class="yellow">guest</span>] to mitchfen.com <img src="/parrot.gif" alt="" aria-hidden="true" style="height: 1.5em; display: inline; margin: 0 4px; vertical-align: baseline;" />`,
             ];
 
             for (const log of bootLogs) {
@@ -208,9 +212,9 @@ import "../styles/app.css";
             await new Promise((resolve) => setTimeout(resolve, 1000));
             await typeCommand("bio");
             await new Promise((resolve) => setTimeout(resolve, 1000));
+            await typeCommand("certifications");
+            await new Promise((resolve) => setTimeout(resolve, 1000));
             await typeCommand("links");
-            await new Promise((resolve) => setTimeout(resolve, 3000));
-            await typeCommand("parrot");
             terminalInput.focus();
         })();
     }
