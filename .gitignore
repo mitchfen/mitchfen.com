@@ -6,6 +6,13 @@
 # Dependency directories
 node_modules/
 
+# Terraform local state and machine-specific overrides
+terraform/.terraform/
+terraform/*.tfstate
+terraform/*.tfstate.*
+terraform/terraform.tfvars
+terraform/*.auto.tfvars
+
 # Astro build output
 dist/
 output/
