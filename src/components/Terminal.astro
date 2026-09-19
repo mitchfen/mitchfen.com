@@ -77,9 +77,7 @@ import "../styles/app.css";
         switch (cmd) {
             case "bio":
                 addLine(
-                    "I'm a cloud engineer focused on Azure, Kubernetes, DevSecOps, and automating everything. Outside my day job, I enjoy building out my " +
-                    "<a href='https://github.com/mitchfen/homelab' target='_blank' rel='noopener noreferrer'>" +
-                    "home server</a>.",
+                    "I'm a cloud engineer focused on Azure, Kubernetes, DevSecOps, and automating everything.",
                 );
                 break;
 
@@ -104,14 +102,12 @@ import "../styles/app.css";
                 addLine(
                     "Email: <a href='mailto:mitch@mitchfen.com' target='_blank' rel='noopener noreferrer'>mitch@mitchfen.com</a>",
                 );
-                /* 
+                break;
+
+            case "homelab":
                 addLine(
-                    "Boot.dev: <a href='https://www.boot.dev/u/mitchfen' target='_blank' rel='noopener noreferrer'>boot.dev/u/mitchfen</a>",
+                    "Homelab: <a href='https://github.com/mitchfen/homelab' target='_blank' rel='noopener noreferrer'>github.com/mitchfen/homelab</a>",
                 );
-                addLine(
-                    "Substack: <a href='https://substack.com/@mitchfen' target='_blank' rel='noopener noreferrer'>substack.com/@mitchfen</a>",
-                );
-                */
                 break;
 
             case "clear":
@@ -122,7 +118,7 @@ import "../styles/app.css";
 
             case "help":
                 addLine(
-                    "Available commands: [bio, certifications, links, sudo, clear]",
+                    "Available commands: [bio, certifications, links, homelab, sudo, clear]",
                 );
                 break;
 
@@ -215,6 +211,8 @@ import "../styles/app.css";
             await typeCommand("certifications");
             await new Promise((resolve) => setTimeout(resolve, 1000));
             await typeCommand("links");
+            await new Promise((resolve) => setTimeout(resolve, 1000));
+            await typeCommand("homelab");
             terminalInput.focus();
         })();
     }
