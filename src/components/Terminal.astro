@@ -82,14 +82,17 @@ import "../styles/app.css";
                 break;
 
             case "certifications":
-                addLine("<a href='https://www.credly.com/badges/e2a509a6-6015-4a65-a538-834fae8e398d/public_url' target='_blank' rel='noopener noreferrer'>Certified Kubernetes Administrator</a>");
-                addLine("<a href='https://learn.microsoft.com/en-us/users/mitchfen/transcript/vme62tkm1nx1jp9' target='_blank' rel='noopener noreferrer'>Azure Solutions Architect Expert</a>");
-                addLine("<a href='https://learn.microsoft.com/en-us/users/mitchfen/transcript/vme62tkm1nx1jp9' target='_blank' rel='noopener noreferrer'>DevOps Engineer Expert</a>");
-                addLine("<a href='https://learn.microsoft.com/en-us/users/mitchfen/transcript/vme62tkm1nx1jp9' target='_blank' rel='noopener noreferrer'>GitHub Actions</a>");
-                addLine("<a href='https://learn.microsoft.com/en-us/users/mitchfen/transcript/vme62tkm1nx1jp9' target='_blank' rel='noopener noreferrer'>Azure Administrator Associate</a>");
-                addLine("<a href='https://learn.microsoft.com/en-us/users/mitchfen/transcript/vme62tkm1nx1jp9' target='_blank' rel='noopener noreferrer'>Azure AI Fundamentals</a>");
-                addLine("<a href='https://learn.microsoft.com/en-us/users/mitchfen/transcript/vme62tkm1nx1jp9' target='_blank' rel='noopener noreferrer'>Security, Compliance, and Identity Fundamentals</a>");
-                addLine("<a href='https://learn.microsoft.com/en-us/users/mitchfen/transcript/vme62tkm1nx1jp9' target='_blank' rel='noopener noreferrer'>Azure Fundamentals</a>");
+                const certs = [
+                    "Certified Kubernetes Administrator",
+                    "Azure Solutions Architect Expert",
+                    "DevOps Engineer Expert",
+                    "GitHub Actions",
+                    "Azure Administrator Associate",
+                    "Azure AI Fundamentals",
+                    "Security, Compliance, and Identity Fundamentals",
+                    "Azure Fundamentals",
+                ];
+                addLine(JSON.stringify(certs, null, 2));
                 break;
 
             case "links":
