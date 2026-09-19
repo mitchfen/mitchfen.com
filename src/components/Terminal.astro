@@ -106,7 +106,10 @@ import "../styles/app.css";
 
             case "homelab":
                 addLine(
-                    "Homelab: <a href='https://github.com/mitchfen/homelab' target='_blank' rel='noopener noreferrer'>github.com/mitchfen/homelab</a>",
+                    "Home server running Kubernetes on NixOS, provisioned via Terraform. Also includes pfSense, split-horizon DNS, Cloudflare-integrated reverse proxying, DNS/IP filtering, and local AI inference.",
+                );
+                addLine(
+                    "<a href='https://github.com/mitchfen/homelab' target='_blank' rel='noopener noreferrer'>github.com/mitchfen/homelab</a>",
                 );
                 break;
 
@@ -208,11 +211,11 @@ import "../styles/app.css";
             await new Promise((resolve) => setTimeout(resolve, 1000));
             await typeCommand("bio");
             await new Promise((resolve) => setTimeout(resolve, 1000));
-            await typeCommand("certifications");
-            await new Promise((resolve) => setTimeout(resolve, 1000));
             await typeCommand("links");
             await new Promise((resolve) => setTimeout(resolve, 1000));
             await typeCommand("homelab");
+            await new Promise((resolve) => setTimeout(resolve, 1000));
+            await typeCommand("certifications");
             terminalInput.focus();
         })();
     }
