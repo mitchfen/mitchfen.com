@@ -144,8 +144,8 @@ html {
     }
 }
 
-.prompt { color: var(--green); font-weight: bold; }
-.prompt-char { color: var(--green); margin-left: 0px; font-weight: normal; }
+.prompt { color: var(--magenta); font-weight: bold; }
+.prompt-char { color: var(--magenta); margin-left: 0px; font-weight: normal; }
 
 .executed-cmd { 
     display: flex;
