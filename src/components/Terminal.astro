@@ -94,7 +94,7 @@ import "../styles/app.css";
                 addLine("<a href='https://learn.microsoft.com/en-us/users/mitchfen/transcript/vme62tkm1nx1jp9' target='_blank' rel='noopener noreferrer'>Azure Fundamentals</a>");
                 break;
 
-            case "links":
+            case "find me online":
                 addLine(
                     "GitHub: <a href='https://github.com/mitchfen' target='_blank' rel='noopener noreferrer'>github.com/mitchfen</a>",
                 );
@@ -103,6 +103,9 @@ import "../styles/app.css";
                 );
                 addLine(
                     "Email: <a href='mailto:mitch@mitchfen.com' target='_blank' rel='noopener noreferrer'>mitch@mitchfen.com</a>",
+                );
+                addLine(
+                    "OSRS: <a href='https://wiseoldman.net/players/mooingpoodle' target='_blank' rel='noopener noreferrer'>wiseoldman.net/players/mooingpoodle</a>",
                 );
                 /* 
                 addLine(
@@ -118,12 +121,6 @@ import "../styles/app.css";
                 if (outputLines) {
                     outputLines.innerHTML = "";
                 }
-                break;
-
-            case "help":
-                addLine(
-                    "Available commands: [bio, certifications, links, sudo, clear]",
-                );
                 break;
 
             default:
