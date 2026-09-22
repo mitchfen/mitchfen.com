@@ -95,7 +95,7 @@ import "../styles/app.css";
                 addLine(JSON.stringify(certs, null, 2));
                 break;
 
-            case "links":
+            case "find me elsewhere online":
                 addLine(
                     "GitHub: <a href='https://github.com/mitchfen' target='_blank' rel='noopener noreferrer'>github.com/mitchfen</a>",
                 );
@@ -104,6 +104,9 @@ import "../styles/app.css";
                 );
                 addLine(
                     "Email: <a href='mailto:mitch@mitchfen.com' target='_blank' rel='noopener noreferrer'>mitch@mitchfen.com</a>",
+                );
+                addLine(
+                    "OSRS: <a href='https://wiseoldman.net/players/mooingpoodle' target='_blank' rel='noopener noreferrer'>wiseoldman.net/players/mooingpoodle</a>",
                 );
                 break;
 
@@ -123,12 +126,6 @@ import "../styles/app.css";
                 if (outputLines) {
                     outputLines.innerHTML = "";
                 }
-                break;
-
-            case "help":
-                addLine(
-                    "Available commands: [bio, certifications, links, homelab, sudo, clear]",
-                );
                 break;
 
             default:
@@ -200,7 +197,7 @@ import "../styles/app.css";
         // Auto-type on startup
         (async () => {
             const bootLogs = [
-                `<img src="/parrot.gif" alt="" aria-hidden="true" style="height: 1.5em; display: inline; margin: 0 4px; vertical-align: baseline;" /> Welcome to mitchfen.com <img src="/parrot.gif" alt="" aria-hidden="true" style="height: 1.5em; display: inline; margin: 0 4px; vertical-align: baseline;" />`,
+                `Welcome to mitchfen.com <img src="/parrot.gif" alt="" aria-hidden="true" style="height: 1.5em; display: inline; margin: 0 4px; vertical-align: baseline;" />`,
             ];
 
             for (const log of bootLogs) {
@@ -217,7 +214,7 @@ import "../styles/app.css";
             await new Promise((resolve) => setTimeout(resolve, 1000));
             await typeCommand("bio");
             await new Promise((resolve) => setTimeout(resolve, 1000));
-            await typeCommand("links");
+            await typeCommand("find me elsewhere online");
             await new Promise((resolve) => setTimeout(resolve, 1000));
             await typeCommand("homelab");
             await new Promise((resolve) => setTimeout(resolve, 1000));
