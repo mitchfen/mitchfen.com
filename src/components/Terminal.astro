@@ -75,7 +75,7 @@ import "../styles/app.css";
         }
 
         switch (cmd) {
-            case "bio":
+            case "about me":
                 addLine(
                     "I'm a cloud engineer focused on Azure, Kubernetes, DevSecOps, and automating everything.",
                 );
@@ -211,8 +211,8 @@ import "../styles/app.css";
             const inputRow = document.getElementById("inputRow");
             if (inputRow) inputRow.style.display = "flex";
 
-            await new Promise((resolve) => setTimeout(resolve, 700));
-            await typeCommand("bio");
+            await new Promise((resolve) => setTimeout(resolve, 1000));
+            await typeCommand("about me");
             await new Promise((resolve) => setTimeout(resolve, 1000));
             await typeCommand("find me elsewhere online");
             terminalInput.focus();
