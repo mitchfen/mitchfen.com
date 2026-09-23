@@ -106,7 +106,7 @@ import "../styles/app.css";
                     "Email: <a href='mailto:mitch@mitchfen.com' target='_blank' rel='noopener noreferrer'>mitch@mitchfen.com</a>",
                 );
                 addLine(
-                    "OSRS: <a href='https://wiseoldman.net/players/mooingpoodle' target='_blank' rel='noopener noreferrer'>wiseoldman.net/players/mooingpoodle</a>",
+                    "OSRS: <a href='https://wiseoldman.net/players/mooingpoodle' target='_blank' rel='noopener noreferrer'>Mooingpoodle</a>",
                 );
                 break;
 
@@ -211,14 +211,14 @@ import "../styles/app.css";
             const inputRow = document.getElementById("inputRow");
             if (inputRow) inputRow.style.display = "flex";
 
-            await new Promise((resolve) => setTimeout(resolve, 1000));
+            await new Promise((resolve) => setTimeout(resolve, 800));
             await typeCommand("bio");
-            await new Promise((resolve) => setTimeout(resolve, 1000));
-            await typeCommand("find me elsewhere online");
-            await new Promise((resolve) => setTimeout(resolve, 1000));
+            await new Promise((resolve) => setTimeout(resolve, 800));
             await typeCommand("homelab");
-            await new Promise((resolve) => setTimeout(resolve, 1000));
+            await new Promise((resolve) => setTimeout(resolve, 800));
             await typeCommand("certifications");
+            await new Promise((resolve) => setTimeout(resolve, 800));
+            await typeCommand("find me elsewhere online");
             terminalInput.focus();
         })();
     }
