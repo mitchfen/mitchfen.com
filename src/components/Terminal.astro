@@ -211,13 +211,13 @@ import "../styles/app.css";
             const inputRow = document.getElementById("inputRow");
             if (inputRow) inputRow.style.display = "flex";
 
-            await new Promise((resolve) => setTimeout(resolve, 800));
+            await new Promise((resolve) => setTimeout(resolve, 700));
             await typeCommand("bio");
-            await new Promise((resolve) => setTimeout(resolve, 800));
+            await new Promise((resolve) => setTimeout(resolve, 1000));
             await typeCommand("homelab");
-            await new Promise((resolve) => setTimeout(resolve, 800));
+            await new Promise((resolve) => setTimeout(resolve, 1000));
             await typeCommand("certifications");
-            await new Promise((resolve) => setTimeout(resolve, 800));
+            await new Promise((resolve) => setTimeout(resolve, 1000));
             await typeCommand("find me elsewhere online");
             terminalInput.focus();
         })();
