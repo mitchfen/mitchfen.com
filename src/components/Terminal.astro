@@ -105,9 +105,6 @@ import "../styles/app.css";
                 addLine(
                     "Email: <a href='mailto:mitch@mitchfen.com' target='_blank' rel='noopener noreferrer'>mitch@mitchfen.com</a>",
                 );
-                addLine(
-                    "OSRS: <a href='https://wiseoldman.net/players/mooingpoodle' target='_blank' rel='noopener noreferrer'>Mooingpoodle</a>",
-                );
                 break;
 
             case "homelab":
@@ -115,7 +112,7 @@ import "../styles/app.css";
                     "I maintain a home server running Kubernetes on NixOS, provisioned via Terraform.",
                 );
                 addLine(
-                    "It also includes pfSense, split-horizon DNS, Cloudflare-integrated reverse proxying, DNS/IP filtering, and local AI inference.",
+                    "It also includes Kubernetes, pfSense, split-horizon DNS, Cloudflare-integrated reverse proxying, DNS/IP filtering, and local AI inference.",
                 );
                 addLine(
                     "See it on <a href='https://github.com/mitchfen/homelab' target='_blank' rel='noopener noreferrer'>GitHub</a>.",
@@ -213,6 +210,8 @@ import "../styles/app.css";
 
             await new Promise((resolve) => setTimeout(resolve, 1000));
             await typeCommand("about me");
+            await new Promise((resolve) => setTimeout(resolve, 1000));
+            await typeCommand("homelab");
             await new Promise((resolve) => setTimeout(resolve, 1000));
             await typeCommand("find me elsewhere online");
             terminalInput.focus();
