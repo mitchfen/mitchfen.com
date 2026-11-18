@@ -89,10 +89,4 @@ jobs:
               --body "Automated weekly update of all npm dependencies, including major versions. The lockfile was regenerated and the site build completed successfully.")"
           fi
 
-          auto_merge_method="$(gh pr view "$pr_url" --json autoMergeRequest --jq '.autoMergeRequest.mergeMethod // ""')"
-          if [[ "$auto_merge_method" != "SQUASH" ]]; then
-            if [[ -n "$auto_merge_method" ]]; then
-              gh pr merge --disable-auto "$pr_url"
-            fi
-            gh pr merge --auto --squash "$pr_url"
-          fi
+
