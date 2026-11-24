@@ -1,0 +1,37 @@
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      timezone: "America/Detroit"
+      day: "friday"
+      time: "10:00"
+    cooldown:
+      default-days: 7
+    groups:
+      npm-dependencies:
+        patterns:
+          - "*"
+    reviewers:
+      - "mitchfen"
+    assignees:
+      - "mitchfen"
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      timezone: "America/Detroit"
+      day: "friday"
+      time: "10:00"
+    cooldown:
+      default-days: 7
+    groups:
+      github-actions:
+        patterns:
+          - "*"
+    reviewers:
+      - "mitchfen"
+    assignees:
+      - "mitchfen"
